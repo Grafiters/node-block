@@ -4,6 +4,7 @@
   "description": "project for nusatech bode block backend version",
   "main": "server.js",
   "scripts": {
+    "running":"nodemon",
     "test": "node test.js"
   },
   "keywords": [

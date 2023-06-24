@@ -34,10 +34,7 @@ module.exports = {
       },
       role: {
         allowNull: false,
-        type: Sequelize.ENUM({
-          values: ['Admin', 'User', 'Developer']
-        }),
-        defaultValue: "User"
+        type: Sequelize.ENUM('Admin', 'User', 'Developer')
       },
       email_verification_token: {
         allowNull: false,

@@ -31,6 +31,6 @@ try {
     console.log(err)
 }
     
-app.use(`/${process.env.SERVICE}/${process.env.API_VERSION}`, MainRouter)
+app.use(`/${process.env.SERVICE}`, MainRouter)
 
 app.listen(port, host ,() => console.log(`running on port ${host}:${port}`));
