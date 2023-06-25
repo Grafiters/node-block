@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     email: DataTypes.STRING,
     password_digest: DataTypes.STRING,
     google_id: DataTypes.STRING,
@@ -25,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     email_verified: DataTypes.BOOLEAN({default: false}),
     otp_secret: DataTypes.STRING,
     otp_enabled: DataTypes.BOOLEAN({default: false}),
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'User',
