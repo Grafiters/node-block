@@ -10,4 +10,11 @@ module.exports = {
     host: DB_HOST,
     dialect: 'postgres',
   },
+  test: {
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
+    host: DB_HOST,
+    dialect: 'postgres',
+  },
 };

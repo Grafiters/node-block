@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const querystring = require('querystring');
 const axios = require('axios');
 const {
     GEETEST_HOST,
@@ -11,34 +11,31 @@ async function registerGeetest() {
   try {
     const response = await axios.get(`${GEETEST_HOST}/register.php?gt=${GEETEST_ID}`);
     const { data } = response;
-    if (data.success !== 1) {
-      throw new Error('Failed to register Geetest');
-    }
 
-    const geetestChallenge = data.challenge;
-    return geetestChallenge;
+    const geetestChallenge = data;
+
+    return {
+      gt: GEETEST_ID,
+      challenge: geetestChallenge
+    };
   } catch (error) {
     console.log(error);
-    return false;
   }
 }
 
 async function verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode) {
-  const params = new URLSearchParams();
-  params.append('seccode', geetestSeccode);
-  params.append('json_format', '1');
-  params.append('challenge', geetestChallenge);
-  params.append('captchaid', GEETEST_ID);
-  params.append('privatekey', GEETEST_KEY);
+  const geetestConfig = {
+      gt: GEETEST_ID,
+      challenge: geetestChallenge,
+      validate: geetestValidate,
+      seccode: geetestSeccode,
+  };
 
   try {
-    const response = await axios.post(`${GEETEST_HOST}/validate.php`, params);
+    const response = await axios.post(`${GEETEST_HOST}/validate.php`, querystring.stringify(geetestConfig));
     const { data } = response;
-    if (data.seccode !== geetestSeccode || data.validate !== geetestValidate) {
-      throw new Error('Invalid Geetest challenge');
-    }
-
-    return true;
+    
+    return data;
   } catch (error) {
     console.log(error);
     return JSON.stringify({
