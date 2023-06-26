@@ -2,7 +2,9 @@ const bcrypt = require('bcrypt');
 const { validateEmailRegister } = require("../../service/validationService");
 const { generateTokenEmail } = require("../../service/generateService");
 const { getUserByTokenActivation } = require("../../service/userService");
+const { handleGoogle } = require("../../service/googleService");
 const model = require("../../db/models");
+const { token } = require('morgan');
 
 exports.registerUser = async (req, res) => {
     // const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
@@ -88,4 +90,11 @@ exports.activationEmail = async (req, res) => {
             message: "Terjadi kesalahan saat memproses reset kata sandi. Silakan coba lagi nanti."
         });
     }
+}
+
+exports.registerWithGoogle = async (req, res) => {
+    const { idToken } = req.body
+
+    token = handleGoogle(idToken)
+    console.log(token);
 }

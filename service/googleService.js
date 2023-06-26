@@ -20,6 +20,19 @@ async function handleGoogle(req, res) {
     }
 }
 
+
+async function getIdTokenFromMetadataServer() {
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+  });
+
+  token = await googleAuth.getAccessToken();
+  console.log(`token generated ${token}`);
+
+  return token;
+}
+
 module.exports = {
-    handleGoogle
+    handleGoogle,
+    getIdTokenFromMetadataServer
 };

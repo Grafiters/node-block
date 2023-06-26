@@ -3,7 +3,8 @@ const AuthRouter = new Router();
 
 const {
     registerUser,
-    activationEmail
+    activationEmail,
+    registerWithGoogle
 } = require('../controller/auth/register');
 
 const {
@@ -12,6 +13,7 @@ const {
 
 AuthRouter.post('/login', userLogin);
 AuthRouter.post('/register', registerUser);
+AuthRouter.post('/register/google', registerWithGoogle);
 AuthRouter.get('/activate-email/:activation_email', activationEmail);
 
 module.exports = AuthRouter;
