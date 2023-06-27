@@ -1,6 +1,8 @@
 require('dotenv').config()
 const querystring = require('querystring');
 const axios = require('axios');
+const crypto = require('crypto');
+
 const {
     GEETEST_HOST,
     GEETEST_ID,
@@ -14,9 +16,12 @@ async function registerGeetest() {
 
     const geetestChallenge = data;
 
+    const hashChallenge = crypto.createHash('md5')
+                   .update(geetestChallenge + GEETEST_KEY)
+                   .digest('hex');
     return {
       gt: GEETEST_ID,
-      challenge: geetestChallenge
+      challenge: hashChallenge
     };
   } catch (error) {
     console.log(error);
@@ -24,24 +29,30 @@ async function registerGeetest() {
 }
 
 async function verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode) {
-  const geetestConfig = {
-      gt: GEETEST_ID,
-      challenge: geetestChallenge,
-      validate: geetestValidate,
-      seccode: geetestSeccode,
-  };
-
   try {
-    const response = await axios.post(`${GEETEST_HOST}/validate.php`, querystring.stringify(geetestConfig));
-    const { data } = response;
-    
-    return data;
+    const md5 = crypto.createHash('md5')
+    .update(GEETEST_KEY + 'geetest' + geetestChallenge)
+    .digest('hex');
+
+    if (geetestValidate == md5){
+      const response = await axios.post(`${GEETEST_HOST}/validate.php`, geetestSeccode);
+
+      if (response.status != 200){
+        return NULL;
+      }else{
+        return crypto.createHash('md5')
+        .update( geetestSeccode )
+        .digest('hex');
+      }
+    }
+
+    return false;
   } catch (error) {
     console.log(error);
     return JSON.stringify({
       status: false,
       message: 'Invalid Geetest challenge'
-    });;
+    });
   }
 }
 

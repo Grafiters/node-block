@@ -56,6 +56,6 @@ app
     
 app.use(`/${process.env.SERVICE}`, MainRouter)
 
-const server = app.listen(port, host);
+const server = app.listen(9696, host);
 
 module.exports = {server, geetestClient};

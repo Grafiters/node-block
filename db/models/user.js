@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     email_verified: DataTypes.BOOLEAN({default: false}),
     otp_secret: DataTypes.STRING,
     otp_enabled: DataTypes.BOOLEAN({default: false}),
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    created_at: DataTypes.DATE,
+    updated_at: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'User',

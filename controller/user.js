@@ -6,7 +6,7 @@ exports.getAllUser = async (req, res) => {
         const {
             page = 0,
             show = 10,
-            sortBy = 'createdAt',
+            sortBy = 'created_at',
             orderBy = 'ASC',
         } = req.query;
         const users = await User.findAndCountAll({

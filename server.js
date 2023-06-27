@@ -8,6 +8,9 @@ const MainRouter = require('./route/index');
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const logger = require('morgan');
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const cors = require('cors');
 
@@ -45,7 +48,9 @@ app
     .use(cors())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json());
-    
+
 app.use(`/${process.env.SERVICE}`, MainRouter)
 
 app.listen(port, host ,() => console.log(`running on port ${host}:${port}`));
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))

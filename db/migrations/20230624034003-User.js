@@ -10,7 +10,7 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
 
-    await queryInterface.createTable('users',{
+    await queryInterface.createTable('Users',{
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -40,10 +40,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email_verified: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      email_verified_at: {
+        allowNull: true,
+        type: "TIMESTAMP",
       },
       otp_secret: {
         allowNull: true,
@@ -54,12 +53,12 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-      createdAt: {
+      created_at: {
         type: "TIMESTAMP",
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: "TIMESTAMP",
         allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
@@ -67,8 +66,8 @@ module.exports = {
       },
     })
 
-    await queryInterface.addIndex('users', ['google_id'])
-    await queryInterface.addIndex('users', ['role'])
+    await queryInterface.addIndex('Users', ['google_id'])
+    await queryInterface.addIndex('Users', ['role'])
   },
 
   async down (queryInterface, Sequelize) {
@@ -76,11 +75,11 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:
-     * await queryInterface.dropTable('users');
+     * await queryInterface.dropTable('Users');
      */
 
-    await queryInterface.removeIndex('users', ['google_id'])
-    await queryInterface.removeIndex('users', ['role'])
-    await queryInterface.dropTable('users');
+    await queryInterface.removeIndex('Users', ['google_id'])
+    await queryInterface.removeIndex('Users', ['role'])
+    await queryInterface.dropTable('Users');
   }
 };

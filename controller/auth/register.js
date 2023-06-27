@@ -47,7 +47,7 @@ exports.registerUser = async (req, res) => {
 }
 
 exports.activationEmail = async (req, res) => {
-    const token = req.params.activation_email;
+    const token = req.params.activation_token;
     const user = await getUserByTokenActivation(token)
 
     if (user === null || user.email_verification_token != token){
