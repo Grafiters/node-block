@@ -1,13 +1,26 @@
 const bcrypt = require('bcrypt');
+const {verifyGeetest} = require('../service/geetestService.js')
 const { validateEmailRegister } = require("../../service/validationService");
 const { generateTokenEmail } = require("../../service/generateService");
 const { getUserByTokenActivation } = require("../../service/userService");
+const { registerMailer } = require("../../service/mailerService");
 const { handleGoogle } = require("../../service/googleService");
 const model = require("../../db/models");
 const { token } = require('morgan');
 
 exports.registerUser = async (req, res) => {
-    // const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
+    if(process.env == 'test'){
+        const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
+
+        geetestVerify = await verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode)
+
+        if(geetestVerify === null){
+            return res.status(401).send({
+                status: false,
+                message: 'Invalid Geetest challenge'
+            });
+        }
+    }
 
     const token = generateTokenEmail(5)
 
@@ -30,13 +43,16 @@ exports.registerUser = async (req, res) => {
         }
 
         model.User.create(params)
-        .then(submit => res.status(201)
-            .send({
-                status: "success",
-                message: "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.",
-                user: submit
-            })
-        )
+            .then(submit => 
+                registerMailer(submit, 'New Account'),
+
+                res.status(201)
+                    .send({
+                        status: "success",
+                        message: "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.",
+                        user: submit
+                    })
+            )
     } catch ( err ){
         console.log(err);
         res.status(500).json({

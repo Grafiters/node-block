@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       default: 'User'
     }),
     email_verification_token: DataTypes.STRING,
-    email_verified: DataTypes.BOOLEAN({default: false}),
+    email_verified_at: DataTypes.DATE({default: null}),
     otp_secret: DataTypes.STRING,
     otp_enabled: DataTypes.BOOLEAN({default: false}),
     created_at: DataTypes.DATE,

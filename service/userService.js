@@ -15,4 +15,17 @@ async function getUserByEmail(email){
     return user
 }
 
-module.exports = { getUserByTokenActivation, getUserByEmail }
+async function getUserByEmailAndGoogleId(email, google_id){
+    user = await model.User.findOne({where: {email: email, google_id: google_id}})
+    if(user === null){
+        return false
+    }
+
+    return user
+}
+
+module.exports = {
+    getUserByEmailAndGoogleId,
+    getUserByTokenActivation,
+    getUserByEmail
+}

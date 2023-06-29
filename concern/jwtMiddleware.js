@@ -1,13 +1,4 @@
-require('dotenv').config()
 const jwt = require('jsonwebtoken');
-
-function generateToken(user){
-    const token = jwt.sign({ user }, process.env.JWT_ACCESS_KEY, {
-        expiresIn: process.env.JWT_EXPIRED
-    });
-
-    return token;
-}
 
 const authJWT = (req, res, next) => {
     const token = req.headers['x-access-token']
@@ -24,8 +15,4 @@ const authJWT = (req, res, next) => {
     })
 }
 
-
-module.exports = {
-    generateToken,
-    authJWT
-}
+module.exports = authJWT;

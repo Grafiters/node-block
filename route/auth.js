@@ -8,7 +8,8 @@ const {
 } = require('../controller/auth/register');
 
 const {
-    userLogin
+    userLogin,
+    userLoginGoogle
 } = require('../controller/auth/login');
 
 const {
@@ -16,6 +17,7 @@ const {
 } = require('../controller/captcha');
 
 AuthRouter.post('/login', userLogin);
+AuthRouter.post('/login/google', userLoginGoogle);
 AuthRouter.post('/register', registerUser);
 AuthRouter.post('/register/google', registerWithGoogle);
 AuthRouter.get('/activate-email/:activation_token', activationEmail);
