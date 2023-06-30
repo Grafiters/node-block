@@ -1,35 +1,62 @@
 const request = require('supertest');
 const {server, geetestClient} = require('./server');
-const { getIdTokenFromMetadataServer } = require("../service/googleService");
+const { getUserByEmail } = require("../service/userService");
 
-describe('Test the Geetest route challenge', () => {
-    test('POST /api/register should return user data success', async () => {
-      const params = {
-        username: 'kuacislayer',
-        email: '111201710284@mhs.dinus.ac.id',
-        password: 'Alone123!*',
-      }
+describe('Test the register', () => {
+  test('POST /api/auth/register should return error email invalid', async () => {
+    const params = {
+      username: 'kuacislayer',
+      email: '111201710284',
+      password: 'Alone123!*',
+    }
 
-      const response = await request(server).post('/api/register').send(params);
+    const response = await request(server).post('/api/auth/register').send(params);
 
-      console.log(response.body);
-    });
+    console.log(response.body);
+    expect(response.status).toBe(406);
+  });
 
-    test('GET /api/activate-email/:activation_token should return user data success', async () => {
-      activation_token = '408201'
-      const response = await request(server).get(`/api/activate-email/${activation_token}`);
+  test('POST /api/auth/register should return error less minimum password', async () => {
+    const params = {
+      username: 'kuacislayer',
+      email: '111201710284@mhs.dinus.ac.id',
+      password: 'alone',
+    }
 
-      console.log(response.body);
-    });
+    const response = await request(server).post('/api/auth/register').send(params);
 
-    test('GET /api/register/google should return google id token', async () => {
-      token = await getIdTokenFromMetadataServer()
-      console.log(token);
-      // const params = {
-      //   idToken: 
-      // }
-      // const response = await request(server).post(`/api/register/google`);
+    console.log(response.body);
+    expect(response.status).toBe(406);
+  });
 
-      // console.log(response.body);
-    });
+  test('POST /api/auth/register should return user data success', async () => {
+    const params = {
+      username: 'kuacislayer',
+      email: '111201710284@mhs.dinus.ac.id',
+      password: 'Alone123!*',
+    }
+
+    const response = await request(server).post('/api/auth/register').send(params);
+
+    console.log(response.body);
+    expect(response.status).toBe(201);
+    expect(response.body.user.email).toBe('111201710284@mhs.dinus.ac.id');
+  });
+
+  test('GET /api/auth/activate-email/:activation_token should return user data success', async () => {
+    const user = await getUserByEmail('111201710284@mhs.dinus.ac.id')
+    const response = await request(server).get(`/api/auth/activate-email/${user.email_verification_token}`);
+
+    console.log(response.body);
+    expect(response.status).toBe(201);
+    expect(response.body).toBeTruthy();
+  });
+
+  test('GET /api/auth/activate-email/:activation_token should return error invalid token', async () => {
+    const response = await request(server).get(`/api/auth/activate-email/123456`);
+
+    console.log(response.body);
+    expect(response.status).toBe(406);
+    expect(response.body).toBeTruthy();
+  });
 });

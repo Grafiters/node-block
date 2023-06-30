@@ -9,9 +9,18 @@ async function validateEmailRegister(email){
     }
 }
 
+async function validateEmailRegisterGoogle(email, google_id){
+    user = await model.User.findOne({where: {email: email, google_id: google_id}})
+    if(user === null || user.email_verified_at === null){
+        return true;
+    }else if(user && user.email_verified_at !== null || user){
+        return false;
+    }
+}
+
 async function validateUserStatus(email){
     user = await model.User.findOne({where: {email: email}})
-    if(user.status === null){
+    if(user.email_verified_at === null){
         return false;
     }else{
         return true;
@@ -28,7 +37,8 @@ async function validateTokenOtp(otp, user){
     }
 }
 
-module.exports = { 
+module.exports = {
+    validateEmailRegisterGoogle,
     validateEmailRegister,
     validateUserStatus,
     validateTokenOtp

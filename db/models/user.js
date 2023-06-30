@@ -1,4 +1,5 @@
 'use strict';
+const { create } = require('qrcode');
 const {
   Model
 } = require('sequelize');
@@ -35,8 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     updated_at: DataTypes.DATE,
   }, {
     sequelize,
+    underscored: true,
     modelName: 'User',
-    tableName: 'users'
+    tableName: 'Users'
   });
   return User;
 };

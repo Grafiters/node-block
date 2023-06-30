@@ -53,4 +53,4 @@ app.use(`/${process.env.SERVICE}`, MainRouter)
 
 app.listen(port, host ,() => console.log(`running on port ${host}:${port}`));
 
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+app.use(`/${process.env.SERVICE}/swagger`, swaggerUi.serve, swaggerUi.setup(swaggerFile))

@@ -1,23 +1,17 @@
 const models = require("../db/models");
-const User = models.User;
 
 const { generateOtp, generateTotpSecret } = require('../service/totpService.js');
+const { findUserByID } = require('../service/userService');
+const User = require('../service/entitiesService/userEntities')
 
-exports.getAllUser = async (req, res) => {
+exports.userProfile = async (req, res) => {
     try {
-        const {
-            page = 0,
-            show = 10,
-            sortBy = 'created_at',
-            orderBy = 'ASC',
-        } = req.query;
-        const users = await User.findAndCountAll({
-            order: [[sortBy, orderBy]],
-            offset: page * show,
-            limit: show,
-        });
+        const user = await findUserByID(req.auth.user.id)
         
-        return res.status(200).json(users);
+        return res.status(200).json({
+            status: true,
+            data: new User(user).getUserLoginEntities()
+        });
     } catch (error) {
         console.log(error);
     }

@@ -4,7 +4,8 @@ const AuthRouter = new Router();
 const {
     registerUser,
     activationEmail,
-    registerWithGoogle
+    registerWithGoogle,
+    resendActivationCode
 } = require('../controller/auth/register');
 
 const {
@@ -16,11 +17,17 @@ const {
     toptGenerate
 } = require('../controller/captcha');
 
-AuthRouter.post('/login', userLogin);
-AuthRouter.post('/login/google', userLoginGoogle);
-AuthRouter.post('/register', registerUser);
-AuthRouter.post('/register/google', registerWithGoogle);
-AuthRouter.get('/activate-email/:activation_token', activationEmail);
-AuthRouter.get('/otp-generate', toptGenerate);
+AuthRouter.post('/auth/login', userLogin);
+AuthRouter.post('/auth/register', registerUser);
+
+AuthRouter.post('/auth/login/google', userLoginGoogle);
+AuthRouter.post('/auth/register/google', registerWithGoogle);
+
+AuthRouter.get('/auth/activate-email/:activation_token', activationEmail);
+AuthRouter.get('/auth/otp-generate', toptGenerate);
+AuthRouter.post('/auth/:email/resend', resendActivationCode);
+
+AuthRouter.post('/auth/forgot-password', resendActivationCode);
+AuthRouter.post('/auth/reset-password', resendActivationCode);
 
 module.exports = AuthRouter;

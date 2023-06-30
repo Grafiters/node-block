@@ -1,25 +1,39 @@
+require('dotenv').config()
 const bcrypt = require('bcrypt');
-const {verifyGeetest} = require('../service/geetestService.js')
-const { validateEmailRegister } = require("../../service/validationService");
+const validatorEmail = require('validator');
+
+const { validateEmailRegister, validateEmailRegisterGoogle } = require("../../service/validationService");
+const { getUserByTokenActivation, getUserByEmail } = require("../../service/userService");
+const { registerMailer, resendRegisterMailer } = require("../../service/mailerService");
 const { generateTokenEmail } = require("../../service/generateService");
-const { getUserByTokenActivation } = require("../../service/userService");
-const { registerMailer } = require("../../service/mailerService");
-const { handleGoogle } = require("../../service/googleService");
+const { verifyGeetest } = require('../../service/geetestService.js')
+const User = require('../../service/entitiesService/userEntities')
 const model = require("../../db/models");
 const { token } = require('morgan');
 
 exports.registerUser = async (req, res) => {
-    if(process.env == 'test'){
+    if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
 
         geetestVerify = await verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode)
 
         if(geetestVerify === null){
-            return res.status(401).send({
+            return res.status(406).send({
                 status: false,
                 message: 'Invalid Geetest challenge'
             });
         }
+    }
+
+    if(!validatorEmail.isEmail(req.body.email) || req.body.password.lenght < 8){
+        return res.status(406).json({
+            status: false,
+            message: "Kesalahan validasi",
+            errors: [
+                "Email tidak valid",
+                "Kata sandi harus terdiri dari minimal 8 karakter"
+              ]
+        });
     }
 
     const token = generateTokenEmail(5)
@@ -36,28 +50,28 @@ exports.registerUser = async (req, res) => {
         const data = await validateEmailRegister(req.body.email);
 
         if(!data){
-            return res.status(401).json({
-                status: 'error',
-                messages: 'Maaf, email sudah terdaftar, silahkan coba lagi'
+            return res.status(406).json({
+                status: false,
+                message: 'Maaf, email sudah terdaftar, silahkan coba lagi'
             });
         }
 
         model.User.create(params)
             .then(submit => 
-                registerMailer(submit, 'New Account'),
-
+                registerMailer(submit, 'New Account')
+            ).then(record => 
                 res.status(201)
-                    .send({
-                        status: "success",
-                        message: "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.",
-                        user: submit
-                    })
+                .send({
+                    status: true,
+                    message: "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.",
+                    user: new User(record).getUserRegisEntities()
+                })
             )
     } catch ( err ){
         console.log(err);
         res.status(500).json({
-            status: 'error',
-            messages: err
+            status: false,
+            message: err
         });
     }
 }
@@ -67,14 +81,22 @@ exports.activationEmail = async (req, res) => {
     const user = await getUserByTokenActivation(token)
 
     if (user === null || user.email_verification_token != token){
-        return res.status(401).json({
-            status: 'error',
-            messages: 'Maaf, activation token anda tidak valid atau sudah kadaluarsa'
+        return res.status(406).json({
+            status: false,
+            message: 'Maaf, activation token anda tidak valid atau sudah kadaluarsa'
+        });
+    }
+
+    const userData = await getUserByEmail(user.email)
+    if (userData.email_verified_at !== null){
+        return res.status(406).json({
+            status: false,
+            message: `Maaf, Email sudah teraktivasi pada ${userData.email_verified_at}`
         });
     }
 
     const params = {
-        email_verified: true
+        email_verified_at: new Date()
     }
 
     try {
@@ -83,34 +105,124 @@ exports.activationEmail = async (req, res) => {
         }).then(num => {
             if (num == 1){
                 res.status(201).json({
-                    status: "success",
+                    status: true,
                     message: "Activation Email Berhasil"
                 })
             }else{
-                res.status(401).send({
-                    status: 'error',
+                res.status(406).send({
+                    status: false,
                     message: 'Maaf, activation token anda tidak valid atau sudah kadaluarsa'
                 });
             }
         }).catch(err => {
             console.log(err);
-            res.status(500).send({
-                status: "error",
+            res.status(406).send({
+                status: false,
                 message: "Terjadi kesalahan saat memproses reset kata sandi. Silakan coba lagi nanti."
               });
         })
     } catch (error) {
         console.log(err);
         res.status(500).send({
-            status: "error",
+            status: false,
             message: "Terjadi kesalahan saat memproses reset kata sandi. Silakan coba lagi nanti."
         });
     }
 }
 
-exports.registerWithGoogle = async (req, res) => {
-    const { idToken } = req.body
+exports.resendActivationCode = async (req, res) => {
+    const { email } = req.params;
+    
+    const data = await validateEmailRegister(email);
 
-    token = handleGoogle(idToken)
-    console.log(token);
+    if(data){
+        return res.status(406).json({
+            status: false,
+            message: 'Pengiriman ulang email aktivasi gagal. Email tidak ditemukan.'
+        });
+    }
+
+    const user = await getUserByEmail(email)
+    if (user.email_verified_at !== null){
+        return res.status(406).json({
+            status: false,
+            message: `Maaf, Email sudah teraktivasi pada ${user.email_verified_at}`
+        });
+    }
+
+    const token = generateTokenEmail(5)
+    const params = {
+        email_verification_token: token
+    }
+
+    try {
+        model.User.update(params, {
+            where: { email: email }
+        }).then(num => {
+            if (num == 1){
+                resendRegisterMailer(data, token)
+            }
+        }).then(() => {
+            res.status(201).json({
+                status: true,
+                message: "Email aktivasi berhasil dikirim ulang. Silakan cek email Anda."
+            })
+        }).catch(err => {
+            console.log(err);
+            res.status(406).send({
+                status: false,
+                message: "Pengiriman ulang email aktivasi gagal. Email tidak ditemukan."
+              });
+        })
+    } catch (error) {
+        console.log(err);
+        res.status(500).send({
+            status: false,
+            message: "Pengiriman ulang email aktivasi gagal. silahkan coba beberapa saat lagi"
+        });
+    }
+}
+
+exports.registerWithGoogle = async (req, res) => {
+    const { google_id, email } = req.body
+
+    const token = generateTokenEmail(5)
+
+    const params = {
+        username: req.body.username,
+        email: req.body.email,
+        google_id: google_id,
+        role: 'User',
+        email_verification_token: token
+    }
+
+    try{
+        const data = await validateEmailRegister(email);
+        const google = await validateEmailRegisterGoogle(email, google_id);
+
+        if(!data || !google){
+            return res.status(406).json({
+                status: false,
+                message: 'Maaf, email sudah terdaftar, silahkan coba lagi'
+            });
+        }
+
+        model.User.create(params)
+            .then(submit => 
+                registerMailer(submit, 'New Account')
+            ).then(record => 
+                res.status(201)
+                .send({
+                    status: true,
+                    message: "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.",
+                    user: new User(record).getUserRegisEntities()
+                })
+            )
+    } catch ( err ){
+        console.log(err);
+        res.status(500).json({
+            status: false,
+            message: err
+        });
+    }
 }

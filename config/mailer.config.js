@@ -1,18 +1,14 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-function transporterMailer(){
-    nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-    });
-}
+const {SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env
 
 module.exports = {
-    transporterMailer
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: false,
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
 }

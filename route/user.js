@@ -3,9 +3,11 @@ const UserRouter = new Router();
 const {authJWT} = require('../service/jwtService')
 
 const {
-    toptGenerate
+    toptGenerate,
+    userProfile
 } = require('../controller/user');
 
-UserRouter.get('/user/generate-otp', authJWT, toptGenerate);
+UserRouter.get('/profile', authJWT, userProfile);
+UserRouter.get('/generate-otp', authJWT, toptGenerate);
 
 module.exports = UserRouter;
