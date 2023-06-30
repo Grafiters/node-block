@@ -8,9 +8,27 @@ const { verifyGeetest } = require('../../service/geetestService.js')
 const { generateToken } = require("../../service/jwtService");
 
 exports.userLogin = async (req, res) => {
+    /*	#swagger.requestBody = {
+            schema: { 
+                properties: {
+                    email: {type: 'string', required: true},
+                    password: {type: 'string', required: true},
+                    captcha: {
+                        type: 'object',
+                        required: false,
+                        properties: {
+                            geetestChallenge: {type: 'string', reqquired: false},
+                            geetestValidate: {type: 'string', reqquired: false},
+                            geetestSeccode: {type: 'string', reqquired: false}
+                        },
+                    },
+                    otp_token: {type: 'integer', required: false}
+                }
+             }
+    } */
     const { email, password } = req.body;
 
-    if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
+    if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
 
         geetestVerify = await verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode)

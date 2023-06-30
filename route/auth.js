@@ -1,5 +1,10 @@
+'use strict'
 const { Router } = require('express');
 const AuthRouter = new Router();
+
+const {
+    loginSchema
+} = require('../db/schema/auth')
 
 const {
     registerUser,
@@ -17,7 +22,7 @@ const {
     toptGenerate
 } = require('../controller/captcha');
 
-AuthRouter.post('/auth/login', userLogin);
+AuthRouter.post('/auth/login',loginSchema, userLogin);
 AuthRouter.post('/auth/register', registerUser);
 
 AuthRouter.post('/auth/login/google', userLoginGoogle);

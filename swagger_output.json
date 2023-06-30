@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:6969",
-      "description": "development local"
+      "url": "http://localhost:6969/api",
+      "description": "development"
     },
     {
-      "url": "https://http://localhost:6969",
-      "description": "development server"
+      "url": "http://localhost:6969",
+      "description": "production"
     }
   ],
   "paths": {
@@ -127,19 +127,72 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
                 "properties": {
-                  "captcha": {
-                    "example": "any"
-                  },
                   "email": {
-                    "example": "any"
-                  },
-                  "otp_token": {
-                    "example": "any"
+                    "type": "string",
+                    "required": true
                   },
                   "password": {
-                    "example": "any"
+                    "type": "string",
+                    "required": true
+                  },
+                  "captcha": {
+                    "type": "object",
+                    "required": false,
+                    "properties": {
+                      "geetestChallenge": {
+                        "type": "string",
+                        "reqquired": false
+                      },
+                      "geetestValidate": {
+                        "type": "string",
+                        "reqquired": false
+                      },
+                      "geetestSeccode": {
+                        "type": "string",
+                        "reqquired": false
+                      }
+                    }
+                  },
+                  "otp_token": {
+                    "type": "integer",
+                    "required": false
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "captcha": {
+                    "type": "object",
+                    "required": false,
+                    "properties": {
+                      "geetestChallenge": {
+                        "type": "string",
+                        "reqquired": false
+                      },
+                      "geetestValidate": {
+                        "type": "string",
+                        "reqquired": false
+                      },
+                      "geetestSeccode": {
+                        "type": "string",
+                        "reqquired": false
+                      }
+                    }
+                  },
+                  "otp_token": {
+                    "type": "integer",
+                    "required": false
                   }
                 }
               }
