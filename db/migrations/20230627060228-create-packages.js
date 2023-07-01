@@ -14,7 +14,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT('long')
       },
-      request_per_secodd_limit: {
+      request_per_second_limit: {
         type: Sequelize.INTEGER
       },
       request_per_day_limit: {

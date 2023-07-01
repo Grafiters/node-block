@@ -1,4 +1,5 @@
 const model = require("../db/models");
+const { validateOtp } = require('./totpService')
 
 async function validateEmailRegister(email){
     user = await model.User.findOne({where: {email: email}})
@@ -27,7 +28,7 @@ async function validateUserStatus(email){
     }
 }
 
-async function validateTokenOtp(otp, user){
+async function validateTokenOtp(user, otp){
     const validate = await validateOtp(user.otp_secret, otp)
 
     if(validate){
@@ -37,9 +38,28 @@ async function validateTokenOtp(otp, user){
     }
 }
 
+function validatePasswordForChange(old_password, system_password){
+    if(bcrypt.compareSync(old_password, system_password)){
+        return true
+    }
+
+    return false
+}
+
+function validateTwoFactorEnabled(user_id){
+    const user = model.User.findOne({where: {id: user_id}})
+    if(user.otp_enabled){
+        return true
+    }
+
+    return false
+}
+
 module.exports = {
     validateEmailRegisterGoogle,
+    validatePasswordForChange,
+    validateTwoFactorEnabled,
     validateEmailRegister,
     validateUserStatus,
-    validateTokenOtp
+    validateTokenOtp,
 }

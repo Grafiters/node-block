@@ -29,7 +29,6 @@ AuthRouter.post('/auth/login/google', userLoginGoogle);
 AuthRouter.post('/auth/register/google', registerWithGoogle);
 
 AuthRouter.get('/auth/activate-email/:activation_token', activationEmail);
-AuthRouter.get('/auth/otp-generate', toptGenerate);
 AuthRouter.post('/auth/:email/resend', resendActivationCode);
 
 AuthRouter.post('/auth/forgot-password', resendActivationCode);

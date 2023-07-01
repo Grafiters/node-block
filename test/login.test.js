@@ -1,7 +1,7 @@
 const request = require('supertest');
 const {server} = require('./server');
 
-describe('Test the Geetest login challenge', () => {
+describe('Test the login Without geetest challenge', () => {
     let userAccessToken = '';
     test('POST /api/login should return user data success and token access', async () => {
       const params = {
@@ -11,8 +11,8 @@ describe('Test the Geetest login challenge', () => {
 
       const response = await request(server).post('/api/auth/login').send(params);
 
-      console.log(response.body);
       userAccessToken = response.body.token
+      console.log(userAccessToken);
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
     });
@@ -24,7 +24,6 @@ describe('Test the Geetest login challenge', () => {
 
       const response = await request(server).post('/api/auth/login').send(params);
 
-      console.log(response.body);
       expect(response.status).toBe(406);
       expect(response.body).toBeTruthy();
     });
@@ -33,7 +32,6 @@ describe('Test the Geetest login challenge', () => {
 
       const response = await request(server).get('/api/user/profile').set('token', `${userAccessToken}`);
 
-      console.log(response.body);
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
     });

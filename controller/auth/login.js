@@ -25,7 +25,16 @@ exports.userLogin = async (req, res) => {
                     otp_token: {type: 'integer', required: false}
                 }
              }
-    } */
+        }
+
+        #swagger.responses[200] = {
+            schema: { 
+                status: 'true/false',
+                message: 'Login Berhasil',
+                token: 'some access token',
+             }
+        }
+    */
     const { email, password } = req.body;
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
@@ -65,7 +74,7 @@ exports.userLogin = async (req, res) => {
             });
         }
         
-        if(result.otp_secret !== null){
+        if(result.otp_enabled){
             if(req.body.otp_token === null){
                 return res.status(406).json({
                     status: false,
@@ -138,7 +147,7 @@ exports.userLoginGoogle = async (req, res) => {
             });
         }
  
-        if(result.otp_enalbled){
+        if(result.otp_enabled){
             if(req.body.otp_token === null){
                 res.status(406).json({
                     status: false,

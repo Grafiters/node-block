@@ -9,7 +9,6 @@ const { generateTokenEmail } = require("../../service/generateService");
 const { verifyGeetest } = require('../../service/geetestService.js')
 const User = require('../../service/entitiesService/userEntities')
 const model = require("../../db/models");
-const { token } = require('morgan');
 
 exports.registerUser = async (req, res) => {
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){

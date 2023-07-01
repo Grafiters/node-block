@@ -27,7 +27,6 @@ async function getIdTokenFromMetadataServer() {
   });
 
   token = await googleAuth.getAccessToken();
-  console.log(`token generated ${token}`);
 
   return token;
 }

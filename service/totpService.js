@@ -18,8 +18,7 @@ async function validateOtp(otpUrl, otp, window = 1){
 
 async function generateTotpSecret(otpUrl){
   return {
-    secret: parseOtpSecret(otpUrl),
-    qrcode: otpUrl
+    secret: otpUrl
   }
 }
 

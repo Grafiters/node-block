@@ -29,7 +29,6 @@ async function registerMailer(data, subject) {
 
     try {
         const info = transporter.sendMail(configValue)
-        console.log(info);
         return data
     } catch (error) {
         console.log(error);
@@ -59,7 +58,6 @@ async function resendRegisterMailer(data, subject) {
 
     try {
         const info = transporter.sendMail(configValue)
-        console.log(info);
         return data
     } catch (error) {
         console.log(error);

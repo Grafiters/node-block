@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('User_Subsriptions', {
+    return queryInterface.createTable('User_Subscriptions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -50,18 +50,18 @@ module.exports = {
         onUpdate: Sequelize.literal("CURRENT_TIMESTAMP")
       },
     })
-    .then(() => queryInterface.addIndex('User_Subsriptions', ['user_id']))
-    .then(() => queryInterface.addIndex('User_Subsriptions', ['package_id']))
-    .then(() => queryInterface.addIndex('User_Subsriptions', ['invoice_id']))
-    .then(() => queryInterface.addIndex('User_Subsriptions', ['start_date']))
-    .then(() => queryInterface.addIndex('User_Subsriptions', ['end_date']));
+    .then(() => queryInterface.addIndex('User_Subscriptions', ['user_id']))
+    .then(() => queryInterface.addIndex('User_Subscriptions', ['package_id']))
+    .then(() => queryInterface.addIndex('User_Subscriptions', ['invoice_id']))
+    .then(() => queryInterface.addIndex('User_Subscriptions', ['start_date']))
+    .then(() => queryInterface.addIndex('User_Subscriptions', ['end_date']));
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('User_Subsriptions')
-    .then(() => queryInterface.removeIndex('User_Subsriptions', ['user_id']))
-    .then(() => queryInterface.removeIndex('User_Subsriptions', ['package_id']))
-    .then(() => queryInterface.removeIndex('User_Subsriptions', ['invoice_id']))
-    .then(() => queryInterface.removeIndex('User_Subsriptions', ['start_date']))
-    .then(() => queryInterface.removeIndex('User_Subsriptions', ['end_date']));
+    return queryInterface.dropTable('User_Subscriptions')
+    .then(() => queryInterface.removeIndex('User_Subscriptions', ['user_id']))
+    .then(() => queryInterface.removeIndex('User_Subscriptions', ['package_id']))
+    .then(() => queryInterface.removeIndex('User_Subscriptions', ['invoice_id']))
+    .then(() => queryInterface.removeIndex('User_Subscriptions', ['start_date']))
+    .then(() => queryInterface.removeIndex('User_Subscriptions', ['end_date']));
   }
 };
