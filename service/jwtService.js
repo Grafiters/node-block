@@ -15,7 +15,7 @@ const authJWT = (req, res, next) => {
     jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decoded) => {
         if (err) {
             return res.status(401).send({
-                error: 'error',
+                error: false,
                 message: 'Jwt was expired'
             });
         }
@@ -24,8 +24,31 @@ const authJWT = (req, res, next) => {
     })
 }
 
+const authAdminJWT = (req, res, next) => {
+    const token = req.headers['token']
+
+    jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decoded) => {
+        console.log(err);
+        if (err) {
+            return res.status(401).send({
+                error: false,
+                message: 'Jwt was expired'
+            });
+        }
+        if (decoded.user.role == 'User'){
+            return res.status(401).send({
+                error: false,
+                message: 'User can\'t access fo this endpoint'
+            });
+        }
+
+        req.auth = decoded;
+        next();
+    })
+}
 
 module.exports = {
     generateToken,
+    authAdminJWT,
     authJWT
 }

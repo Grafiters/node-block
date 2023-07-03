@@ -65,7 +65,7 @@ function activationCodeSchema(req, res ,next){
         activation_token: Joi.string().required()
     });
 
-    validation.validateRequest(req, next, schema, res);
+    validation.validateParamsRequest(req, next, schema, res);
 }
 
 function resendActivationCodeSchema(req, res ,next){

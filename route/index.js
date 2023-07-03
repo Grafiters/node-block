@@ -5,10 +5,11 @@ const UserRouter = require('./user.js');
 const GeetestRouter = require('./captcha.js');
 const AuthRouter = require('./auth.js');
 const BlogRouter = require('./blog.js');
+const BlockchainRouter = require('./blockchain.js');
 
-MainRouter.use('/blog', BlogRouter);
-
+MainRouter.use('/blockchain', BlockchainRouter);
 MainRouter.use('/geetest', GeetestRouter);
+MainRouter.use('/blog', BlogRouter);
 MainRouter.use('/user', UserRouter);
 MainRouter.use('/', AuthRouter);
 

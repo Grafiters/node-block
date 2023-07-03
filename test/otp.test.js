@@ -11,7 +11,7 @@ describe('Test the Geetest route challenge', () => {
         const create = await createOtp(totpUrl)
         const validate = await validateOtp(totpUrl, create)
 
-            expect(response.status).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body).toBeTruthy();
     });
 

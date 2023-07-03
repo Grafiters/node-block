@@ -19,6 +19,25 @@ function validateRequest(req, next, schema, res) {
     }
 }
 
+function validateParamsRequest(req, next, schema, res) {
+    const options = {
+        abortEarly: false, // include all errors
+        allowUnknown: true, // ignore unknown props
+        stripUnknown: true // remove unknown props
+    };
+    const { error, value } = schema.validate(req.params, options);
+    if (error) {
+        detail_error = error.details.map(x => x.message).join(', ')
+        res.status(422).send({
+            status: false,
+            message: detail_error
+        })
+    } else {
+        req.params = value;
+        next();
+    }
+}
+
 function validateEmailAndPassword(email, password){
     if(!validatorEmail.isEmail(email) && password.length < 8){
         return res.status(422).json({
@@ -60,5 +79,6 @@ module.exports = {
     validateEmail,
     validateRequest,
     validatePassword,
-    validateEmailAndPassword
+    validateParamsRequest,
+    validateEmailAndPassword,
 }
