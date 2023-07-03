@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     api_interface: DataTypes.ENUM({
       values: ['JSON-RPC', 'WS', 'GRAPHQL','Advanced API']
     }),
+    connection_speed: DataTypes.STRING,
     endpoint: DataTypes.STRING,
     documentation_link: DataTypes.STRING,
     created_at: DataTypes.DATE,

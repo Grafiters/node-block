@@ -6,7 +6,9 @@ const GeetestRouter = require('./captcha.js');
 const AuthRouter = require('./auth.js');
 const BlogRouter = require('./blog.js');
 const BlockchainRouter = require('./blockchain.js');
+const NodeBlockchainRouter = require('./node.js');
 
+MainRouter.use('/node', NodeBlockchainRouter);
 MainRouter.use('/blockchain', BlockchainRouter);
 MainRouter.use('/geetest', GeetestRouter);
 MainRouter.use('/blog', BlogRouter);

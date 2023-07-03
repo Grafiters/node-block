@@ -88,15 +88,15 @@ describe('Test the Blockchain route challenge', () => {
         const getData = await request(server).get('/api/blockchain');
 
         const response = await request(server).delete(`/api/blockchain/delete/${getData.body.data[0].id}`).set('token', `${tokenAdminAkses}`);
-        // console.log(response);
+        
         expect(response.status).toBe(201);
         expect(response.body.message).toBe('Blockchain successfully deleted.');
     });
     
-    test('DELETE clean table', async () => {
+    // test('DELETE clean table', async () => {
 
-        const truncate = await model.Blockchain.sync({force: true})
+    //     const truncate = await model.Blockchain.sync({force: true})
 
-        expect(truncate).toBeTruthy();
-    });
+    //     expect(truncate).toBeTruthy();
+    // });
 });
