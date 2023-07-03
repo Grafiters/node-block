@@ -15,7 +15,7 @@ exports.forgotPassword = async (req, res) => {
         const data = await validateEmailRegister(email);
 
         if(!data){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: 'Pengiriman email pemulihan kata sandi gagal. Email tidak ditemukan.'
             });
@@ -42,7 +42,7 @@ exports.resetPassword = async (req, res) => {
     const data = await validateEmailRegister(email);
 
     if(!data){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Pengiriman email pemulihan kata sandi gagal. Email tidak ditemukan.'
         });
@@ -62,14 +62,14 @@ exports.resetPassword = async (req, res) => {
                     message: "Reset kata sandi berhasil. Kata sandi Anda telah diperbarui."
                 })
             }else{
-                res.status(406).send({
+                res.status(422).send({
                     status: false,
                     message: 'Reset kata sandi gagal. Token tidak valid atau sudah kedaluwarsa.'
                 });
             }
         }).catch(err => {
             console.log(err);
-            res.status(406).send({
+            res.status(422).send({
                 status: false,
                 message: "Terjadi kesalahan saat memproses reset kata sandi. Silakan coba lagi nanti."
               });

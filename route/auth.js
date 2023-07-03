@@ -2,36 +2,22 @@
 const { Router } = require('express');
 const AuthRouter = new Router();
 
-const {
-    loginSchema
-} = require('../db/schema/auth')
+const schema = require('../db/schema/auth')
 
-const {
-    registerUser,
-    activationEmail,
-    registerWithGoogle,
-    resendActivationCode
-} = require('../controller/auth/register');
+const register = require('../controller/auth/register');
+const password = require('../controller/auth/password');
+const login = require('../controller/auth/login');
 
-const {
-    userLogin,
-    userLoginGoogle
-} = require('../controller/auth/login');
+AuthRouter.post('/auth/login', schema.loginSchema, login.userLogin);
+AuthRouter.post('/auth/register',schema.registerSchema, register.registerUser);
 
-const {
-    toptGenerate
-} = require('../controller/captcha');
+AuthRouter.post('/auth/login/google', schema.loginGoogleSchema, login.userLoginGoogle);
+AuthRouter.post('/auth/register/google', schema.registerGoogleSchema, register.registerWithGoogle);
 
-AuthRouter.post('/auth/login',loginSchema, userLogin);
-AuthRouter.post('/auth/register', registerUser);
+AuthRouter.get('/auth/activate-email/:activation_token', schema.activationCodeSchema, register.activationEmail);
+AuthRouter.post('/auth/:email/resend', schema.resendActivationCodeSchema, register.resendActivationCode);
 
-AuthRouter.post('/auth/login/google', userLoginGoogle);
-AuthRouter.post('/auth/register/google', registerWithGoogle);
-
-AuthRouter.get('/auth/activate-email/:activation_token', activationEmail);
-AuthRouter.post('/auth/:email/resend', resendActivationCode);
-
-AuthRouter.post('/auth/forgot-password', resendActivationCode);
-AuthRouter.post('/auth/reset-password', resendActivationCode);
+AuthRouter.post('/auth/forgot-password', schema.forgotPasswordSchema, password.forgotPassword);
+AuthRouter.post('/auth/reset-password', schema.resetPasswordSchema, password.resetPassword);
 
 module.exports = AuthRouter;

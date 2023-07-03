@@ -36,7 +36,7 @@ exports.changePassword = async (req, res) => {
             }
         }
 
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Perubahan kata sandi gagal. Kata sandi lama tidak valid.'
         });
@@ -47,7 +47,7 @@ exports.changePassword = async (req, res) => {
 
 exports.toptGenerate = async (req, res) => {
     if(validate){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: "two-factor authentication already enabled"
         });
@@ -72,7 +72,7 @@ exports.toptGenerate = async (req, res) => {
 
 exports.enableTwoFactor = async (req, res) => {
     if(validate){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: "two-factor authentication already enabled"
         });
@@ -91,7 +91,7 @@ exports.enableTwoFactor = async (req, res) => {
             }
         }
 
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Verifikasi dua faktor (2FA) gagal. Kode OTP tidak valid.'
         })
@@ -116,7 +116,7 @@ exports.verifyTwoFactor = async (req, res) => {
             })
         }
 
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Verifikasi dua faktor (2FA) gagal. Kode OTP tidak valid.'
         })
@@ -144,7 +144,7 @@ exports.disableTwoFactor = async (req, res) => {
             }
         }
 
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Verifikasi dua faktor (2FA) gagal. Kode OTP tidak valid.'
         })
@@ -184,7 +184,7 @@ exports.currentPlan = async (req, res) => {
             })
         }
 
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             data: "Paket saat ini tidak ditemukan."
         })

@@ -17,7 +17,7 @@ exports.registerUser = async (req, res) => {
         geetestVerify = await verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode)
 
         if(geetestVerify === null){
-            return res.status(406).send({
+            return res.status(422).send({
                 status: false,
                 message: 'Invalid Geetest challenge'
             });
@@ -25,7 +25,7 @@ exports.registerUser = async (req, res) => {
     }
 
     if(!validatorEmail.isEmail(req.body.email) || req.body.password.length < 8){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: "Kesalahan validasi",
             errors: [
@@ -49,7 +49,7 @@ exports.registerUser = async (req, res) => {
         const data = await validateEmailRegister(req.body.email);
 
         if(!data){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: 'Maaf, email sudah terdaftar, silahkan coba lagi'
             });
@@ -80,7 +80,7 @@ exports.activationEmail = async (req, res) => {
     const user = await getUserByTokenActivation(token)
 
     if (user === null || user.email_verification_token != token){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Maaf, activation token anda tidak valid atau sudah kadaluarsa'
         });
@@ -88,7 +88,7 @@ exports.activationEmail = async (req, res) => {
 
     const userData = await getUserByEmail(user.email)
     if (userData.email_verified_at !== null){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: `Maaf, Email sudah teraktivasi pada ${userData.email_verified_at}`
         });
@@ -108,14 +108,14 @@ exports.activationEmail = async (req, res) => {
                     message: "Activation Email Berhasil"
                 })
             }else{
-                res.status(406).send({
+                res.status(422).send({
                     status: false,
                     message: 'Maaf, activation token anda tidak valid atau sudah kadaluarsa'
                 });
             }
         }).catch(err => {
             console.log(err);
-            res.status(406).send({
+            res.status(422).send({
                 status: false,
                 message: "Terjadi kesalahan saat memproses reset kata sandi. Silakan coba lagi nanti."
               });
@@ -135,7 +135,7 @@ exports.resendActivationCode = async (req, res) => {
     const data = await validateEmailRegister(email);
 
     if(data){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: 'Pengiriman ulang email aktivasi gagal. Email tidak ditemukan.'
         });
@@ -143,7 +143,7 @@ exports.resendActivationCode = async (req, res) => {
 
     const user = await getUserByEmail(email)
     if (user.email_verified_at !== null){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: `Maaf, Email sudah teraktivasi pada ${user.email_verified_at}`
         });
@@ -168,7 +168,7 @@ exports.resendActivationCode = async (req, res) => {
             })
         }).catch(err => {
             console.log(err);
-            res.status(406).send({
+            res.status(422).send({
                 status: false,
                 message: "Pengiriman ulang email aktivasi gagal. Email tidak ditemukan."
               });
@@ -200,7 +200,7 @@ exports.registerWithGoogle = async (req, res) => {
         const google = await validateEmailRegisterGoogle(email, google_id);
 
         if(!data || !google){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: 'Maaf, email sudah terdaftar, silahkan coba lagi'
             });

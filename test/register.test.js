@@ -13,7 +13,7 @@ describe('Test the register', () => {
     const response = await request(server).post('/api/auth/register').send(params);
 
     console.log(response.body);
-    expect(response.status).toBe(406);
+    expect(response.status).toBe(422);
   });
 
   test('POST /api/auth/register should return error less minimum password', async () => {
@@ -26,7 +26,7 @@ describe('Test the register', () => {
     const response = await request(server).post('/api/auth/register').send(params);
 
     console.log(response.body);
-    expect(response.status).toBe(406);
+    expect(response.status).toBe(422);
   });
 
   test('POST /api/auth/register should return user data success', async () => {
@@ -56,7 +56,7 @@ describe('Test the register', () => {
     const response = await request(server).get(`/api/auth/activate-email/123456`);
 
     console.log(response.body);
-    expect(response.status).toBe(406);
+    expect(response.status).toBe(422);
     expect(response.body).toBeTruthy();
   });
 });

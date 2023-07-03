@@ -11,7 +11,7 @@
       "description": "development"
     },
     {
-      "url": "http://localhost:6969",
+      "url": "http://localhost:6969/api",
       "description": "production"
     }
   ],
@@ -23,8 +23,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -36,8 +36,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -59,8 +59,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -72,8 +72,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         },
         "requestBody": {
@@ -112,8 +112,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         },
         "requestBody": {
@@ -179,8 +179,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         },
         "requestBody": {
@@ -221,8 +221,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -249,8 +249,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -294,8 +294,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -336,8 +336,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -403,8 +403,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -490,8 +490,8 @@
               }
             }
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -582,8 +582,8 @@
           "201": {
             "description": "Created"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -621,8 +621,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -654,8 +654,8 @@
           "201": {
             "description": "Created"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -700,8 +700,8 @@
           "201": {
             "description": "Created"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -726,8 +726,8 @@
           "201": {
             "description": "Created"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -739,14 +739,28 @@
       "post": {
         "description": "",
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -758,11 +772,31 @@
           "201": {
             "description": "Created"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "new_password": {
+                    "example": "any"
+                  },
+                  "reset_token": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }

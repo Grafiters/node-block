@@ -10,7 +10,7 @@ exports.getContent = async (req, res) => {
             data: new BlogEntities(categories).getDataContentCategoryEntities()
         })
     } catch (error) {       
-        return res.status(406).json({
+        return res.status(422).json({
             success: false,
             data: 'Kategori blog tidak ditemukan.'
         })
@@ -27,7 +27,7 @@ exports.getCategories = async (req, res) => {
         })
     } catch (error) {
         
-        return res.status(406).json({
+        return res.status(422).json({
             success: false,
             data: 'Kategori blog tidak ditemukan.'
         })
@@ -44,7 +44,7 @@ exports.getBlogByCategories = async (req, res) => {
         })
     } catch (error) {
         
-        return res.status(406).json({
+        return res.status(422).json({
             success: false,
             data: 'Kategori blog tidak ditemukan.'
         })
@@ -62,7 +62,7 @@ exports.getBlogByKeyword = async (req, res) => {
         })
     } catch (error) {
         
-        return res.status(406).json({
+        return res.status(422).json({
             success: false,
             data: 'Keyword blog tidak ditemukan.'
         })
@@ -79,7 +79,7 @@ exports.getBlogByID = async (req, res) => {
             data: new BlogEntities(categories).getContentEntities()
         })
     } catch (error) {
-        return res.status(406).json({
+        return res.status(422).json({
             success: false,
             data: 'Blog berdasarkan id tidak ditermukan.'
         })

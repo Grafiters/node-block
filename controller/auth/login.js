@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const validatorEmail = require('validator');
 
 const { getUserByEmail, getUserByEmailAndGoogleId } = require("../../service/userService");
-const { validateUserStatus, validateTokenOtp } = require("../../service/validationService");
+const { validateUserStatus } = require("../../service/validationService");
 const { verifyGeetest } = require('../../service/geetestService.js')
 const { generateToken } = require("../../service/jwtService");
 const totpService = require('../../service/totpService');
@@ -44,7 +44,7 @@ exports.userLogin = async (req, res) => {
         geetestVerify = await verifyGeetest(geetestChallenge, geetestValidate, geetestSeccode)
 
         if(geetestVerify === null){
-            return res.status(406).send({
+            return res.status(422).send({
                 status: false,
                 message: 'Invalid Geetest challenge'
             });
@@ -52,7 +52,7 @@ exports.userLogin = async (req, res) => {
     }
 
     if(!validatorEmail.isEmail(req.body.email)){
-        return res.status(406).json({
+        return res.status(422).json({
             status: false,
             message: "Kesalahan validasi",
             errors: [
@@ -69,7 +69,7 @@ exports.userLogin = async (req, res) => {
         }
 
         if (!validateUserStatus){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
             });
@@ -77,7 +77,7 @@ exports.userLogin = async (req, res) => {
         
         if(result.otp_enabled){
             if(req.body.otp_token === null){
-                return res.status(406).json({
+                return res.status(422).json({
                     status: false,
                     message: "Missing otp token"
                 });
@@ -85,7 +85,7 @@ exports.userLogin = async (req, res) => {
 
             const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
-                return res.status(406).json({
+                return res.status(422).json({
                     status: false,
                     message: "Invalid token otp"
                 });
@@ -93,14 +93,14 @@ exports.userLogin = async (req, res) => {
         }
 
         if(result.password_digest === null){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
         }
 
         if(!password){
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
@@ -115,7 +115,7 @@ exports.userLogin = async (req, res) => {
                 token: token
             })
         }else{
-            return res.status(406).json({
+            return res.status(422).json({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
@@ -135,14 +135,14 @@ exports.userLoginGoogle = async (req, res) => {
         const result = await getUserByEmailAndGoogleId(google_id)
     
         if(!result){
-            res.status(406).json({
+            res.status(422).json({
                 status: false,
                 message: "Login menggunakan akun Google gagal. ID Google tidak valid."
             });
         }
 
         if (!validateUserStatus){
-            res.status(406).json({
+            res.status(422).json({
                 status: false,
                 message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
             });
@@ -150,7 +150,7 @@ exports.userLoginGoogle = async (req, res) => {
  
         if(result.otp_enabled){
             if(req.body.otp_token === null){
-                res.status(406).json({
+                res.status(422).json({
                     status: false,
                     message: "Missing otp token"
                 });
@@ -158,7 +158,7 @@ exports.userLoginGoogle = async (req, res) => {
 
             const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
-                res.status(406).json({
+                res.status(422).json({
                     status: false,
                     message: "Invalid token otp"
                 });

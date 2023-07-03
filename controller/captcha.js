@@ -35,7 +35,7 @@ exports.validateGeetest = async (req, res) => {
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(406).json({
+        return res.status(422).json({
             status: "error",
             message: "Terjadi kesalahan saat memproses verify captcha. Silakan coba lagi nanti"
         });
