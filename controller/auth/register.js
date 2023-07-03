@@ -24,7 +24,7 @@ exports.registerUser = async (req, res) => {
         }
     }
 
-    if(!validatorEmail.isEmail(req.body.email) || req.body.password.lenght < 8){
+    if(!validatorEmail.isEmail(req.body.email) || req.body.password.length < 8){
         return res.status(406).json({
             status: false,
             message: "Kesalahan validasi",

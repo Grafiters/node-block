@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     blockchain_id: DataTypes.BIGINT,
     api_interface: DataTypes.ENUM({
-      value: ['JSON-RPC', 'WS', 'GRAPHQL','Advanced API']
+      values: ['JSON-RPC', 'WS', 'GRAPHQL','Advanced API']
     }),
     endpoint: DataTypes.STRING,
     documentation_link: DataTypes.STRING,

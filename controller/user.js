@@ -1,15 +1,14 @@
 const bcrypt = require('bcrypt');
 
-const { findUserByID, updateUserPasswordByID, updateUserOtpSecretByID } = require('../service/userService');
-const { validatePasswordForChange, validateTwoFactorEnabled } = require("../service/validationService");
-const { generateOtp, generateTotpSecret } = require('../service/totpService.js');
 const Subscription = require('../service/entitiesService/subcriptionEntities')
 const User = require('../service/entitiesService/userEntities')
 const userService = require('../service/userService');
+const totpService = require('../service/totpService.js');
+const validationService = require("../service/validationService");
 
 exports.userProfile = async (req, res) => {
     try {
-        const user = await findUserByID(req.auth.user.id)
+        const user = await userService.findUserByID(req.auth.user.id)
 
         return res.status(200).json({
             status: true,
@@ -23,12 +22,12 @@ exports.userProfile = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
     const {old_password, new_password} = req.body;
-    const user = await findUserByID(req.auth.user.id)
+    const user = await userService.findUserByID(req.auth.user.id)
 
     try {
-        const checking_old_password = validatePasswordForChange(old_password, user.password_digest)
+        const checking_old_password = validationService.validatePasswordForChange(old_password, user.password_digest)
         if (checking_old_password){
-            const update = await updateUserPasswordByID(user.id, await bcrypt.hash(new_password, 10))
+            const update = await userService.updateUserPasswordByID(user.id, await bcrypt.hash(new_password, 10))
             if(update){
                 return res.status(201).json({
                     status: true,
@@ -47,7 +46,6 @@ exports.changePassword = async (req, res) => {
 }
 
 exports.toptGenerate = async (req, res) => {
-    const validate = validateTwoFactorEnabled(req.auth.user.id)
     if(validate){
         return res.status(406).json({
             status: false,
@@ -55,8 +53,8 @@ exports.toptGenerate = async (req, res) => {
         });
     }
     try {
-        const totpUrl = await generateOtp()
-        const createTotp = await generateTotpSecret(totpUrl);
+        const totpUrl = await totpService.generateOtp()
+        const createTotp = await totpService.generateTotpSecret(totpUrl);
 
         return res.status(200).json({
             status: true,
@@ -73,7 +71,6 @@ exports.toptGenerate = async (req, res) => {
 }
 
 exports.enableTwoFactor = async (req, res) => {
-    const validate = validateTwoFactorEnabled(req.auth.user.id)
     if(validate){
         return res.status(406).json({
             status: false,
@@ -83,9 +80,9 @@ exports.enableTwoFactor = async (req, res) => {
 
     const { otp_secret, otp_code} = req.body;
     try {
-        const validateOtp = await validateOtp(otp_secret, otp_code);
+        const validateOtp = await totpService.validateOtp(otp_secret, otp_code);
         if(validateOtp) {
-            const update = await updateUserOtpSecretByID(req.auth.user.id, otp_secret, true)
+            const update = await userService.updateUserOtpSecretByID(req.auth.user.id, otp_secret, true)
             if(update){
                 return res.status(200).json({
                     status: true,
@@ -109,9 +106,9 @@ exports.enableTwoFactor = async (req, res) => {
 
 exports.verifyTwoFactor = async (req, res) => {
     const { otp_code } = req.body;
-    const user = await findUserByID(req.auth.user.id)
+    const user = await userService.findUserByID(req.auth.user.id)
     try {
-        const validateOtp = await validateOtp(user.otp_secret, otp_code);
+        const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);
         if(validateOtp) {
             return res.status(200).json({
                 status: true,
@@ -134,11 +131,11 @@ exports.verifyTwoFactor = async (req, res) => {
 
 exports.disableTwoFactor = async (req, res) => {
     const { otp_code } = req.body;
-    const user = await findUserByID(req.auth.user.id)
+    const user = await userService.findUserByID(req.auth.user.id)
     try {
-        const validateOtp = await validateOtp(user.otp_secret, otp_code);
+        const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);
         if(validateOtp) {
-            const update = await updateUserOtpSecretByID(req.auth.user.id, null, false)
+            const update = await userService.updateUserOtpSecretByID(req.auth.user.id, null, false)
             if(update){
                 return res.status(200).json({
                     status: true,

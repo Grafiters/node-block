@@ -6,6 +6,7 @@ const { getUserByEmail, getUserByEmailAndGoogleId } = require("../../service/use
 const { validateUserStatus, validateTokenOtp } = require("../../service/validationService");
 const { verifyGeetest } = require('../../service/geetestService.js')
 const { generateToken } = require("../../service/jwtService");
+const totpService = require('../../service/totpService');
 
 exports.userLogin = async (req, res) => {
     /*	#swagger.requestBody = {
@@ -82,7 +83,7 @@ exports.userLogin = async (req, res) => {
                 });
             }
 
-            const valid_otp = await validateTokenOtp(result, req.body.otp_token)
+            const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
                 return res.status(406).json({
                     status: false,
@@ -155,7 +156,7 @@ exports.userLoginGoogle = async (req, res) => {
                 });
             }
 
-            const valid_otp = await validateTokenOtp(result, req.body.otp_token)
+            const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
                 res.status(406).json({
                     status: false,
