@@ -2,5 +2,7 @@
     "launch": {
         "configurations": [],
         "compounds": []
-    }
+    },
+    "doki.sticker.path": "/home/back-dev/Downloads/logo-whoite.png",
+    "doki.background.anchor": "center"
 }

@@ -45,23 +45,45 @@ async function updateBlockchainData(blockchain_id, params){
 }
 
 async function deleteBlockchainData(blockchain_id){
-    const blockchain = await model.Blockchain.destroy({
-        where: {
-            id: blockchain_id
-        }
-        }).then((submit) => {
-            return {
-                status: true,
-                message: ''
-            }
-        }).catch((error) => {
-            return {
-                status: false,
-                message: error
-            }
-        });
+    const transaction = await model.sequelize.transaction()
+    try {
+        const node = await model.Node.findAll({
+            where: {
+                blockchain_id: blockchain_id
+            },
+            transaction
+        })
 
-    return blockchain
+        const nodeId = node.map((nod) => nod.id)
+
+        await model.Blockchain.destroy({
+            where: {
+                id: blockchain_id,
+            },
+            transaction
+        })
+
+        await model.Node.destroy({
+            where: {
+                id: nodeId,
+            },
+            transaction
+        })
+
+        await transaction.commit()
+
+        return {
+            status: true,
+            message: ''
+        }
+    } catch (error) {
+        console.log(error);
+        await transaction.rollback()
+        return {
+            status: false,
+            message: error
+        }
+    }
 }
 
 

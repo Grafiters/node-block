@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      PaymentMethods.hasMany(models.Invoices, {as: 'Invoices'})
     }
   }
   PaymentMethods.init({

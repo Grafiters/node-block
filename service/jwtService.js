@@ -34,7 +34,7 @@ const authAdminJWT = (req, res, next) => {
                 message: 'Jwt was expired'
             });
         }
-        if (decoded.user.role == 'User'){
+        if (decoded.user.role != 'Admin'){
             return res.status(401).send({
                 error: false,
                 message: 'User can\'t access fo this endpoint'

@@ -7,7 +7,9 @@ const AuthRouter = require('./auth.js');
 const BlogRouter = require('./blog.js');
 const BlockchainRouter = require('./blockchain.js');
 const NodeBlockchainRouter = require('./node.js');
+const PaymentMethodRouter = require('./paymentMethod.js');
 
+MainRouter.use('/payment-method', PaymentMethodRouter);
 MainRouter.use('/node', NodeBlockchainRouter);
 MainRouter.use('/blockchain', BlockchainRouter);
 MainRouter.use('/geetest', GeetestRouter);
