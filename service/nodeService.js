@@ -51,7 +51,30 @@ async function updateNodeBlockchain(node_blockchain_id, params){
     return node
 }
 
+async function deleteNodeBlockchain(node_blockchain_id, params){
+    const node = await model.Node.destroy({
+                    where: {
+                        id: node_blockchain_id
+                    }
+                })
+                .then((submit) => {
+                    return {
+                        status: true,
+                        message: ''
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                    return {
+                        status: false,
+                        message: error.message
+                    }
+                });
+
+    return node
+}
+
 module.exports = {
+    deleteNodeBlockchain,
     updateNodeBlockchain,
     getAllNodeBlockchain,
     addNodeBlockchain,

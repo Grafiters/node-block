@@ -6,7 +6,7 @@ async function getAllPaymentMethods(){
     return payment
 }
 
-async function getAllPaymentMethods(payment_id){
+async function getAllPaymentMethodsByID(payment_id){
     const payment = await model.PaymentMethods.findOne({
         where: {
             id: payment_id
@@ -96,6 +96,7 @@ async function deletePaymentMethods(payment_id){
 }
 
 module.exports = {
+    getAllPaymentMethodsByID,
     deletePaymentMethods,
     updatePaymentMethods,
     getAllPaymentMethods,

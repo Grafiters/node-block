@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
     }
   }
   Packages.init({
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     request_per_second_limit: DataTypes.INTEGER,
     request_per_day_limit: DataTypes.INTEGER,
     request_per_month_limit: DataTypes.INTEGER,
-    price: DataTypes.INTEGER,
+    price: DataTypes.DECIMAL(10,2),
     is_trial: DataTypes.BOOLEAN({default: false}),
     trial_duration: DataTypes.INTEGER,
     trial_request_limit: DataTypes.INTEGER,

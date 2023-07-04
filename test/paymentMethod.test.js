@@ -97,7 +97,9 @@ describe('Test the Payment Method route challenge', () => {
     
     test('DELETE clean table', async () => {
 
-        const truncate = await model.PaymentMethods.sync({force: true})
+        const truncate = await model.PaymentMethods.destroy({
+            truncate: true
+        })
 
         expect(truncate).toBeTruthy();
     });

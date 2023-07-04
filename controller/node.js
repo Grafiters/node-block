@@ -64,3 +64,26 @@ exports.updateNodeBlockchain = async (req, res) => {
         });
     }
 }
+
+exports.deleteNodeBlockchain = async (req, res) => {
+    try {
+        const node = await nodeService.deleteNodeBlockchain(req.params.node_id)
+        if (node.status){
+            return res.status(201).json({
+                status: true,
+                message: 'Node blockchain berhasil dihapus.',
+            });
+        }else{
+            return res.status(422).json({
+                status: false,
+                message: node.message,
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({
+            status: false,
+            message: 'Tidak dapat menambah data node blockchain, silahkan coba beberapa saat lagi',
+        });
+    }
+}

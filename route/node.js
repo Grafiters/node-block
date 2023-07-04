@@ -8,6 +8,6 @@ const schema = require('../db/schema/node');
 NodeBlockchainRouter.get('/', jwtService.authExecptionJWT, node.getAllNodeBlockchain)
 NodeBlockchainRouter.post('/add', jwtService.authExecptionJWT, schema.requestCreateSchema, node.addNodeBlockchain)
 NodeBlockchainRouter.post('/edit/:node_id', jwtService.authExecptionJWT, schema.requestCreateSchema, node.updateNodeBlockchain)
-// NodeBlockchainRouter.delete('/delete/:blockchain_id', jwtService.authExecptionJWT, node.deleteBlockchainData)
+NodeBlockchainRouter.delete('/delete/:node_id', jwtService.authExecptionJWT, node.deleteNodeBlockchain)
 
 module.exports = NodeBlockchainRouter
