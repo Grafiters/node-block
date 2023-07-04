@@ -1,4 +1,5 @@
 const model = require("../db/models");
+const Sequelize = require("../db/models");
 
 async function getAllNodeBlockchain(){
     const node = await model.Node.findAll({
@@ -10,7 +11,19 @@ async function getAllNodeBlockchain(){
     return node
 }
 
+async function getDataNodeByBlockchainID(params){
+    const node = await model.Node.findAll({
+        where: {
+            blockchain_id: params
+        },
+        include: [model.Blockchain]
+    });
+
+    return node
+}
+
 async function addNodeBlockchain(params){
+    console.log(params);
     const node = await model.Node.create( params )
                 .then((submit) => {
                     return {
@@ -21,7 +34,7 @@ async function addNodeBlockchain(params){
                     console.log(error);
                     return {
                         status: false,
-                        message: error.message
+                        message: error
                     }
                 });
 
@@ -29,7 +42,6 @@ async function addNodeBlockchain(params){
 }
 
 async function updateNodeBlockchain(node_blockchain_id, params){
-    console.log(params);
     const node = await model.Node.update( params, {
                     where: {
                         id: node_blockchain_id
@@ -74,6 +86,7 @@ async function deleteNodeBlockchain(node_blockchain_id, params){
 }
 
 module.exports = {
+    getDataNodeByBlockchainID,
     deleteNodeBlockchain,
     updateNodeBlockchain,
     getAllNodeBlockchain,

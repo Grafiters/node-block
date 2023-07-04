@@ -6,15 +6,8 @@ const model = require('../models')
 
 async function requestCreateSchema(req, res, next){
     const blockchain = await model.Blockchain.findOne({where: {id: req.body.blockchain_id}})
-        
+
     if(!blockchain){
-        return res.status(422).send({
-            status: false,
-            message: 'Blockchain not found'
-        })
-    }
-    
-    if(!req.params.node_id){
         return res.status(422).send({
             status: false,
             message: 'Blockchain not found'

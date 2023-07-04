@@ -6,7 +6,7 @@ const jwtService = require('../service/jwtService')
 const schema = require('../db/schema/node');
 
 NodeBlockchainRouter.get('/', jwtService.authExecptionJWT, node.getAllNodeBlockchain)
-NodeBlockchainRouter.post('/add', jwtService.authExecptionJWT, schema.requestCreateSchema, node.addNodeBlockchain)
+NodeBlockchainRouter.post('/add', jwtService.authExecptionJWT, node.addNodeBlockchain)
 NodeBlockchainRouter.post('/edit/:node_id', jwtService.authExecptionJWT, schema.requestCreateSchema, node.updateNodeBlockchain)
 NodeBlockchainRouter.delete('/delete/:node_id', jwtService.authExecptionJWT, node.deleteNodeBlockchain)
 

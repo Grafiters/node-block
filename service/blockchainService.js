@@ -1,8 +1,26 @@
-const { error } = require("console");
+
 const model = require("../db/models");
 
 async function getAllBlcokchainData(){
     const blockchain = await model.Blockchain.findAll();
+
+    return blockchain
+}
+
+async function getAllBlcokchainGroupData(){
+    const blockchain = await model.Blockchain.findAll({
+        attributes: ['blockchain_name'],
+        group: ['blockchain_name']
+    });
+
+    return blockchain
+}
+
+async function getBlockchainByName(blockchain_name, attributes){
+    const blockchain = await model.Blockchain.findAll({
+        attributes: [attributes],
+        where: {blockchain_name: blockchain_name}
+    });
 
     return blockchain
 }
@@ -98,6 +116,8 @@ async function getDetailBlockchainByID(id){
 }
 
 module.exports = {
+    getAllBlcokchainGroupData,
+    getBlockchainByName,
     addBlockchainData,
     getAllBlcokchainData,
     updateBlockchainData,

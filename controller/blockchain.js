@@ -1,4 +1,5 @@
 const blockchainService = require('../service/blockchainService');
+const blockchainEntities = require('../service/entitiesService/blockchainEntities');
 
 exports.getAllBlockchain = async (req, res) => {
     try {
@@ -7,7 +8,7 @@ exports.getAllBlockchain = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'Berhasil mengambil data blockchain',
-            data: blokchain
+            data: new blockchainEntities(blokchain).getBlockchainData()
         });
     } catch (error) {
         console.log(error);

@@ -1,13 +1,15 @@
+const blockchainService = require('../service/blockchainService');
 const nodeService = require('../service/nodeService');
+const nodeBlockchainEntities = require('../service/entitiesService/nodeBlockchainEntities')
 
 exports.getAllNodeBlockchain = async (req, res) => {
     try {
-        const node = await nodeService.getAllNodeBlockchain()
+        const blockchain = await blockchainService.getAllBlcokchainGroupData();
 
         return res.status(200).json({
             status: true,
             message: 'Berhasil mengambil data blockchain',
-            data: node
+            data: await new nodeBlockchainEntities(blockchain).getBlockchainGroup()
         });
     } catch (error) {
         console.log(error);
@@ -21,7 +23,6 @@ exports.getAllNodeBlockchain = async (req, res) => {
 exports.addNodeBlockchain = async (req, res) => {
     try {
         const node = await nodeService.addNodeBlockchain(req.body)
-
         if (node.status){
             return res.status(201).json({
                 status: true,
@@ -34,7 +35,6 @@ exports.addNodeBlockchain = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log(error);
         return res.status(422).json({
             status: false,
             message: 'Tidak dapat menambah data node blockchain, silahkan coba beberapa saat lagi',

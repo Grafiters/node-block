@@ -27,6 +27,10 @@ class User {
       role: this.role
     }
   }
+
+  getActivityEntities(){
+    
+  }
 }
 
 module.exports = User;

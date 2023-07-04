@@ -14,6 +14,7 @@ const authJWT = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decoded) => {
         if (err) {
+            console.log(err);
             return res.status(401).send({
                 error: false,
                 message: 'Jwt was expired'

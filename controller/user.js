@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 
 const Subscription = require('../service/entitiesService/subcriptionEntities')
 const User = require('../service/entitiesService/userEntities')
+const Activity = require('../service/entitiesService/activityEntities')
 const userService = require('../service/userService');
 const totpService = require('../service/totpService.js');
 const validationService = require("../service/validationService");
@@ -202,7 +203,7 @@ exports.activityUser = async (req, res) => {
         const activity = await userService.getActivityUser(req.auth.user.id)
         return res.status(200).json({
             status: true,
-            data: activity
+            data: new Activity(activity).getActivityUser()
         })
     } catch (error) {
         return res.status(500).json({
