@@ -1,3 +1,5 @@
+const { generateApiKey } = require('generate-api-key');
+
 function generateTokenEmail(n) {
     var add = 1, max = 12 - add;
         
@@ -13,4 +15,8 @@ function generateTokenEmail(n) {
     return number;
 }
 
-module.exports = { generateTokenEmail }
+function generateApiKeys(){
+    return generateApiKey({ method: 'base32', pool: 'abcdefghijklmnopqrstuvwxyz0123456789' });
+}
+
+module.exports = { generateTokenEmail, generateApiKeys }

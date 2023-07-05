@@ -10,8 +10,10 @@ const GeetestRouter = require('./captcha.js');
 const NodeBlockchainRouter = require('./node.js');
 const BlockchainRouter = require('./blockchain.js');
 const PaymentMethodRouter = require('./paymentMethod.js');
+const ApiKeysRouter = require('./apiKeys.js');
 
 MainRouter.use('/payment-method', PaymentMethodRouter);
+MainRouter.use('/api-keys', ApiKeysRouter);
 MainRouter.use('/blockchain', BlockchainRouter);
 MainRouter.use('/node', NodeBlockchainRouter);
 MainRouter.use('/invoice', InvocieRouter);

@@ -29,10 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     endpoint: DataTypes.STRING,
     created_at: DataTypes.DATE,
   }, {
+    updated_at: false,
+    updatedAt: false,
     sequelize,
     underscored: true,
     modelName: 'RequestStatistic',
-    tableName: 'RequestStatistic'
+    tableName: 'RequestStatistics'
   });
   return RequestStatistic;
 };

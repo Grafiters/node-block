@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       ApiKeys.hasMany(models.RequestStatistic, {as: 'RequestStatistic'})
-      
       ApiKeys.belongsTo(models.User, {foreignKey: 'user_id'})
     }
   }

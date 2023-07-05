@@ -6,6 +6,19 @@ async function findUserByID(id){
     return user
 }
 
+async function findUserByApiKeys(api_keys){
+    user = await model.ApiKeys.findOne({
+        where: {
+            api_key: api_keys
+        },
+        include: [model.User]
+    })
+
+    return {
+        user: user.User
+    }
+}
+
 async function getUserByTokenActivation(token){
     user = await model.User.findOne({where: {email_verification_token: token}})
     if(user === null){
@@ -107,6 +120,7 @@ module.exports = {
     updateUserOtpSecretByID,
     updateUserPasswordByID,
     getCurrentPackageUser,
+    findUserByApiKeys,
     updateUserStatus,
     getActivityUser,
     getUserByEmail,

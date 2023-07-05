@@ -104,7 +104,6 @@ async function deleteBlockchainData(blockchain_id){
     }
 }
 
-
 async function getDetailBlockchainByID(id){
     const blockchain = await model.Blockchain.findOne({
         where: {

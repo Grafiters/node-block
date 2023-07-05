@@ -23,7 +23,6 @@ async function getDataNodeByBlockchainID(params){
 }
 
 async function addNodeBlockchain(params){
-    console.log(params);
     const node = await model.Node.create( params )
                 .then((submit) => {
                     return {
