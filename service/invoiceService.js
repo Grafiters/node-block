@@ -14,6 +14,8 @@ async function addInvoiceUser(param){
             message: error
         }
     })
+
+    return invoice
 }
 
 module.exports = {
