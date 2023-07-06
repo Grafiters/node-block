@@ -9,3 +9,19 @@ function buildParamsWithAuthUser(another, params){
 
     return updateParams
 }
+
+function buildParamsFilter(){
+    const buildParams = {}
+
+    for(const key in params){
+        if(params[key] !== null || params[key] !== undefined){
+            buildParams[key] = params[key];
+        }
+    }
+
+    return buildParams
+}
+
+module.exports = {
+    buildParamsFilter
+}

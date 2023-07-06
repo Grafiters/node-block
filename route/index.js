@@ -9,6 +9,7 @@ const InvocieRouter = require('./invoice.js');
 const PackageRouter = require('./package.js');
 const GeetestRouter = require('./captcha.js');
 const ApiKeysRouter = require('./apiKeys.js');
+const SubcribeRouter = require('./subcribe.js');
 const NodeBlockchainRouter = require('./node.js');
 const BlockchainRouter = require('./blockchain.js');
 const PaymentMethodRouter = require('./paymentMethod.js');
@@ -20,6 +21,7 @@ MainRouter.use('/monitored-event', SmartContractEventRouter);
 MainRouter.use('/payment-method', PaymentMethodRouter);
 MainRouter.use('/blockchain', BlockchainRouter);
 MainRouter.use('/node', NodeBlockchainRouter);
+MainRouter.use('/subcribe', SubcribeRouter);
 MainRouter.use('/api-keys', ApiKeysRouter);
 MainRouter.use('/invoice', InvocieRouter);
 MainRouter.use('/package', PackageRouter);
@@ -27,7 +29,5 @@ MainRouter.use('/geetest', GeetestRouter);
 MainRouter.use('/blog', BlogRouter);
 MainRouter.use('/user', UserRouter);
 MainRouter.use('/', AuthRouter);
-
-
 
 module.exports = MainRouter;
