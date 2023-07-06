@@ -23,10 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: DataTypes.BIGINT,
     address: DataTypes.STRING,
-    notification_method: DataTypes.STRING,
-    created_at: DataTypes.DATE,
+    notification_method: DataTypes.ENUM({
+      values: ['Email', 'WebSocket', 'Other']
+    }),
     created_at: DataTypes.DATE,
   }, {
+    updated_at: false,
+    updatedAt: false,
     sequelize,
     underscored: true,
     modelName: 'MonitoredAddresses',

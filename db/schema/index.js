@@ -13,9 +13,6 @@ function validateRequest(req, next, schema, res) {
             status: false,
             message: detail_error
         })
-    } else {
-        req.body = value;
-        next();
     }
 }
 
@@ -32,9 +29,6 @@ function validateParamsRequest(req, next, schema, res) {
             status: false,
             message: detail_error
         })
-    } else {
-        req.params = value;
-        next();
     }
 }
 

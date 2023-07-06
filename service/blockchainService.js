@@ -1,4 +1,3 @@
-
 const model = require("../db/models");
 
 async function getAllBlcokchainData(){
@@ -74,16 +73,16 @@ async function deleteBlockchainData(blockchain_id){
 
         const nodeId = node.map((nod) => nod.id)
 
-        await model.Blockchain.destroy({
+        await model.Node.destroy({
             where: {
-                id: blockchain_id,
+                id: nodeId,
             },
             transaction
         })
 
-        await model.Node.destroy({
+        await model.Blockchain.destroy({
             where: {
-                id: nodeId,
+                id: blockchain_id,
             },
             transaction
         })
