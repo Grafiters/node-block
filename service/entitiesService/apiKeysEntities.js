@@ -62,13 +62,14 @@ class Activity {
         const value = new Array()
         const startTime = moment(start_date)
         const endTime = moment(end_date)
+        const intervalUnit = validateTimeInterval(interval)
 
         let time = moment(start_date)
         const current = moment(startTime)
         while (time <= endTime) {
             const pushToArray = moment(time).format('YYYY-MM-DD HH:mm:ss')
             arrayDate.push(pushToArray);
-            const nextTime = current.add(interval, 'hours')
+            const nextTime = current.add(interval, intervalUnit)
             value.push(this.countStatisticOnDate(data, pushToArray, moment(nextTime).format(formatDate), formatDate))
 
 
@@ -78,6 +79,22 @@ class Activity {
         return {arrayDate, value}
     }
 
+    validateTimeInterval(interval){
+        const timeRegex = /^(\d+)(m|h|d)$/; // Regex pattern to match digits followed by 'm', 'h', or 'd'
+
+        if (timeRegex.test(symbol)) {
+            const [, value, unit] = symbol.match(timeRegex);
+        
+            if (unit === 'm') {
+                return `minutes`;
+            } else if (unit === 'h') {
+                return `hours`;
+            } else if (unit === 'd') {
+                return `days`;
+            }
+        }
+    }
+    
     countStatisticOnDate(data, start_date, end_date, formatDate){
         let total = 0;
         data.map(record => {

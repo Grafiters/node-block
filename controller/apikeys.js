@@ -143,6 +143,9 @@ exports.usageStatisticByApiKey = async (req, res) => {
 exports.usageStatisticByApiKeyChart = async (req, res) => {
     const { api_key, interval, start_date, end_date } = req.query;
 
+    if(interval === null ){
+        interval = '1h'
+    }
     var api_key_ids = null
     if(api_key){
         api_key_ids = await apiKeysService.findApiKeyByApiKeyValue(api_key)

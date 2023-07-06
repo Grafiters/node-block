@@ -1905,55 +1905,29 @@
     "/auth/login": {
       "post": {
         "description": "",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "true/false"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Login Berhasil"
-                    },
-                    "token": {
-                      "type": "string",
-                      "example": "some access token"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "true/false"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Login Berhasil"
-                    },
-                    "token": {
-                      "type": "string",
-                      "example": "some access token"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "User data login.",
+            "schema": {
+              "type": "string",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "required": true
+                },
+                "password": {
+                  "type": "string",
+                  "required": true
                 }
               }
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -1966,72 +1940,25 @@
           "content": {
             "application/json": {
               "schema": {
+                "type": "object",
                 "properties": {
+                  "captcha": {
+                    "example": "any"
+                  },
                   "email": {
-                    "type": "string",
-                    "required": true
+                    "example": "any"
                   },
                   "password": {
-                    "type": "string",
-                    "required": true
-                  },
-                  "captcha": {
-                    "type": "object",
-                    "required": false,
-                    "properties": {
-                      "geetestChallenge": {
-                        "type": "string",
-                        "reqquired": false
-                      },
-                      "geetestValidate": {
-                        "type": "string",
-                        "reqquired": false
-                      },
-                      "geetestSeccode": {
-                        "type": "string",
-                        "reqquired": false
-                      }
-                    }
+                    "example": "any"
                   },
                   "otp_token": {
-                    "type": "integer",
-                    "required": false
-                  }
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "required": true
+                    "example": "any"
                   },
-                  "password": {
-                    "type": "string",
-                    "required": true
+                  "in": {
+                    "example": "any"
                   },
-                  "captcha": {
-                    "type": "object",
-                    "required": false,
-                    "properties": {
-                      "geetestChallenge": {
-                        "type": "string",
-                        "reqquired": false
-                      },
-                      "geetestValidate": {
-                        "type": "string",
-                        "reqquired": false
-                      },
-                      "geetestSeccode": {
-                        "type": "string",
-                        "reqquired": false
-                      }
-                    }
-                  },
-                  "otp_token": {
-                    "type": "integer",
-                    "required": false
+                  "description": {
+                    "example": "any"
                   }
                 }
               }

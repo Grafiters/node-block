@@ -9,7 +9,8 @@ const { generateToken } = require("../../service/jwtService");
 const totpService = require('../../service/totpService');
 
 exports.userLogin = async (req, res) => {
-    /*	#swagger.requestBody = {
+    /*	
+    #swagger.requestBody = {
             schema: { 
                 properties: {
                     email: {type: 'string', required: true},
@@ -18,9 +19,9 @@ exports.userLogin = async (req, res) => {
                         type: 'object',
                         required: false,
                         properties: {
-                            geetestChallenge: {type: 'string', reqquired: false},
-                            geetestValidate: {type: 'string', reqquired: false},
-                            geetestSeccode: {type: 'string', reqquired: false}
+                            geetestChallenge: {type: 'string', required: false},
+                            geetestValidate: {type: 'string', required: false},
+                            geetestSeccode: {type: 'string', required: false}
                         },
                     },
                     otp_token: {type: 'integer', required: false}
