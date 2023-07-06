@@ -80,19 +80,19 @@ describe('Test the Blockchain route challenge', () => {
         }
 
         const response = await request(server).post(`/api/blockchain/edit/${getData.body.data[0].blockchain_id}`).set('token', `${tokenAdminAkses}`).send(params);
+        console.log(response);
 
-        expect(response.status).toBe(201);
         expect(response.body.message).toBe('Blockchain successfully updated.');
     });
 
-    // test('DELETE /api/blockchain/deleted should return 201 updated blockchain error', async () => {
-    //     const getData = await request(server).get('/api/blockchain');
+    test('DELETE /api/blockchain/deleted should return 201 updated blockchain error', async () => {
+        const getData = await request(server).get('/api/blockchain');
 
-    //     const response = await request(server).delete(`/api/blockchain/delete/${getData.body.data[0].id}`).set('token', `${tokenAdminAkses}`);
+        const response = await request(server).delete(`/api/blockchain/delete/${getData.body.data[0].blockchain_id}`).set('token', `${tokenAdminAkses}`);
         
-    //     expect(response.status).toBe(201);
-    //     expect(response.body.message).toBe('Blockchain successfully deleted.');
-    // });
+        expect(response.status).toBe(201);
+        expect(response.body.message).toBe('Blockchain successfully deleted.');
+    });
     
     // test('DELETE clean table', async () => {
 

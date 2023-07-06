@@ -37,6 +37,7 @@ exports.userLogin = async (req, res) => {
         }
     */
     const { email, password } = req.body;
+    console.log(req.body);
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;

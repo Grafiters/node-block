@@ -1,4 +1,5 @@
 const packageService = require('../service/packageService')
+const packageEntities = require('../service/entitiesService/packageEntities')
 
 exports.getAllPackage = async (req, res) => {
     try {
@@ -8,13 +9,12 @@ exports.getAllPackage = async (req, res) => {
             return res.status(200).json({
                 status: true,
                 message: 'Berhasil mengambil data package',
-                data: packageData
+                data: new packageEntities(packageData).getListPackages()
             });
         }else{
             return res.status(200).json({
                 status: true,
                 message: 'Daftar Package tidak ditemukan',
-                data: packageData
             });
         }
     } catch (error) {
@@ -33,7 +33,7 @@ exports.getPackageByID = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'Berhasil mengambil data package',
-            data: packageData
+            data: new packageEntities(packageData).getDetailPackage
         });
     } catch (error) {
         console.log(error);

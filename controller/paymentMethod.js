@@ -1,4 +1,5 @@
 const paymentService = require('../service/paymentMethodService')
+const paymentMethodEntities = require('../service/entitiesService/paymentMethodEntities')
 
 exports.getAllPaymentMethod = async (req, res) => {
     try {
@@ -8,13 +9,12 @@ exports.getAllPaymentMethod = async (req, res) => {
             return res.status(200).json({
                 status: true,
                 message: 'Berhasil mengambil data payment method',
-                data: payment
+                data: new paymentMethodEntities(payment).getListPaymentMethod()
             });
         }else{
             return res.status(200).json({
                 status: true,
                 message: 'Daftar Metode Pembayaran tidak ditemukan',
-                data: payment
             });
         }
     } catch (error) {
@@ -33,7 +33,7 @@ exports.getPaymentMethodByID = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'Berhasil mengambil data payment method',
-            data: payment
+            data: new paymentMethodEntities(payment).getDetailPaymentMethod()
         });
     } catch (error) {
         console.log(error);
@@ -51,7 +51,7 @@ exports.addPaymentMethod = async (req, res) => {
         return res.status(201).json({
             status: true,
             message: 'Metode pembayaran baru berhasil ditambahkan.',
-            data: payment
+            data: new paymentMethodEntities(payment).getDetailPaymentMethod
         });
     } catch (error) {
         console.log(error);

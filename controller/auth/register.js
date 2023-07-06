@@ -24,17 +24,6 @@ exports.registerUser = async (req, res) => {
         }
     }
 
-    if(!validatorEmail.isEmail(req.body.email) || req.body.password.length < 8){
-        return res.status(422).json({
-            status: false,
-            message: "Kesalahan validasi",
-            errors: [
-                "Email tidak valid",
-                "Kata sandi harus terdiri dari minimal 8 karakter"
-              ]
-        });
-    }
-
     const token = generateTokenEmail(5)
 
     const params = {

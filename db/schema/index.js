@@ -16,6 +16,22 @@ function validateRequest(req, next, schema, res) {
     }
 }
 
+function validateQueryRequest(req, next, schema, res) {
+    const options = {
+        abortEarly: false, // include all errors
+        allowUnknown: true, // ignore unknown props
+        stripUnknown: true // remove unknown props
+    };
+    const { error, value } = schema.validate(req.query, options);
+    if (error) {
+        detail_error = error.details.map(x => x.message).join(', ')
+        res.status(422).send({
+            status: false,
+            message: detail_error
+        })
+    }
+}
+
 function validateParamsRequest(req, next, schema, res) {
     const options = {
         abortEarly: false, // include all errors
@@ -75,4 +91,5 @@ module.exports = {
     validatePassword,
     validateParamsRequest,
     validateEmailAndPassword,
+    validateQueryRequest,
 }

@@ -1001,6 +1001,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1098,6 +1105,13 @@
           {
             "name": "token",
             "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
             "schema": {
               "type": "string"
             }

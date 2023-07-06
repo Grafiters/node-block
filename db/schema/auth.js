@@ -19,9 +19,10 @@ function loginSchema(req, res, next){
         password: Joi.string().required(),
     });
 
-    
     validation.validateRequest(req, next, schema, res);
     validation.validateEmailAndPassword(req.body.email, req.body.password)
+
+    next()
 }
 
 function loginGoogleSchema(req, res ,next){
@@ -30,6 +31,7 @@ function loginGoogleSchema(req, res ,next){
     });
 
     validation.validateRequest(req, next, schema, res);
+    next()
 }
 
 function registerSchema(req, res ,next){
@@ -49,6 +51,7 @@ function registerSchema(req, res ,next){
 
     validation.validateRequest(req, next, schema, res);
     validation.validateEmailAndPassword(req.body.email, req.body.password)
+    next()
 }
 
 function registerGoogleSchema(req, res ,next){
@@ -58,6 +61,7 @@ function registerGoogleSchema(req, res ,next){
     });
 
     validation.validateRequest(req, next, schema, res);
+    next()
 }
 
 function activationCodeSchema(req, res ,next){
@@ -66,6 +70,7 @@ function activationCodeSchema(req, res ,next){
     });
 
     validation.validateParamsRequest(req, next, schema, res);
+    next()
 }
 
 function resendActivationCodeSchema(req, res ,next){
@@ -74,6 +79,7 @@ function resendActivationCodeSchema(req, res ,next){
     });
 
     validation.validateRequest(req, next, schema, res);
+    next()
 }
 
 function forgotPasswordSchema(req, res, next){
@@ -83,6 +89,7 @@ function forgotPasswordSchema(req, res, next){
 
     validation.validateRequest(req, next, schema, res);
     validation.validateEmail(req.body.email)
+    next()
 }
 
 function resetPasswordSchema(req, res, next){
@@ -95,7 +102,10 @@ function resetPasswordSchema(req, res, next){
     validation.validateRequest(req, next, schema, res);
     validation.validateEmail(req.body.email)
     validation.validatePassword(req.body.new_password)
+    next()
 }
+
+
 
 module.exports = {
     loginSchema,

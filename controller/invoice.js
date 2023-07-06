@@ -57,13 +57,13 @@ exports.getInvoiceUserByID = async (req, res) => {
 
 exports.addInvoiceUser = async (req, res) => {
     const { package_id, payment_method_id } = req.body
-    const package = await packageService.getPackageByID(package_id)
+    const package_data = await packageService.getPackageByID(package_id)
 
     const params = {
         package_id: package_id,
         payment_method_id: payment_method_id,
         payment_due_date: moment().add(INVOICE_PAYMENT_DUE_LIMIT_NUMBER, INVOICE_PAYMENT_DUE_LIMIT_TIME),
-        total_amount: package.price
+        total_amount: package_data.price
     }
 
     try {

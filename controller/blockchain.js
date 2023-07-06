@@ -33,7 +33,7 @@ exports.addBlockchainData = async (req, res) => {
         }else{
             return res.status(422).json({
                 status: false,
-                message: blokchain.message
+                message: blokchain
             });
         }
     } catch (error) {

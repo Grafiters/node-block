@@ -3,7 +3,6 @@ const {server, geetestClient} = require('./server');
 
 
 describe('Test the login Without geetest challenge', () => {
-    let userAccessToken = '';
     test('POST /api/login should return user data success and token access', async () => {
       const params = {
         email: '111201710284@mhs.dinus.ac.id',
@@ -13,7 +12,6 @@ describe('Test the login Without geetest challenge', () => {
       const response = await request(server).post('/api/auth/login').send(params);
 
       userAccessToken = response.body.token
-      console.log(userAccessToken);
       expect(response.status).toBe(200);
       expect(response.body).toBeTruthy();
     });
