@@ -1,5 +1,6 @@
 const { Router} = require("express");
 const MainRouter = new Router();
+const AdminMainRouter = new Router();
 
 const UserRouter = require('./user.js');
 const AuthRouter = require('./auth.js');
@@ -26,5 +27,7 @@ MainRouter.use('/geetest', GeetestRouter);
 MainRouter.use('/blog', BlogRouter);
 MainRouter.use('/user', UserRouter);
 MainRouter.use('/', AuthRouter);
+
+
 
 module.exports = MainRouter;
