@@ -9,36 +9,19 @@ const { generateToken } = require("../../service/jwtService");
 const totpService = require('../../service/totpService');
 
 exports.userLogin = async (req, res) => {
-    /*	
-    #swagger.requestBody = {
-            schema: { 
-                properties: {
-                    email: {type: 'string', required: true},
-                    password: {type: 'string', required: true},
-                    captcha: {
-                        type: 'object',
-                        required: false,
-                        properties: {
-                            geetestChallenge: {type: 'string', required: false},
-                            geetestValidate: {type: 'string', required: false},
-                            geetestSeccode: {type: 'string', required: false}
-                        },
-                    },
-                    otp_token: {type: 'integer', required: false}
-                }
-             }
-        }
+    /* 	#swagger.tags = ['Login']
+        #swagger.description = 'Endpoint to sign in a specific user' */
 
-        #swagger.responses[200] = {
-            schema: { 
-                status: 'true/false',
-                message: 'Login Berhasil',
-                token: 'some access token',
-             }
-        }
-    */
+    /*	
+        #swagger.parameters['login'] = {
+        in: 'body',
+        description: 'Login Form.',
+        required: true,
+        schema: { $ref: "#/definitions/Login" }
+    } */
+
+   
     const { email, password } = req.body;
-    console.log(req.body);
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;

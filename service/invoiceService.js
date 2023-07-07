@@ -15,7 +15,8 @@ async function getInvoiceUserByID(invoice_id){
     const invoice = await model.Invoices.findOne({
         where: {
             id: invoice_id
-        }
+        },
+        include: [model.Packages, model.PaymentMethods]
     })
 
     return invoice

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Invoices.belongsTo(models.Packages, {foreignKey: 'package_id'})
       Invoices.belongsTo(models.PaymentMethods, {foreignKey: 'payment_method_id'})
+      Invoices.hasOne(models.UserSubscriptions, {as: 'UserSubscriptions'})
     }
   }
   Invoices.init({

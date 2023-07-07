@@ -1130,6 +1130,32 @@
         }
       }
     },
+    "/invoice/xendit/invoice": {
+      "get": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/invoice/xendit/invoice/create": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
     "/invoice/": {
       "get": {
         "description": "",
@@ -1904,24 +1930,18 @@
     },
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Login"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "login",
             "in": "body",
-            "description": "User data login.",
+            "description": "Login Form.",
+            "required": true,
             "schema": {
-              "type": "string",
-              "properties": {
-                "email": {
-                  "type": "string",
-                  "required": true
-                },
-                "password": {
-                  "type": "string",
-                  "required": true
-                }
-              }
+              "$ref": "#/components/schemas/Login"
             }
           }
         ],
@@ -1958,6 +1978,12 @@
                     "example": "any"
                   },
                   "description": {
+                    "example": "any"
+                  },
+                  "required": {
+                    "example": "any"
+                  },
+                  "schema": {
                     "example": "any"
                   }
                 }
@@ -2191,6 +2217,40 @@
             }
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Example123!*"
+          }
+        }
+      },
+      "AddUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "example@example.com"
+          },
+          "age": {
+            "type": "string",
+            "example": "Example123!*"
+          }
+        },
+        "required": [
+          "name",
+          "age"
+        ]
       }
     }
   }

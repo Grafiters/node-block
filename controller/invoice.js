@@ -5,6 +5,9 @@ const invoiceService = require('../service/invoiceService')
 const packageService = require('../service/packageService')
 const UserSubscipService = require('../service/userSubcribesionService')
 const invoiceEntities = require('../service/entitiesService/invoiceEntities')
+const xenditService = require('../service/paymentService/xenditService')
+const btcPayService = require('../service/paymentService/btcpayService')
+
 const moment = require('moment')
 
 exports.getAllinvoiceUser = async (req, res) => {
@@ -80,7 +83,7 @@ exports.addInvoiceUser = async (req, res) => {
             invoice_id: createInvoice.invoice_id,
             package_id: createInvoice.package_id,
         }
-
+        
         const userSub = await UserSubscipService.createUserSubcription(userSubParams)
 
         if(!userSub.status){
@@ -88,6 +91,13 @@ exports.addInvoiceUser = async (req, res) => {
                 status: false,
                 message: 'Invoice gagal dibuat'
             })
+        }
+
+        const invoiceDetail = invoiceService.getInvoiceUserByID(createInvoice.id)
+        if(!invoiceDetail.PaymentMethods.is_crypto){
+            await paymentService.createInvoice(invoiceDetail)
+        }else{
+            await btcPayService.createInvoice(invoiceDetail)
         }
 
         return res.status(201).json({
@@ -117,6 +127,38 @@ exports.deleteInvoiceUser = async (req, res) => {
         return res.status(201).json({
             success: true,
             message: "Berhasil menghapus data invoice",
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({
+            success: false,
+            message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
+        })
+    }
+}
+
+exports.xenditListInvoice = async (req, res) => {
+    try {
+        const invoice = await xenditService.getAllInvoice()
+        return res.status(201).json({
+            success: true,
+            message: invoice
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({
+            success: false,
+            message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
+        })
+    }
+}
+
+exports.xenditCreateInvoice = async (req, res) => {
+    try {
+        const invoice = await xenditService.createInvoice()
+        return res.status(201).json({
+            success: true,
+            message: invoice
         })
     } catch (error) {
         console.log(error);

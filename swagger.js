@@ -1,5 +1,5 @@
 require('dotenv').config()
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.0.0'})
+const swaggerAutogen = require('swagger-autogen')({openapi: '3.0.0',autoHeaders: true})
 
 const outputFile = './swagger_output.json'
 const endpointsFiles = ['./route/index.js']
@@ -20,6 +20,16 @@ const doc = {
           description: "production"
         }
     ],
+    definitions: {
+      Login: {
+          email: "example@example.com",
+          password: "Example123!*",
+      },
+      AddUser: {
+          $name: "example@example.com",
+          $age: "Example123!*",
+      }
+    },
     basePath: "/api/",
     consumes: ['application/json'],
     produces: ['application/json'],
