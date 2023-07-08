@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
     "title": "Nusablockchain Api Backend",
@@ -76,23 +76,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "example": "any"
-                  },
-                  "notification_method": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -269,26 +252,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "contract_address": {
-                    "example": "any"
-                  },
-                  "event_name": {
-                    "example": "any"
-                  },
-                  "notification_method": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -737,20 +700,6 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "blockchain_id": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -926,20 +875,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -1257,23 +1192,6 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "package_id": {
-                    "example": "any"
-                  },
-                  "payment_method_id": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1467,26 +1385,6 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "geetestChallenge": {
-                    "example": "any"
-                  },
-                  "geetestValidate": {
-                    "example": "any"
-                  },
-                  "geetestSeccode": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1549,20 +1447,6 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "keyword": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1623,23 +1507,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "old_password": {
-                    "example": "any"
-                  },
-                  "new_password": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -1711,23 +1578,6 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_secret": {
-                    "example": "any"
-                  },
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1763,20 +1613,6 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1811,20 +1647,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -1931,7 +1753,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "Login"
+          "Auth"
         ],
         "description": "Endpoint to sign in a specific user",
         "parameters": [
@@ -1941,50 +1763,230 @@
             "description": "Login Form.",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Login"
+              "$ref": "#/components/schemas/Auth/Login"
+            },
+            "examples": {
+              "example": {
+                "$ref": "#/components/examples/Login"
+              }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Login Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geetest": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid Geetest challenge"
+                        }
+                      }
+                    },
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Email tidak valid",
+                            "password kurang dari 8 karakter",
+                            "Login gagal. Email atau password tidak valid."
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "twoFactor": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "array",
+                          "example": [
+                            "Missing otp token",
+                            "invalid otp token"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geetest": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid Geetest challenge"
+                        }
+                      }
+                    },
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Email tidak valid",
+                            "password kurang dari 8 karakter",
+                            "Login gagal. Email atau password tidak valid."
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "twoFactor": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "array",
+                          "example": [
+                            "Missing otp token",
+                            "invalid otp token"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "captcha": {
-                    "example": "any"
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
                   },
-                  "email": {
-                    "example": "any"
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
                   },
-                  "password": {
-                    "example": "any"
-                  },
-                  "otp_token": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "required": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
+                  "xml": {
+                    "name": "main"
                   }
                 }
               }
@@ -1995,35 +1997,203 @@
     },
     "/auth/register": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Register Form.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Auth/Register"
+            },
+            "examples": {
+              "example": {
+                "$ref": "#/components/examples/Login"
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Register"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Register"
+                }
+              }
+            }
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Login Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geetest": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid Geetest challenge"
+                        }
+                      }
+                    },
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Email tidak valid",
+                            "password kurang dari 8 karakter",
+                            "Login gagal. Email atau password tidak valid."
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geetest": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid Geetest challenge"
+                        }
+                      }
+                    },
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Email tidak valid",
+                            "password kurang dari 8 karakter",
+                            "Login gagal. Email atau password tidak valid."
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "captcha": {
-                    "example": "any"
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
                   },
-                  "email": {
-                    "example": "any"
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
                   },
-                  "password": {
-                    "example": "any"
-                  },
-                  "username": {
-                    "example": "any"
+                  "xml": {
+                    "name": "main"
                   }
                 }
               }
@@ -2034,29 +2204,221 @@
     },
     "/auth/login/google": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "Login Google",
+            "in": "body",
+            "description": "Login Form.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "google_id": {
+                  "type": "object",
+                  "properties": {
+                    "require": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Login Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Akun google belum terdaftar pada system"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "twoFactor": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "array",
+                          "example": [
+                            "Missing otp token",
+                            "invalid otp token"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "akun": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Kesalahan validasi"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "example": [
+                            "Akun google belum terdaftar pada system"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "twoFactor": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "array",
+                          "example": [
+                            "Missing otp token",
+                            "invalid otp token"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "otherValidation": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
+                        }
+                      }
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_token": {
-                    "example": "any"
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
                   },
-                  "google_id": {
-                    "example": "any"
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
                   }
                 }
               }
@@ -2067,7 +2429,10 @@
     },
     "/auth/register/google": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "responses": {
           "201": {
             "description": "Created"
@@ -2078,32 +2443,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "example": "any"
-                  },
-                  "email": {
-                    "example": "any"
-                  },
-                  "google_id": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
     "/auth/activate-email/{activation_token}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "activation_token",
@@ -2129,7 +2477,10 @@
     },
     "/auth/{email}/resend": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "email",
@@ -2155,7 +2506,10 @@
     },
     "/auth/forgot-password": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "responses": {
           "200": {
             "description": "OK"
@@ -2166,26 +2520,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
     "/auth/reset-password": {
       "post": {
-        "description": "",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "responses": {
           "201": {
             "description": "Created"
@@ -2196,26 +2539,6 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "new_password": {
-                    "example": "any"
-                  },
-                  "reset_token": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
@@ -2225,32 +2548,172 @@
       "Login": {
         "type": "object",
         "properties": {
-          "email": {
+          "type": {
             "type": "string",
-            "example": "example@example.com"
+            "example": "object"
           },
-          "password": {
-            "type": "string",
-            "example": "Example123!*"
-          }
-        }
-      },
-      "AddUser": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "example@example.com"
-          },
-          "age": {
-            "type": "string",
-            "example": "Example123!*"
+          "value": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "true"
+              },
+              "message": {
+                "type": "string",
+                "example": "Login successful"
+              },
+              "token": {
+                "type": "string",
+                "example": "<string>"
+              }
+            }
           }
         },
-        "required": [
-          "name",
-          "age"
-        ]
+        "xml": {
+          "name": "Login"
+        }
+      },
+      "Register": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "value": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "true"
+              },
+              "message": {
+                "type": "string",
+                "example": "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi."
+              },
+              "user": {
+                "xml": {
+                  "name": "user"
+                },
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Register"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "value": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "example@example.com"
+              },
+              "role": {
+                "type": "string",
+                "example": "admin/user/developer"
+              },
+              "otp_enabled": {
+                "type": "string",
+                "example": "true/false"
+              }
+            }
+          },
+          "summary": {
+            "type": "string",
+            "example": "sample of user data"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "Auth": {
+        "type": "object",
+        "Login": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "require": true,
+              "type": "string"
+            },
+            "password": {
+              "require": true,
+              "type": "string"
+            },
+            "otp_token": {
+              "require": false,
+              "type": "integer"
+            },
+            "captcha": {
+              "require": false,
+              "type": "object",
+              "properties": {
+                "geetestChallenge": {
+                  "require": true,
+                  "type": "string"
+                },
+                "geetestValidate": {
+                  "require": true,
+                  "type": "string"
+                },
+                "geetestSeccode": {
+                  "require": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Register": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "require": true,
+              "type": "string"
+            },
+            "password": {
+              "require": true,
+              "type": "string"
+            },
+            "captcha": {
+              "require": false,
+              "type": "object",
+              "properties": {
+                "geetestChallenge": {
+                  "require": true,
+                  "type": "string"
+                },
+                "geetestValidate": {
+                  "require": true,
+                  "type": "string"
+                },
+                "geetestSeccode": {
+                  "require": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "Login": {
+        "value": {
+          "email": "example@example.com",
+          "password": "example"
+        }
       }
     }
   }

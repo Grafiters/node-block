@@ -2,14 +2,14 @@ const validatorEmail = require('validator');
 
 function validateRequest(req, next, schema, res) {
     const options = {
-        abortEarly: false, // include all errors
+        abortEarly: true, // include all errors
         allowUnknown: true, // ignore unknown props
         stripUnknown: true // remove unknown props
     };
     const { error, value } = schema.validate(req.body, options);
     if (error) {
         detail_error = error.details.map(x => x.message).join(', ')
-        res.status(422).send({
+        return res.status(422).json({
             status: false,
             message: detail_error
         })
@@ -18,14 +18,14 @@ function validateRequest(req, next, schema, res) {
 
 function validateQueryRequest(req, next, schema, res) {
     const options = {
-        abortEarly: false, // include all errors
+        abortEarly: true, // include all errors
         allowUnknown: true, // ignore unknown props
         stripUnknown: true // remove unknown props
     };
     const { error, value } = schema.validate(req.query, options);
     if (error) {
         detail_error = error.details.map(x => x.message).join(', ')
-        res.status(422).send({
+        return res.status(422).json({
             status: false,
             message: detail_error
         })
@@ -34,14 +34,14 @@ function validateQueryRequest(req, next, schema, res) {
 
 function validateParamsRequest(req, next, schema, res) {
     const options = {
-        abortEarly: false, // include all errors
+        abortEarly: true, // include all errors
         allowUnknown: true, // ignore unknown props
         stripUnknown: true // remove unknown props
     };
     const { error, value } = schema.validate(req.params, options);
     if (error) {
         detail_error = error.details.map(x => x.message).join(', ')
-        res.status(422).send({
+        return res.status(422).json({
             status: false,
             message: detail_error
         })

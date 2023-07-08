@@ -26,17 +26,17 @@ describe('Test the Blockchain route challenge', () => {
         expect(adminResponse.body).toBeTruthy();
     });
 
-    // test('POST /api/api-keys should return user data success and show api-keys', async () => {
-    //     const params = {
-    //       label: makeid(10)
-    //     }
+    test('POST /api/api-keys should return user data success and show api-keys', async () => {
+        const params = {
+          label: makeid(10)
+        }
 
-    //     const response = await request(server).post('/api/api-keys/generate').set('token', `${userAccessToken}`).send(params);
+        const response = await request(server).post('/api/api-keys/generate').set('token', `${userAccessToken}`).send(params);
 
-    //     console.log(response.body);
-    //     expect(response.status).toBe(201);
-    //     expect(response.body).toBeTruthy();
-    // });
+        console.log(response.body);
+        expect(response.status).toBe(201);
+        expect(response.body).toBeTruthy();
+    });
 
     test('GET /api/api-keys should return user data success and show api-keys', async () => {
         const response = await request(server).get('/api/api-keys').set('token', `${userAccessToken}`)
@@ -64,14 +64,14 @@ describe('Test the Blockchain route challenge', () => {
         expect(response.body).toBeTruthy();
     });
 
-    // test('DELETE /api/api-keys/delete should return api key data success deleted', async () => {
-    //     const apiKeysList = await request(server).get('/api/api-keys').set('token', `${userAccessToken}`)
+    test('DELETE /api/api-keys/delete should return api key data success deleted', async () => {
+        const apiKeysList = await request(server).get('/api/api-keys').set('token', `${userAccessToken}`)
 
-    //     const response = await request(server).delete(`/api/api-keys/delete/${apiKeysList.body.data[0].api_key_id}`).set('token', `${userAccessToken}`)
+        const response = await request(server).delete(`/api/api-keys/delete/${apiKeysList.body.data[0].api_key_id}`).set('token', `${userAccessToken}`)
 
-    //     expect(response.status).toBe(201);
-    //     expect(response.body).toBeTruthy();
-    // });
+        expect(response.status).toBe(201);
+        expect(response.body).toBeTruthy();
+    });
 });
 
 function makeid(length) {

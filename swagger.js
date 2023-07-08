@@ -1,5 +1,5 @@
 require('dotenv').config()
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.0.0',autoHeaders: true})
+const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: false})
 
 const outputFile = './swagger_output.json'
 const endpointsFiles = ['./route/index.js']
@@ -20,15 +20,114 @@ const doc = {
           description: "production"
         }
     ],
-    definitions: {
-      Login: {
-          email: "example@example.com",
-          password: "Example123!*",
-      },
-      AddUser: {
-          $name: "example@example.com",
-          $age: "Example123!*",
+    '@definitions': {
+      Auth: {
+        type: 'object',
+        Login: {
+          type: 'object',
+          properties: {
+            email: {
+              require: true,
+              type: 'string',
+            },
+            password: {
+              require: true,
+              type: 'string',
+            },
+            otp_token:{
+              require: false,
+              type: 'integer'
+            },
+            captcha: {
+              require: false,
+              type: 'object',
+              properties: {
+                geetestChallenge: {
+                  require: true,
+                  type: 'string'
+                },
+                geetestValidate: {
+                  require: true,
+                  type: 'string'
+                },
+                geetestSeccode: {
+                  require: true,
+                  type: 'string'
+                }
+              }
+            }
+          }
+        },
+        Register: {
+          type: 'object',
+          properties: {
+            email: {
+              require: true,
+              type: 'string',
+            },
+            password: {
+              require: true,
+              type: 'string',
+            },
+            captcha: {
+              require: false,
+              type: 'object',
+              properties: {
+                geetestChallenge: {
+                  require: true,
+                  type: 'string'
+                },
+                geetestValidate: {
+                  require: true,
+                  type: 'string'
+                },
+                geetestSeccode: {
+                  require: true,
+                  type: 'string'
+                }
+              }
+            }
+          }
+        }
       }
+    },
+    components: {
+      schemas: {
+        Login: {
+          type: 'object',
+          value: {
+            status: 'true',
+            message: 'Login successful',
+            token: '<string>'
+          }
+        },
+        Register: {
+          type: 'object',
+          value: {
+            status: 'true',
+            message: 'Registrasi berhasil. Silakan periksa email Anda untuk verifikasi.',
+            user: { $ref: '#/components/schemas/User' }
+          }
+        },
+        User:{
+          type: 'object',
+          value: {
+            email: "example@example.com",
+            role: "admin/user/developer",
+            otp_enabled: "true/false"
+          },
+          summary: "sample of user data"
+        },
+
+      },
+      examples: {
+        Login: {
+          value: {
+            email: 'example@example.com',
+            password: 'example'
+          }
+        },
+      },
     },
     basePath: "/api/",
     consumes: ['application/json'],

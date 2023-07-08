@@ -4,15 +4,14 @@ const Joi = require('joi');
 const validation = require('./index')
 
 function loginSchema(req, res, next){
-    if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
+    if(process.env.GEETEST_ENABLED === true && process.env.NODE_ENV == 'production' ){
         if(typeof req.body.captcha !== 'object'){
-            res.status(422).send({
+            return res.status(422).send({
                 status: false,
                 message: ['captcha must be exists', 'captcha must be object']
             })
         }
     }
-    
     
     const schema = Joi.object({
         email: Joi.string().required(),
@@ -37,7 +36,7 @@ function loginGoogleSchema(req, res ,next){
 function registerSchema(req, res ,next){
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
         if(typeof req.body.captcha !== 'object'){
-            res.status(422).send({
+            return res.status(422).send({
                 status: false,
                 message: ['captcha must be exists', 'captcha must be object']
             })
@@ -51,6 +50,7 @@ function registerSchema(req, res ,next){
 
     validation.validateRequest(req, next, schema, res);
     validation.validateEmailAndPassword(req.body.email, req.body.password)
+
     next()
 }
 
@@ -102,9 +102,9 @@ function resetPasswordSchema(req, res, next){
     validation.validateRequest(req, next, schema, res);
     validation.validateEmail(req.body.email)
     validation.validatePassword(req.body.new_password)
+    
     next()
 }
-
 
 
 module.exports = {

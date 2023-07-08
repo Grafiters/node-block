@@ -18,6 +18,10 @@ exports.userProfile = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            status: false,
+            message: "Terjadi kesalahan saat memproses Profile User. Silakan coba lagi nanti"
+        });
     }
 }
 
@@ -43,6 +47,10 @@ exports.changePassword = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            status: false,
+            message: "Terjadi kesalahan saat memproses Rubah password. Silakan coba lagi nanti"
+        });
     }
 }
 

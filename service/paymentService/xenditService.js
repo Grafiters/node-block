@@ -17,11 +17,11 @@ async function getAllInvoice(){
     return invoices
 }
 
-async function getInvoiceByFilterID(invoice_id){
+async function getInvoiceByFilterID(invoice, invoice_id){
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${XENDIT_API_URL}/v2/invoices?external_id=${invoice_id}`,
+        url: `${invoice.gateway}/v2/invoices?external_id=${invoice_id}`,
         headers: { 
           'Authorization': `Basic ${Buffer.from(`${XENDIT_APIKEY_SECRET}:`).toString('base64')}`
         }

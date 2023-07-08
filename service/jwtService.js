@@ -30,10 +30,11 @@ const authJWT = async (req, res, next) => {
                 console.log(err);
                 return res.status(401).send({
                     error: false,
-                    message: 'Jwt was expired'
+                    message: 'Invalid JWT Token'
                 });
             }
             req.auth = decoded;
+
             next();
         })
     }
@@ -46,7 +47,7 @@ const authAdminJWT = (req, res, next) => {
         if (err) {
             return res.status(401).send({
                 error: false,
-                message: 'Jwt was expired'
+                message: 'Invalid JWT Token'
             });
         }
         if (decoded.user.role != 'Admin'){
@@ -74,7 +75,7 @@ const authExecptionJWT = async (req, res, next) => {
             if (err) {
                 return res.status(401).send({
                     error: false,
-                    message: 'Jwt was expired'
+                    message: 'Invalid JWT Token'
                 });
             }
             if (decoded.user.role == 'Developer'){

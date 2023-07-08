@@ -11,7 +11,7 @@ const {
 
 async function createInvoice(invoice, user_subcribe){
     const body = generateParamsBody(invoice, user_subcribe)
-    const headers = configPostRequest(body)
+    const headers = configPostRequest(invoice, body)
 
     const invoice_created = await axios.request(headers)
     .then((response) => {
@@ -48,10 +48,10 @@ async function getSingleInvoice(invoice_id){
     return invoiceResult
 }
 
-function configGetRequest(query){
+function configGetRequest(invoice, query){
     let config = {
         method: 'get',
-        url: `${BTCPAY_URL}/api/v1${query}`,
+        url: `${invoice.PaymentMethods.gateway}/api/v1${query}`,
         headers: { 
           'Authorization': `token ${BTCPAY_API_KEY_TOKEN}`,
         }
