@@ -5,40 +5,39 @@ class Invoices {
 
     getListPlan(){
         return this.data.map(entities => ({
-            invoice_id: entities.Inovices.id,
-            package_id: entities.Inovices.package_id,
-            payment_method_id: entities.Inovices.payment_method_id,
-            payment_due_date: entities.Inovices.payment_due_date,
-            payment_due: entities.Inovices.payment_due,
-            total_amount: entities.Inovices.total_amount,
-            status: entities.Inovices.status
+            invoice_id: entities.Invoice.id,
+            package_id: entities.Invoice.package_id,
+            payment_method_id: entities.Invoice.payment_method_id,
+            payment_due_date: entities.Invoice.payment_due_date,
+            payment_due: entities.Invoice.payment_due,
+            total_amount: entities.Invoice.total_amount,
+            status: entities.Invoice.status
         }))
     }
 
     getSinglePlan(){
         return {
-            invoice_id: entities.Inovices.id,
-            package_id: entities.Inovices.package_id,
-            payment_method_id: entities.Inovices.payment_method_id,
-            payment_due_date: entities.Inovices.payment_due_date,
-            payment_due: entities.Inovices.payment_due,
-            total_amount: entities.Inovices.total_amount,
-            status: entities.Inovices.status
+            invoice_id: entities.Invoice.id,
+            package_id: entities.Invoice.package_id,
+            payment_method_id: entities.Invoice.payment_method_id,
+            payment_due_date: entities.Invoice.payment_due_date,
+            payment_due: entities.Invoice.payment_due,
+            total_amount: entities.Invoice.total_amount,
+            status: entities.Invoice.status
         }
     }
 
     getCreateInoviceResponse(invoice){
+        console.log(invoice);
         return {
             invoice_id: this.data.invoice_id,
-            package_id: invoice.package_id,
-            payment_method_id: invoice.payment_method_id,
-            payment_due_date: invoice.payment_due_date,
-            total_amount: invoice.total_amount,
-            status: invoice.status
+            package_id: invoice.data.package_id,
+            payment_method_id: invoice.data.payment_method_id,
+            payment_due_date: invoice.data.payment_due_date,
+            total_amount: invoice.data.total_amount,
+            status: invoice.data.status
         }
     }
 }
   
-module.exports = {
-    Invoices
-}
+module.exports = Invoices

@@ -1065,32 +1065,6 @@
         }
       }
     },
-    "/invoice/xendit/invoice": {
-      "get": {
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        }
-      }
-    },
-    "/invoice/xendit/invoice/create": {
-      "post": {
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        }
-      }
-    },
     "/invoice/": {
       "get": {
         "description": "",
@@ -1188,6 +1162,37 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/invoice/edit/{id}/{status}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -1475,6 +1480,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1507,6 +1515,9 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

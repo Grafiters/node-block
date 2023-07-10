@@ -30,6 +30,4 @@ class Packages {
     }
 }
   
-module.exports = {
-    Packages
-}
+module.exports = Packages

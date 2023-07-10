@@ -33,7 +33,7 @@ exports.getPackageByID = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'Berhasil mengambil data package',
-            data: new packageEntities(packageData).getDetailPackage
+            data: new packageEntities(packageData).getDetailPackage()
         });
     } catch (error) {
         console.log(error);

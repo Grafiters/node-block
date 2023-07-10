@@ -1,4 +1,37 @@
+const { Op, col, literal } = require('sequelize');
 const model = require('../db/models')
+const xenditService = require('../service/paymentService/xenditService')
+const btcPayService = require('../service/paymentService/btcpayService')
+
+async function getPrevInvoiceUser(user_id){
+    try {
+        const invoice = await model.UserSubscriptions.findOne({
+            where: {
+                'user_id': user_id
+            },
+            include: [{
+                model: model.Invoices,
+                as: 'Invoice',
+                where: {
+                    status: 'unpaid'
+                }
+            }]
+        });
+    
+        if(invoice !== null){
+            return {
+                status: false,
+                message: 'Anda memiliki invoice yang belum dibayar. Harap bayar invoice sebelum membuat invoice baru.'
+            }
+        }else{
+            return {
+                status: true
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 async function getAllInvoiceUser(user_id){
     const invoice = await model.UserSubscriptions.findAll({
@@ -19,22 +52,54 @@ async function getInvoiceUserByID(invoice_id){
         include: [model.Packages, model.PaymentMethods]
     })
 
+    var detail = {}
+    if (!invoice.PaymentMethod.is_crypto){
+        return {
+            invoice: invoice,
+            detail: await xenditService.getInvoiceByFilterID(invoice, invoice_id)
+        }
+    }else{
+        return {
+            invoice: invoice,
+            detail: await btcPayService.getSingleInvoice(invoice, invoice_id)
+        }
+    }
+}
+
+async function updatePaymentInvoice(invoice_id, params){
+    const invoice = await model.Invoices.update(params, {
+        where: {
+            id: invoice_id
+        }
+    })
+
     return invoice
 }
 
-async function addInvoiceUser(params){
+async function addInvoiceUser(params, user_email){
     const invoice = await model.Invoices.create(params)
     .then((submit) => {
         return {
             status: true,
-            message: ''
-        }
+            message: '',
+            data: submit
+       }
     }).catch((error) => {
         return {
             status: false,
             message: error
         }
     })
+
+    if(invoice.status){
+        const invoiceDetail = await getInvoiceUserByID(invoice.data.id)
+
+        if(!invoiceDetail.invoice.PaymentMethod.is_crypto){
+            await xenditService.createInvoice(invoiceDetail.invoice, user_email)
+        }else{
+            await btcPayService.createInvoice(invoiceDetail.invoice, user_email)
+        }
+    }
 
     return invoice
 }
@@ -78,6 +143,8 @@ async function deleteInoivceUser(invoice_id){
 }
 
 module.exports = {
+    updatePaymentInvoice,
+    getPrevInvoiceUser,
     getInvoiceUserByID,
     getAllInvoiceUser,
     deleteInoivceUser,

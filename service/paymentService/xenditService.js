@@ -1,7 +1,8 @@
 require('dotenv').config()
 const axios = require('axios');
+const { error } = require('console');
 const Xendit = require('xendit-node');
-const { XENDIT_APIKEY_SECRET, XENDIT_INVOICE_NOTIFIER, INVOICE_DURATION_EXPIRATE, XENDIT_API_URL } = process.env
+const { XENDIT_APIKEY_SECRET, XENDIT_INVOICE_NOTIFIER, INVOICE_DURATION_EXPIRATE, XENDIT_API_URL, APP_URL } = process.env
 
 const x = new Xendit({
   secretKey: XENDIT_APIKEY_SECRET
@@ -18,17 +19,9 @@ async function getAllInvoice(){
 }
 
 async function getInvoiceByFilterID(invoice, invoice_id){
-    let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `${invoice.gateway}/v2/invoices?external_id=${invoice_id}`,
-        headers: { 
-          'Authorization': `Basic ${Buffer.from(`${XENDIT_APIKEY_SECRET}:`).toString('base64')}`
-        }
-    };
-
+    const invoiceConfig = await configGetRequest(invoice, `invoices?external_id=${invoice_id}`)
     try {
-        const invoice = await axios.request(config)
+        const invoice = await axios.request(invoiceConfig)
 
         return invoice.data[0]
     } catch (error) {
@@ -38,24 +31,28 @@ async function getInvoiceByFilterID(invoice, invoice_id){
 
 async function createInvoice(invoice, user_subcribe){
     const params = {
-        externalID: `${invoice.id}`,
+        external_id: `${invoice.id}`,
         amount: invoice.total_amount,
-        description: `Invoice Testing #${invoice.Packages.description}`,
+        description: `Invoice Testing #${invoice.Package.description}`,
         invoice_duration: INVOICE_DURATION_EXPIRATE,
         customer: {
-            email: user_subcribe.User.email,
+            email: user_subcribe.email,
         },
         customer_notification_preference: {
-            invoice_created: XENDIT_INVOICE_NOTIFIER,
-            invoice_reminder: XENDIT_INVOICE_NOTIFIER,
-            invoice_paid: XENDIT_INVOICE_NOTIFIER,
-            invoice_expired: XENDIT_INVOICE_NOTIFIER
+            invoice_created: [XENDIT_INVOICE_NOTIFIER],
+            invoice_reminder: [XENDIT_INVOICE_NOTIFIER],
+            invoice_paid: [XENDIT_INVOICE_NOTIFIER],
+            invoice_expired: [XENDIT_INVOICE_NOTIFIER]
         },
         currency: 'IDR',
+        payment_methods: [invoice.PaymentMethod.name],
+        success_redirect_url: `${APP_URL}/api/invoice/edit/${invoice.id}/paid/${user_subcribe.id}`,
+        failure_redirect_url: `${APP_URL}/api/invoice/edit/${invoice.id}/overdue/${user_subcribe.id}`,
+        // success_redirect_url: `https://digi.nusatechblockchain.com`,
         items: [
             {
-                name: `${invoice.Packages.name}`,
-                description: `${invoice.Packages.description}`,
+                name: `${invoice.Package.name}`,
+                description: `${invoice.Package.description}`,
                 quantity: 1,
                 price: invoice.total_amount,
                 url: 'https://yourcompany.com/example_item'
@@ -63,14 +60,41 @@ async function createInvoice(invoice, user_subcribe){
         ],
     }
 
+    const invoiceConfig = await configPostRequest(invoice, 'invoices', params)
+
     try {
-        const invoices = await i.createInvoice(params)
+        const invoices = await axios.request(invoiceConfig)
 
         return invoices
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data.errors);
         return false
     }
+}
+
+async function configGetRequest(invoice, query){
+    let config = {
+        method: 'get',
+        url: `${invoice.PaymentMethod.gateway}/v2/${query}`,
+        headers: { 
+            'Authorization': `Basic ${Buffer.from(`${XENDIT_APIKEY_SECRET}:`).toString('base64')}`
+        }
+    };
+
+    return config
+}
+
+async function configPostRequest(invoice, query, params){
+    let config = {
+        method: 'post',
+        url: `${invoice.PaymentMethod.gateway}/v2/${query}`,
+        headers: { 
+            'Authorization': `Basic ${Buffer.from(`${XENDIT_APIKEY_SECRET}:`).toString('base64')}`
+        },
+        data: params
+    };
+
+    return config
 }
 
 module.exports = {

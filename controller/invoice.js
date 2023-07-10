@@ -5,8 +5,6 @@ const invoiceService = require('../service/invoiceService')
 const packageService = require('../service/packageService')
 const UserSubscipService = require('../service/userSubcribesionService')
 const invoiceEntities = require('../service/entitiesService/invoiceEntities')
-const xenditService = require('../service/paymentService/xenditService')
-const btcPayService = require('../service/paymentService/btcpayService')
 
 const moment = require('moment')
 
@@ -20,7 +18,7 @@ exports.getAllinvoiceUser = async (req, res) => {
             })
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             message: "Berhasil mendapatkan data invoice",
             data: new invoiceEntities(invoice).getListPlan()
@@ -36,18 +34,18 @@ exports.getAllinvoiceUser = async (req, res) => {
 
 exports.getInvoiceUserByID = async (req, res) => {
     try {
-        const invoice = await invoiceService.getInvoiceUserByID(req.params.invoice_id)
+        const invoice = await invoiceService.getInvoiceUserByID(req.params.id)
         if(!invoice){
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
                 message: "Tidak dapat menemukan data invoice",
             })
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             message: "Berhasil mendapatkan data invoice",
-            data: new invoiceEntities(invoice).getSinglePlan()
+            data: invoice
         })
     } catch (error) {
         console.log(error);
@@ -62,6 +60,12 @@ exports.addInvoiceUser = async (req, res) => {
     const { package_id, payment_method_id } = req.body
     const package_data = await packageService.getPackageByID(package_id)
 
+    const invoiceCheck = await invoiceService.getPrevInvoiceUser(req.auth.user.id)
+    console.log(invoiceCheck);
+    if(!invoiceCheck.status) {
+        return res.status(422).send(invoiceCheck)
+    }
+
     const params = {
         package_id: package_id,
         payment_method_id: payment_method_id,
@@ -69,8 +73,13 @@ exports.addInvoiceUser = async (req, res) => {
         total_amount: package_data.price
     }
 
+    const user = {
+        id: req.auth.user.id,
+        email: req.auth.user.email
+    }
+
     try {
-        const createInvoice = await invoiceService.addInvoiceUser(params)
+        const createInvoice = await invoiceService.addInvoiceUser(params, user)
         if(!createInvoice.status) {
             return res.status(422).json({
                 success: false,
@@ -79,9 +88,9 @@ exports.addInvoiceUser = async (req, res) => {
         }
 
         const userSubParams = {
-            user_id: request.auth.user.id,
-            invoice_id: createInvoice.invoice_id,
-            package_id: createInvoice.package_id,
+            user_id: req.auth.user.id,
+            invoice_id: createInvoice.data.id,
+            package_id: createInvoice.data.package_id,
         }
         
         const userSub = await UserSubscipService.createUserSubcription(userSubParams)
@@ -93,23 +102,37 @@ exports.addInvoiceUser = async (req, res) => {
             })
         }
 
-        const invoiceDetail = invoiceService.getInvoiceUserByID(createInvoice.id)
-        if(!invoiceDetail.PaymentMethods.is_crypto){
-            await paymentService.createInvoice(invoiceDetail)
-        }else{
-            await btcPayService.createInvoice(invoiceDetail)
-        }
-
         return res.status(201).json({
             success: true,
             message: "Invoice berhasil dibuat.",
-            data: new invoiceEntities(userSub).getCreateInoviceResponse(createInvoice)
+            data: new invoiceEntities(userSub.data).getCreateInoviceResponse(createInvoice)
         })
     } catch (error) {
         console.log(error);
         return res.status(422).json({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
+        })
+    }
+}
+
+exports.updatePaymentInvoice = async (req, res) => {
+    const params = {
+        status: req.params.status
+    }
+    try {
+        await invoiceService.updatePaymentInvoice(req.params.id, params)
+        await UserSubscipService.updateUserSubcription(req.params.id, req.params.user_id)      
+
+        return res.status(201).json({
+            success: true,
+            message: "Berhasil merubah data invoice",
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({
+            success: false,
+            message: "Terjadi kesalahan pada saat mengupdate invoice, cobalah beberapa saat lagi"
         })
     }
 }

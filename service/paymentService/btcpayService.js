@@ -17,11 +17,11 @@ async function createInvoice(invoice, user_subcribe){
     .then((response) => {
         return {
             status: true,
-            checkoutLink: response.checkoutLink,
-            storeId: response.storeId,
-            amount: response.amount,
-            createdTime: response.createdTime,
-            expirationTime: response.expirationTime
+            checkoutLink: response.data.checkoutLink,
+            storeId: response.data.storeId,
+            amount: response.data.amount,
+            createdTime: response.data.createdTime,
+            expirationTime: response.data.expirationTime
         }
     }).catch((error) => {
         return {
@@ -30,11 +30,13 @@ async function createInvoice(invoice, user_subcribe){
         }
     })
 
+    console.log(invoice_created);
+
     return invoice_created
 }
 
 async function getSingleInvoice(invoice_id){
-    const headers = configGetRequest(`/stores/${BTCPAY_STORE_ID}/invoices?orderId=invoice_id`)
+    const headers = configGetRequest(invoice_id, `/stores/${BTCPAY_STORE_ID}/invoices?orderId=invoice_id`)
     const invoiceResult = await axios.request(headers)
     .then((response) => {
         return response
@@ -51,7 +53,7 @@ async function getSingleInvoice(invoice_id){
 function configGetRequest(invoice, query){
     let config = {
         method: 'get',
-        url: `${invoice.PaymentMethods.gateway}/api/v1${query}`,
+        url: `${invoice.PaymentMethod.gateway}/api/v1${query}`,
         headers: { 
           'Authorization': `token ${BTCPAY_API_KEY_TOKEN}`,
         }
@@ -60,12 +62,13 @@ function configGetRequest(invoice, query){
     return config
 }
 
-function configPostRequest(params){
+function configPostRequest(invoice, params){
     let config = {
         method: 'post',
-        url: `${BTCPAY_URL}/api/v1/users/me`,
+        url: `${invoice.PaymentMethod.gateway}/api/v1/stores/${BTCPAY_STORE_ID}/invoices`,
         headers: { 
           'Authorization': `token ${BTCPAY_API_KEY_TOKEN}`,
+          'Content-Type': 'application/json'
         },
         data: JSON.stringify(params)
     };
@@ -78,8 +81,8 @@ function generateParamsBody(invoice, user_subcribe){
         metadata: {
             orderId: invoice.id,
             orderUrl: `${APP_URL}`,
-            buyerEmail: user_subcribe.User.email,
-            itemDesc: invoice.Packages.name,
+            buyerEmail: user_subcribe.email,
+            itemDesc: invoice.Package.name,
         },
         receipt: {
             enabled: true,
@@ -87,12 +90,17 @@ function generateParamsBody(invoice, user_subcribe){
             showPayments: null
         },
         amount: invoice.total_amount,
-        currency: BTCPAY_STORE_BASE_CURRENCY
+        currency: BTCPAY_STORE_BASE_CURRENCY,
+        checkout: {
+            paymentMethods: [invoice.PaymentMethod.name],
+            redirectUrl: `${APP_URL}/api/invoice/edit/${invoice.id}/paid/${user_subcribe.id}`,
+        }
     }
 
     return bodyRequest
 }
 
 module.exports = {
+    getSingleInvoice,
     createInvoice
 }
