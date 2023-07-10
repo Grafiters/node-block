@@ -1,10 +1,13 @@
 require('dotenv').config()
+const j2s = require('joi-to-swagger');
 const validation = require('./index')
-const Joi = require('joi');
-const schemaBase = require('./base')
 
 function loginSchema(req, res, next){
-    const schema = schemaBase.authLogReg();
+    const schema = Joi.object({
+        email: Joi.string().required(),
+        password: Joi.string().required(),
+        captcha: Joi.string().required()
+    });
 
     validation.validateRequest(req, next, schema, res)
     validation.validateEmailAndPassword(req.body.email, req.body.password)
