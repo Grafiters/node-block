@@ -21,6 +21,72 @@ const doc = {
         }
     ],
     '@definitions': {
+      Form: {
+        Package: {
+          type: 'object',
+          properties:{
+            name: {
+              require: false,
+              type: 'string',
+            },
+            name: {
+              require: false,
+              type: 'string',
+            },
+            is_trial: {
+              require: false,
+              type: 'string'
+            },
+            description: {
+              require: false,
+              type: 'string'
+            },
+            request_per_second_limit: {
+              require: false,
+              type: 'integer'
+            },
+            request_per_day_limit: {
+              require: false,
+              type: 'integer'
+            },
+            request_per_month_limit: {
+              require: false,
+              type: 'integer'
+            },
+            price: {
+              require: false,
+              type: 'number'
+            },
+            trial_duration: {
+              require: false,
+              type: 'integer'
+            },
+            trial_request_limit: {
+              require: false,
+              type: 'integer'
+            }
+          }
+        }
+      },
+      Filter: {
+        Package: {
+          type: 'object',
+          properties:{
+            name: {
+              require: false,
+              type: 'string',
+            },
+            name: {
+              require: false,
+              type: 'string',
+            },
+            is_trial: {
+              require: false,
+              type: 'string'
+            }
+          }
+        }
+      },
       Auth: {
         type: 'object',
         Login: {
@@ -118,7 +184,6 @@ const doc = {
           },
           summary: "sample of user data"
         },
-
       },
       examples: {
         Login: {

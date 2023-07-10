@@ -18,7 +18,10 @@
   "paths": {
     "/monitored-addresses/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -50,7 +53,10 @@
     },
     "/monitored-addresses/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -82,7 +88,10 @@
     },
     "/monitored-addresses/history": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -114,7 +123,10 @@
     },
     "/monitored-addresses/{address_id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "address_id",
@@ -154,7 +166,10 @@
     },
     "/monitored-addresses/delete/{address_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "address_id",
@@ -194,7 +209,10 @@
     },
     "/monitored-event/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -226,7 +244,10 @@
     },
     "/monitored-event/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -258,7 +279,10 @@
     },
     "/monitored-event/{address_id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "address_id",
@@ -298,7 +322,10 @@
     },
     "/monitored-event/history": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -330,7 +357,10 @@
     },
     "/monitored-event/delete/{address_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "address_id",
@@ -406,7 +436,10 @@
     },
     "/payment-method/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "token",
@@ -431,7 +464,10 @@
     },
     "/payment-method/edit/{id}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -464,7 +500,10 @@
     },
     "/payment-method/delete/{id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -510,7 +549,10 @@
     },
     "/blockchain/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "token",
@@ -535,7 +577,10 @@
     },
     "/blockchain/edit/{blockchain_id}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "blockchain_id",
@@ -568,7 +613,10 @@
     },
     "/blockchain/delete/{blockchain_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "blockchain_id",
@@ -633,7 +681,10 @@
     },
     "/node/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -665,7 +716,10 @@
     },
     "/node/edit/{node_id}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "node_id",
@@ -705,7 +759,10 @@
     },
     "/node/delete/{node_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "node_id",
@@ -745,7 +802,10 @@
     },
     "/subcribe/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -777,7 +837,10 @@
     },
     "/subcribe/{subcribe_id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "subcribe_id",
@@ -817,7 +880,10 @@
     },
     "/api-keys/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -849,7 +915,10 @@
     },
     "/api-keys/generate": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -881,7 +950,10 @@
     },
     "/api-keys/delete/{api_key_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "api_key_id",
@@ -960,7 +1032,10 @@
     },
     "/api-keys/usage-statistic/chart": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1020,7 +1095,10 @@
     },
     "/api-keys/usage-statistic/{api_key}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "api_key",
@@ -1067,7 +1145,10 @@
     },
     "/invoice/": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1085,6 +1166,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
           },
@@ -1099,7 +1183,10 @@
     },
     "/invoice/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1125,8 +1212,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
@@ -1139,7 +1226,10 @@
     },
     "/invoice/create": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1169,9 +1259,12 @@
         }
       }
     },
-    "/invoice/edit/{id}/{status}": {
+    "/invoice/edit/{id}/{status}/{user_id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1183,6 +1276,14 @@
           },
           {
             "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1202,7 +1303,10 @@
     },
     "/invoice/delete/{id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1242,7 +1346,21 @@
     },
     "/package/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Package"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Filter/Package"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1255,7 +1373,10 @@
     },
     "/package/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Package"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1278,13 +1399,25 @@
     },
     "/package/add": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "token",
             "in": "header",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Form/Package"
             }
           }
         ],
@@ -1303,7 +1436,10 @@
     },
     "/package/edit/{id}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1318,6 +1454,15 @@
             "in": "header",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Form/Package"
             }
           }
         ],
@@ -1336,7 +1481,10 @@
     },
     "/package/delete/{id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1395,7 +1543,26 @@
     },
     "/blog/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Blog"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1408,7 +1575,26 @@
     },
     "/blog/categories": {
       "get": {
-        "description": "",
+        "tags": [
+          "Blog"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1421,7 +1607,10 @@
     },
     "/blog/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Blog"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "id",
@@ -1444,7 +1633,26 @@
     },
     "/blog/search": {
       "post": {
-        "description": "",
+        "tags": [
+          "Blog"
+        ],
+        "description": "Endpoint to sign in a specific user",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1457,7 +1665,10 @@
     },
     "/user/profile": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1489,7 +1700,10 @@
     },
     "/user/change-password": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1524,7 +1738,10 @@
     },
     "/user/generate-2fa": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1559,7 +1776,10 @@
     },
     "/user/enable-2fa": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1594,7 +1814,10 @@
     },
     "/user/verify-2fa": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1629,7 +1852,10 @@
     },
     "/user/disable-2fa": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1664,7 +1890,10 @@
     },
     "/user/disable-account": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1696,7 +1925,10 @@
     },
     "/user/current-plan": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1731,7 +1963,10 @@
     },
     "/user/my-activity": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to sign in a specific user",
         "parameters": [
           {
             "name": "x-api-key",
@@ -2647,6 +2882,64 @@
         },
         "xml": {
           "name": "User"
+        }
+      },
+      "Form": {
+        "Package": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "require": false,
+              "type": "string"
+            },
+            "is_trial": {
+              "require": false,
+              "type": "string"
+            },
+            "description": {
+              "require": false,
+              "type": "string"
+            },
+            "request_per_second_limit": {
+              "require": false,
+              "type": "integer"
+            },
+            "request_per_day_limit": {
+              "require": false,
+              "type": "integer"
+            },
+            "request_per_month_limit": {
+              "require": false,
+              "type": "integer"
+            },
+            "price": {
+              "require": false,
+              "type": "number"
+            },
+            "trial_duration": {
+              "require": false,
+              "type": "integer"
+            },
+            "trial_request_limit": {
+              "require": false,
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "Filter": {
+        "Package": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "require": false,
+              "type": "string"
+            },
+            "is_trial": {
+              "require": false,
+              "type": "string"
+            }
+          }
         }
       },
       "Auth": {

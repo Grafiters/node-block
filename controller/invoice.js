@@ -9,6 +9,8 @@ const invoiceEntities = require('../service/entitiesService/invoiceEntities')
 const moment = require('moment')
 
 exports.getAllinvoiceUser = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const invoice = await invoiceService.getAllInvoiceUser(req.auth.user.id)
         if(!invoice[0]){
@@ -33,6 +35,8 @@ exports.getAllinvoiceUser = async (req, res) => {
 }
 
 exports.getInvoiceUserByID = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const invoice = await invoiceService.getInvoiceUserByID(req.params.id)
         if(!invoice){
@@ -57,6 +61,8 @@ exports.getInvoiceUserByID = async (req, res) => {
 }
 
 exports.addInvoiceUser = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const { package_id, payment_method_id } = req.body
     const package_data = await packageService.getPackageByID(package_id)
 
@@ -117,6 +123,8 @@ exports.addInvoiceUser = async (req, res) => {
 }
 
 exports.updatePaymentInvoice = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const params = {
         status: req.params.status
     }
@@ -138,6 +146,8 @@ exports.updatePaymentInvoice = async (req, res) => {
 }
 
 exports.deleteInvoiceUser = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const invoice = await invoiceService.deleteInoivceUser(req.params.invoice_id)
         if(!invoice){
@@ -161,6 +171,8 @@ exports.deleteInvoiceUser = async (req, res) => {
 }
 
 exports.xenditListInvoice = async (req, res) => {
+    /* 	#swagger.tags = ['Depreceted']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const invoice = await xenditService.getAllInvoice()
         return res.status(201).json({
@@ -177,6 +189,8 @@ exports.xenditListInvoice = async (req, res) => {
 }
 
 exports.xenditCreateInvoice = async (req, res) => {
+    /* 	#swagger.tags = ['Depreceted']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const invoice = await xenditService.createInvoice()
         return res.status(201).json({

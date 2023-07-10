@@ -2,8 +2,21 @@ const packageService = require('../service/packageService')
 const packageEntities = require('../service/entitiesService/packageEntities')
 
 exports.getAllPackage = async (req, res) => {
+    /* 	#swagger.tags = ['Package']
+        #swagger.description = 'Endpoint to sign in a specific user' */
+
+    /*
+        #swagger.parameters['query'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Filter/Package" }
+        }
+    */
+    const query = req.query
+
     try {
-        const packageData = await packageService.getAllPackage()
+        const packageData = await packageService.getAllPackage(query)
         
         if (packageData.length > 0){
             return res.status(200).json({
@@ -27,6 +40,8 @@ exports.getAllPackage = async (req, res) => {
 }
 
 exports.getPackageByID = async (req, res) => {
+    /* 	#swagger.tags = ['Package']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const packageData = await packageService.getPackageByID(req.params.id)
         
@@ -45,6 +60,16 @@ exports.getPackageByID = async (req, res) => {
 }
 
 exports.addPackage = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
+    /*
+        #swagger.parameters['query'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Form/Package" }
+        }
+    */
     try {
         const packageData = await packageService.addPackage(req.body)
         return res.status(201).json({
@@ -61,6 +86,16 @@ exports.addPackage = async (req, res) => {
 }
 
 exports.updatePackage = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
+    /*
+        #swagger.parameters['query'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Form/Package" }
+        }
+    */
     try {
         const packageData = await packageService.updatePackage(req.params.id, req.body)
         return res.status(201).json({
@@ -77,6 +112,8 @@ exports.updatePackage = async (req, res) => {
 }
 
 exports.deletePackage = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const packageData = await packageService.deletePackage(req.params.id)
         return res.status(201).json({

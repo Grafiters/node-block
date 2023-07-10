@@ -19,7 +19,9 @@ function buildParamsFilter(){
         }
     }
 
-    return buildParams
+    return params = {
+        where: buildParams
+    }
 }
 
 module.exports = {

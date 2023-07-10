@@ -20,6 +20,8 @@ exports.getAllBlockchain = async (req, res) => {
 }
 
 exports.addBlockchainData = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const params = req.body
 
     try {
@@ -46,6 +48,8 @@ exports.addBlockchainData = async (req, res) => {
 }
 
 exports.updateBlockchainData = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const blockchain_id = req.params.blockchain_id
     const params = req.body
 
@@ -74,6 +78,8 @@ exports.updateBlockchainData = async (req, res) => {
 }
 
 exports.deleteBlockchainData = async (req, res) => {
+    /* 	#swagger.tags = ['Admin']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const blockchain_id = req.params.blockchain_id
 
     console.log(blockchain_id);

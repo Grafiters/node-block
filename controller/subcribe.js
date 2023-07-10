@@ -3,6 +3,8 @@ const subcribeService = require('../service/subcribeService')
 const paramsService = require('../service/paramsService')
 
 exports.getAllSubcribeUser = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const rawParams = {
         user_id: req.auth.user.id
     }
@@ -33,6 +35,8 @@ exports.getAllSubcribeUser = async (req, res) => {
 }
 
 exports.getDetailSubcribeUser = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const rawParams = {
         user_id: req.auth.user.id
     }

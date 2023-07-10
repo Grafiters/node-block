@@ -1,6 +1,8 @@
 const monitoredAddressService = require('../service/monitoredAddressService')
 
 exports.getAllMonitoredAddress = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await monitoredAddressService.getAllMonitoredAddress(req.auth.user.id)
 
@@ -26,6 +28,8 @@ exports.getAllMonitoredAddress = async (req, res) => {
 }
 
 exports.getMonitoredAddressHistory = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await monitoredAddressService.getMonitoredAddressHistory(req.params.monitored_id)
 
@@ -51,6 +55,8 @@ exports.getMonitoredAddressHistory = async (req, res) => {
 }
 
 exports.findMonitoredAddressByID = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await monitoredAddressService.findMonitoredAddressByID(req.params.address_id)
 
@@ -76,6 +82,8 @@ exports.findMonitoredAddressByID = async (req, res) => {
 }
 
 exports.createMonitoredAddress = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const { address, notification_method } = req.body
     const params = {
         user_id: req.auth.user.id,
@@ -107,6 +115,8 @@ exports.createMonitoredAddress = async (req, res) => {
 }
 
 exports.deleteMonitoredAddress = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await monitoredAddressService.deleteMontoredAddressUser(req.params.address_id)
 

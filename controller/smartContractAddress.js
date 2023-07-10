@@ -1,6 +1,8 @@
 const smartContractService = require('../service/smartContractService')
 
 exports.getAllSmartContractEvent = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await smartContractService.getAllSmartContractEvent(req.auth.user.id)
 
@@ -26,6 +28,8 @@ exports.getAllSmartContractEvent = async (req, res) => {
 }
 
 exports.findSmartContractEventByID = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await smartContractService.findSmartContractByID(req.params.event_id)
 
@@ -51,6 +55,8 @@ exports.findSmartContractEventByID = async (req, res) => {
 }
 
 exports.createSmartContractEvent = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     const { contract_address, event_name, notification_method } = req.body
     const params = {
         user_id: req.auth.user.id,
@@ -81,6 +87,8 @@ exports.createSmartContractEvent = async (req, res) => {
 }
 
 exports.deleteSmartCotnractEvent = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await smartContractService.deleteSmartContractEvent(req.params.event_id)
 
@@ -107,6 +115,8 @@ exports.deleteSmartCotnractEvent = async (req, res) => {
 }
 
 exports.getSmartContractEventHistory = async (req, res) => {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const address = await smartContractService.getSmartContractEventHistory(req.params.event_id)
 

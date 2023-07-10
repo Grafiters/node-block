@@ -1,7 +1,9 @@
 const model = require('../db/models')
+const paramsService = require('../service/paramsService')
 
-async function getAllPackage(){
-    const packageData = await model.Packages.findAll()
+async function getAllPackage(query){
+    const params = paramsService.buildParamsFilter(query)
+    const packageData = await model.Packages.findAll(params)
 
     return packageData
 }
