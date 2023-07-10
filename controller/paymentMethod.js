@@ -45,8 +45,6 @@ exports.getPaymentMethodByID = async (req, res) => {
 }
 
 exports.addPaymentMethod = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const payment = await paymentService.addPaymentMethods(req.body)
 
@@ -66,8 +64,6 @@ exports.addPaymentMethod = async (req, res) => {
 }
 
 exports.updatePaymentMethod = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const payment = await paymentService.updatePaymentMethods(req.params.id, req.body)
 
@@ -85,8 +81,6 @@ exports.updatePaymentMethod = async (req, res) => {
 }
 
 exports.deletePaymentMethod = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const payment = await paymentService.deletePaymentMethods(req.params.id)
 

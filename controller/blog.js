@@ -2,8 +2,6 @@ const blogService = require('../service/blogService');
 const BlogEntities = require('../service/entitiesService/blogEntites');
 
 exports.getContent = async (req, res) => {
-    /* 	#swagger.tags = ['Blog']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const categories = await blogService.getContent(req.query.limit, req.query.page);
 
@@ -20,8 +18,6 @@ exports.getContent = async (req, res) => {
 }
 
 exports.getCategories = async (req, res) => {
-    /* 	#swagger.tags = ['Blog']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const categories = await blogService.getCategories(req.query.limit, req.query.page);
 
@@ -39,8 +35,6 @@ exports.getCategories = async (req, res) => {
 }
 
 exports.getBlogByCategories = async (req, res) => {
-    /* 	#swagger.tags = ['Blog']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const categories = await blogService.getBlogByCategories(req.query.limit, req.query.page, req.query.category);
 
@@ -58,8 +52,6 @@ exports.getBlogByCategories = async (req, res) => {
 }
 
 exports.getBlogByKeyword = async (req, res) => {
-    /* 	#swagger.tags = ['Blog']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { keyword } = req.body
     try {
         const categories = await blogService.getBlogByKeyword(req.query.limit, req.query.page, keyword);
@@ -78,8 +70,6 @@ exports.getBlogByKeyword = async (req, res) => {
 }
 
 exports.getBlogByID = async (req, res) => {
-    /* 	#swagger.tags = ['Blog']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { id } = req.params
     try {
         const categories = await blogService.getBlogByID(id);

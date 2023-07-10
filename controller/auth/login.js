@@ -9,58 +9,6 @@ const { generateToken } = require("../../service/jwtService");
 const totpService = require('../../service/totpService');
 
 exports.userLogin = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
-
-    /*	
-        #swagger.parameters['login'] = {
-            in: 'body',
-            description: 'Login Form.',
-            required: true,
-            schema: { $ref: "#/definitions/Auth/Login" },
-            examples: { example: {$ref: "#/components/examples/Login"} }
-        }
-
-        #swagger.responses[201] = {
-            description: 'Login',
-            schema: { $ref: '#/components/schemas/Login' }
-        }
-
-        #swagger.responses[422] = {
-            description: 'Login Error',
-            schema: {
-                geetest: {
-                    status: false,
-                    message: 'Invalid Geetest challenge'
-                },
-                akun: {
-                    status: false,
-                    message: "Kesalahan validasi",
-                    errors: [
-                        "Email tidak valid", "password kurang dari 8 karakter", "Login gagal. Email atau password tidak valid."
-                    ]
-                },
-                twoFactor: {
-                    status: false,
-                    message: ["Missing otp token", "invalid otp token"]
-                },
-                otherValidation: {
-                    status: false,
-                    message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                }
-            }
-        }
-
-        #swagger.responses[500] = {
-            description: 'Login',
-            schema: { 
-                status: false,
-                message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-            }
-        }
-    */
-
-   console.log(req.body);
     const { email, password } = req.body;
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
@@ -149,7 +97,6 @@ exports.userLogin = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log(error);
         return res.status(500).json({
             status: false,
             message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
@@ -158,56 +105,6 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.userLoginGoogle = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
-
-    /*	
-        #swagger.parameters['Login Google'] = {
-            in: 'body',
-            description: 'Login Form.',
-            required: true,
-            schema: {
-                google_id: { 
-                    require: true,
-                    type: 'string',
-                } 
-            }
-        }
-
-        #swagger.responses[201] = {
-            description: 'Login',
-            schema: { $ref: '#/components/schemas/Login' }
-        }
-
-        #swagger.responses[422] = {
-            description: 'Login Error',
-            schema: {
-                akun: {
-                    status: false,
-                    message: "Kesalahan validasi",
-                    errors: [
-                        "Akun google belum terdaftar pada system",
-                    ]
-                },
-                twoFactor: {
-                    status: false,
-                    message: ["Missing otp token", "invalid otp token"]
-                },
-                otherValidation: {
-                    status: false,
-                    message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                }
-            }
-        }
-
-        #swagger.responses[500] = {
-            description: 'Login',
-            schema: { 
-                status: false,
-                message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-            }
-        }
-    */
     const { google_id } = req.body;
     try {
         const result = await getUserByEmailAndGoogleId(google_id)

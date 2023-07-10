@@ -7,8 +7,6 @@ const { registerMailer, resendRegisterMailer } = require("../../service/mailerSe
 const model = require("../../db/models");
 
 exports.forgotPassword = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { email } = req.body
 
     const token = generateTokenEmail(5)
@@ -39,8 +37,6 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.resetPassword = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { email, reset_token, new_password } = req.body
 
     const data = await validateEmailRegister(email);

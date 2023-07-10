@@ -10,7 +10,6 @@ const Sequelize = require('sequelize');
 const logger = require('morgan');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
-const swaggerJsdoc = require('swagger-jsdoc');
 
 const cors = require('cors');
 
@@ -43,9 +42,15 @@ sequelize
   .then(() => console.log(`[LOG] connection success`))
   .catch((err) => console.log(`[ERR] `, err));
 
+const corsConfig = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+    AccessControlAllowMethods: ['POST','GET','OPTIONS','PUT','DELETE']
+}
+
 app
     .use(logger('dev'))
-    .use(cors())
+    .use(cors(corsConfig))
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json());
 

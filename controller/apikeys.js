@@ -3,8 +3,6 @@ const generatedKeysService = require('../service/generateService')
 const apiKeyEntities = require('../service/entitiesService/apiKeysEntities')
 
 exports.apiKeysUser = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const apiKeys = await apiKeysService.findAllApiKeysByUser(req.auth.user.id)
 
@@ -31,8 +29,6 @@ exports.apiKeysUser = async (req, res) => {
 }
 
 exports.createApiKeysUser = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { label } = req.body
     const params = {
         user_id: req.auth.user.id,
@@ -64,8 +60,6 @@ exports.createApiKeysUser = async (req, res) => {
 }
 
 exports.deleteApiKeysUser = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { api_key_id } = req.params
     
     try {
@@ -118,8 +112,6 @@ exports.usageStatistic = async (req, res) => {
 }
 
 exports.usageStatisticByApiKey = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { api_key } = req.params;
 
     const api_key_id = await apiKeysService.findApiKeyByApiKeyValue(api_key)
@@ -149,8 +141,6 @@ exports.usageStatisticByApiKey = async (req, res) => {
 }
 
 exports.usageStatisticByApiKeyChart = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { api_key, interval, start_date, end_date } = req.query;
 
     if(interval === null ){

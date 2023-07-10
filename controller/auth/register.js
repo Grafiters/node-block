@@ -11,53 +11,6 @@ const User = require('../../service/entitiesService/userEntities')
 const model = require("../../db/models");
 
 exports.registerUser = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
-
-    /*	
-        #swagger.parameters['register'] = {
-            in: 'body',
-            description: 'Register Form.',
-            required: true,
-            schema: { $ref: "#/definitions/Auth/Register" },
-            examples: { example: {$ref: "#/components/examples/Login"} }
-        }
-
-        #swagger.responses[201] = {
-            description: 'Login',
-            schema: { $ref: '#/components/schemas/Register' }
-        }
-
-        #swagger.responses[422] = {
-            description: 'Login Error',
-            schema: {
-                geetest: {
-                    status: false,
-                    message: 'Invalid Geetest challenge'
-                },
-                akun: {
-                    status: false,
-                    message: "Kesalahan validasi",
-                    errors: [
-                        "Email tidak valid", "password kurang dari 8 karakter", "Login gagal. Email atau password tidak valid."
-                    ]
-                },
-                otherValidation: {
-                    status: false,
-                    message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                }
-            }
-        }
-
-        #swagger.responses[500] = {
-            description: 'Login',
-            schema: { 
-                status: false,
-                message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-            }
-        }
-    */
-
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
 
@@ -112,8 +65,6 @@ exports.registerUser = async (req, res) => {
 }
 
 exports.activationEmail = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const token = req.params.activation_token;
     const user = await getUserByTokenActivation(token)
 
@@ -168,8 +119,6 @@ exports.activationEmail = async (req, res) => {
 }
 
 exports.resendActivationCode = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { email } = req.params;
     
     const data = await validateEmailRegister(email);
@@ -223,8 +172,6 @@ exports.resendActivationCode = async (req, res) => {
 }
 
 exports.registerWithGoogle = async (req, res) => {
-    /* 	#swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { google_id, email } = req.body
 
     const token = generateTokenEmail(5)

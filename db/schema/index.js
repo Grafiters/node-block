@@ -14,6 +14,7 @@ function validateRequest(req, next, schema, res) {
             message: detail_error
         })
     }
+    return true
 }
 
 function validateQueryRequest(req, next, schema, res) {
@@ -30,6 +31,7 @@ function validateQueryRequest(req, next, schema, res) {
             message: detail_error
         })
     }
+    return true
 }
 
 function validateParamsRequest(req, next, schema, res) {
@@ -46,6 +48,7 @@ function validateParamsRequest(req, next, schema, res) {
             message: detail_error
         })
     }
+    return true
 }
 
 function validateEmailAndPassword(email, password){
@@ -59,6 +62,8 @@ function validateEmailAndPassword(email, password){
               ]
         });
     }
+
+    return true
 }
 
 function validatePassword(password){
@@ -71,6 +76,7 @@ function validatePassword(password){
               ]
         });
     }
+    return true
 }
 
 function validateEmail(email){
@@ -83,6 +89,7 @@ function validateEmail(email){
               ]
         });
     }
+    return true
 }
 
 module.exports = {

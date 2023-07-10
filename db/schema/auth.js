@@ -1,9 +1,14 @@
 require('dotenv').config()
-
-const Joi = require('joi');
 const validation = require('./index')
+const Joi = require('joi');
+const schemaBase = require('./base')
 
 function loginSchema(req, res, next){
+    const schema = schemaBase.authLogReg();
+
+    validation.validateRequest(req, next, schema, res)
+    validation.validateEmailAndPassword(req.body.email, req.body.password)
+    
     if(process.env.GEETEST_ENABLED === true && process.env.NODE_ENV == 'production' ){
         if(typeof req.body.captcha !== 'object'){
             return res.status(422).send({
@@ -12,14 +17,6 @@ function loginSchema(req, res, next){
             })
         }
     }
-    
-    const schema = Joi.object({
-        email: Joi.string().required(),
-        password: Joi.string().required(),
-    });
-
-    validation.validateRequest(req, next, schema, res);
-    validation.validateEmailAndPassword(req.body.email, req.body.password)
 
     next()
 }
@@ -106,6 +103,10 @@ function resetPasswordSchema(req, res, next){
     next()
 }
 
+const LoginSwaggerSchema = Joi.object({
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+});
 
 module.exports = {
     loginSchema,

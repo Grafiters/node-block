@@ -8,8 +8,6 @@ const totpService = require('../service/totpService.js');
 const validationService = require("../service/validationService");
 
 exports.userProfile = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const user = await userService.findUserByID(req.auth.user.id)
 
@@ -28,8 +26,6 @@ exports.userProfile = async (req, res) => {
 }
 
 exports.changePassword = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const {old_password, new_password} = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
 
@@ -59,8 +55,6 @@ exports.changePassword = async (req, res) => {
 }
 
 exports.toptGenerate = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { otp_code} = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
     const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);
@@ -90,8 +84,6 @@ exports.toptGenerate = async (req, res) => {
 }
 
 exports.enableTwoFactor = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { otp_secret, otp_code} = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
     const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);
@@ -128,8 +120,6 @@ exports.enableTwoFactor = async (req, res) => {
 }
 
 exports.verifyTwoFactor = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { otp_code } = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
     try {
@@ -155,8 +145,6 @@ exports.verifyTwoFactor = async (req, res) => {
 }
 
 exports.disableTwoFactor = async (req, res) => {
-     /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     const { otp_code } = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
     try {
@@ -185,8 +173,6 @@ exports.disableTwoFactor = async (req, res) => {
 }
 
 exports.nonActiveAccount = async (req, res) => {
-     /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const update = await userService.updateUserStatus(req.auth.user.id, 'nonactive')
         if(update){
@@ -204,8 +190,6 @@ exports.nonActiveAccount = async (req, res) => {
 }
 
 exports.currentPlan = async (req, res) => {
-     /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const subscribe = await userService.getCurrentPackageUser(req.auth.user.id)
         if(subscribe !== null){
@@ -229,8 +213,6 @@ exports.currentPlan = async (req, res) => {
 }
 
 exports.activityUser = async (req, res) => {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const activity = await userService.getActivityUser(req.auth.user.id)
         return res.status(200).json({

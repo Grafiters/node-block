@@ -21,8 +21,6 @@ exports.getAllNodeBlockchain = async (req, res) => {
 }
 
 exports.addNodeBlockchain = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const node = await nodeService.addNodeBlockchain(req.body)
         if (node.status){
@@ -45,8 +43,6 @@ exports.addNodeBlockchain = async (req, res) => {
 }
 
 exports.updateNodeBlockchain = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const node = await nodeService.updateNodeBlockchain(req.params.node_id, req.body)
         if (node.status){
@@ -70,8 +66,6 @@ exports.updateNodeBlockchain = async (req, res) => {
 }
 
 exports.deleteNodeBlockchain = async (req, res) => {
-    /* 	#swagger.tags = ['Admin']
-        #swagger.description = 'Endpoint to sign in a specific user' */
     try {
         const node = await nodeService.deleteNodeBlockchain(req.params.node_id)
         if (node.status){
