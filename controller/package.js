@@ -63,7 +63,7 @@ exports.addPackage = async (req, res) => {
     /* 	#swagger.tags = ['Admin']
         #swagger.description = 'Endpoint to sign in a specific user' */
     /*
-        #swagger.parameters['query'] = {
+        #swagger.parameters['package'] = {
             in: 'params',
             description: 'Filter parameters',
             required: true,
@@ -89,7 +89,7 @@ exports.updatePackage = async (req, res) => {
     /* 	#swagger.tags = ['Admin']
         #swagger.description = 'Endpoint to sign in a specific user' */
     /*
-        #swagger.parameters['query'] = {
+        #swagger.parameters['package'] = {
             in: 'params',
             description: 'Filter parameters',
             required: true,

@@ -1,8 +1,10 @@
 require('dotenv').config()
+const fs = require('fs');
 const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: false})
 
 const outputFile = './swagger_output.json'
 const endpointsFiles = ['./route/index.js']
+const Form = JSON.parse(fs.readFileSync('./swagger/form.json'));
 
 const doc = {
     info: {
@@ -21,61 +23,11 @@ const doc = {
         }
     ],
     '@definitions': {
-      Form: {
-        Package: {
-          type: 'object',
-          properties:{
-            name: {
-              require: false,
-              type: 'string',
-            },
-            name: {
-              require: false,
-              type: 'string',
-            },
-            is_trial: {
-              require: false,
-              type: 'string'
-            },
-            description: {
-              require: false,
-              type: 'string'
-            },
-            request_per_second_limit: {
-              require: false,
-              type: 'integer'
-            },
-            request_per_day_limit: {
-              require: false,
-              type: 'integer'
-            },
-            request_per_month_limit: {
-              require: false,
-              type: 'integer'
-            },
-            price: {
-              require: false,
-              type: 'number'
-            },
-            trial_duration: {
-              require: false,
-              type: 'integer'
-            },
-            trial_request_limit: {
-              require: false,
-              type: 'integer'
-            }
-          }
-        }
-      },
+      Form,
       Filter: {
         Package: {
           type: 'object',
           properties:{
-            name: {
-              require: false,
-              type: 'string',
-            },
             name: {
               require: false,
               type: 'string',

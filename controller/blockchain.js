@@ -22,6 +22,14 @@ exports.getAllBlockchain = async (req, res) => {
 exports.addBlockchainData = async (req, res) => {
     /* 	#swagger.tags = ['Admin']
         #swagger.description = 'Endpoint to sign in a specific user' */
+    /*
+        #swagger.parameters['form'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Form/Blockchain" }
+        }
+    */
     const params = req.body
 
     try {
@@ -50,6 +58,14 @@ exports.addBlockchainData = async (req, res) => {
 exports.updateBlockchainData = async (req, res) => {
     /* 	#swagger.tags = ['Admin']
         #swagger.description = 'Endpoint to sign in a specific user' */
+    /*
+        #swagger.parameters['form'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Form/Blockchain" }
+        }
+    */
     const blockchain_id = req.params.blockchain_id
     const params = req.body
 

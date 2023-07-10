@@ -1,0 +1,82 @@
+{
+    "type": "object",
+    "Package": {
+        "type": "object",
+        "properties":{
+            "name": {
+                "require": true,
+                "type": "string"
+            },
+            "is_trial": {
+                "require": true,
+                "type": "string"
+            },
+            "description": {
+                "require": true,
+                "type": "string"
+            },
+            "request_per_second_limit": {
+                "require": true,
+                "type": "integer"
+            },
+            "request_per_day_limit": {
+                "require": true,
+                "type": "integer"
+            },
+            "request_per_month_limit": {
+                "require": true,
+                "type": "integer"
+            },
+            "price": {
+                "require": true,
+                "type": "number"
+            },
+            "trial_duration": {
+                "require": true,
+                "type": "integer"
+            },
+            "trial_request_limit": {
+                "require": true,
+                "type": "integer"
+            }
+        }
+    },
+    "Blockchain": {
+        "type": "object",
+        "properties": {
+            "blockchain_name": {
+                "type": "string",
+                "require": true
+            },
+            "height": {
+                "type": "integer",
+                "require":true
+            },
+            "network": {
+                "type": "string",
+                "require": true
+            },
+            "version": {
+                "type": "string",
+                "require": true
+            },
+            "location":{
+                "type": "string",
+                "require": true
+            }
+        }
+    },
+    "Invoice": {
+        "type": "object",
+        "properties": {
+            "package_id": {
+                "type": "integer",
+                "require": true
+            },
+            "payment_method_id": {
+                "type": "integer",
+                "require":true
+            }
+        }
+    }
+}

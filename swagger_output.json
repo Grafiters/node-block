@@ -560,6 +560,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "form",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Form/Blockchain"
+            }
           }
         ],
         "responses": {
@@ -595,6 +604,15 @@
             "in": "header",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "form",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Form/Blockchain"
             }
           }
         ],
@@ -1244,6 +1262,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "form",
+            "in": "params",
+            "description": "Filter parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Form/Invoice"
+            }
           }
         ],
         "responses": {
@@ -1412,7 +1439,7 @@
             }
           },
           {
-            "name": "query",
+            "name": "package",
             "in": "params",
             "description": "Filter parameters",
             "required": true,
@@ -1457,7 +1484,7 @@
             }
           },
           {
-            "name": "query",
+            "name": "package",
             "in": "params",
             "description": "Filter parameters",
             "required": true,
@@ -2885,44 +2912,83 @@
         }
       },
       "Form": {
+        "type": "object",
         "Package": {
           "type": "object",
           "properties": {
             "name": {
-              "require": false,
+              "require": true,
               "type": "string"
             },
             "is_trial": {
-              "require": false,
+              "require": true,
               "type": "string"
             },
             "description": {
-              "require": false,
+              "require": true,
               "type": "string"
             },
             "request_per_second_limit": {
-              "require": false,
+              "require": true,
               "type": "integer"
             },
             "request_per_day_limit": {
-              "require": false,
+              "require": true,
               "type": "integer"
             },
             "request_per_month_limit": {
-              "require": false,
+              "require": true,
               "type": "integer"
             },
             "price": {
-              "require": false,
+              "require": true,
               "type": "number"
             },
             "trial_duration": {
-              "require": false,
+              "require": true,
               "type": "integer"
             },
             "trial_request_limit": {
-              "require": false,
+              "require": true,
               "type": "integer"
+            }
+          }
+        },
+        "Blockchain": {
+          "type": "object",
+          "properties": {
+            "blockchain_name": {
+              "type": "string",
+              "require": true
+            },
+            "height": {
+              "type": "integer",
+              "require": true
+            },
+            "network": {
+              "type": "string",
+              "require": true
+            },
+            "version": {
+              "type": "string",
+              "require": true
+            },
+            "location": {
+              "type": "string",
+              "require": true
+            }
+          }
+        },
+        "Invoice": {
+          "type": "object",
+          "properties": {
+            "package_id": {
+              "type": "integer",
+              "require": true
+            },
+            "payment_method_id": {
+              "type": "integer",
+              "require": true
             }
           }
         }

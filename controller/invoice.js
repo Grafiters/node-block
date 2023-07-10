@@ -63,6 +63,14 @@ exports.getInvoiceUserByID = async (req, res) => {
 exports.addInvoiceUser = async (req, res) => {
     /* 	#swagger.tags = ['User']
         #swagger.description = 'Endpoint to sign in a specific user' */
+     /*
+        #swagger.parameters['form'] = {
+            in: 'params',
+            description: 'Filter parameters',
+            required: true,
+            schema: { $ref: "#/definitions/Form/Invoice" }
+        }
+    */
     const { package_id, payment_method_id } = req.body
     const package_data = await packageService.getPackageByID(package_id)
 
