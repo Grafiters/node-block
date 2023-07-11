@@ -90,6 +90,6 @@ lakukan migrasi database untuk configurasi database dan seeder pada awal program
 
 setelah itu jalankan program dengan menggunakan ```npm run dev```
 
-# <img src="http://cliparts.co/cliparts/8iE/jnA/8iEjnAgaT.png?raw=true" width="50" /> ===> CAUTION <=== <img src="http://cliparts.co/cliparts/8iE/jnA/8iEjnAgaT.png?raw=true" width="50" />
+# <img src="http://cliparts.co/cliparts/8iE/jnA/8iEjnAgaT.png?raw=true" width="25" /> ===> CAUTION <=== <img src="http://cliparts.co/cliparts/8iE/jnA/8iEjnAgaT.png?raw=true" width="25" />
 
 Sebelum menjalankan program pada production pastikan semua konfigurasi awal sudah disiapkan dan sudah melakukan konfig awal, disarankan tidak terlalu terpaku pada seeder yang sudah dibuat
