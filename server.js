@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const logger = require('morgan');
 const swaggerUi = require('swagger-ui-express')
+const RateLimit = require("express-rate-limit");
 const swaggerFile = require('./swagger_output.json')
 
 const cors = require('cors');
@@ -20,6 +21,11 @@ app.get('/', (req, res) => {
             message: 'Backend Nusa Blockchain is running'
         }
     ))
+});
+
+const limiter = RateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 10,
 });
 
 const {
@@ -51,11 +57,11 @@ const corsConfig = {
 app
     .use(logger('dev'))
     .use(cors(corsConfig))
+    .use(limiter)
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json());
 
+app.use(`/${process.env.SERVICE}/swagger`, swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(`/${process.env.SERVICE}`, MainRouter)
 
 app.listen(port, host ,() => console.log(`running on port ${host}:${port}`));
-
-app.use(`/${process.env.SERVICE}/swagger`, swaggerUi.serve, swaggerUi.setup(swaggerFile))

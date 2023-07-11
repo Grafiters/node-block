@@ -1,5 +1,6 @@
 require('dotenv').config()
 const axios = require('axios')
+const {INVOICE_PAYMENT_DUE_LIMIT_NUMBER } = process.env
 
 const { 
     APP_URL,
@@ -94,6 +95,7 @@ function generateParamsBody(invoice, user_subcribe){
         checkout: {
             paymentMethods: [invoice.PaymentMethod.name],
             redirectUrl: `${APP_URL}/api/invoice/edit/${invoice.id}/paid/${user_subcribe.id}`,
+            expirationMinutes: INVOICE_PAYMENT_DUE_LIMIT_NUMBER
         }
     }
 
