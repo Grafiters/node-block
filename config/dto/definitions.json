@@ -1,0 +1,196 @@
+{
+    "User": {
+        "Request": {
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type":"string",
+                        "examples": "example@example.com"
+                    }
+                }
+            },
+            "Register":{
+                
+            }
+        },
+        "Response":{
+            "email":"example@example.com",
+            "role":["User", "Admin"],
+            "otp_enabled":false
+        },
+        "Register":{
+            "email":"example@example.com",
+            "google_id":"123JUG123123",
+            "role":["User", "Admin"]
+        },
+        "Login": {
+            "token": "123JUG123123"
+        }
+    },
+    "ApiKey": {
+        "List": [{
+            "api_key_id":1,
+            "label":"label",
+            "api_key":"ABCDEFGHIJKLMNOPQRSTUVWXYZabc",
+            "masked_api_key":"*******************BHCAS"
+        }],
+        "Single": {
+            "api_key_id":1,
+            "label":"label",
+            "api_key":"ABCDEFGHIJKLMNOPQRSTUVWXYZabc",
+            "masked_api_key":"*******************BHCAS"
+        }
+    },
+    "Blockchain": {
+        "List":[{
+            "blockchain_id":1,
+            "blockchain_name":"ETH",
+            "height":123456,
+            "network":"testnet",
+            "version":"2.0.0",
+            "location":"singapura"
+        }],
+        "Single": {
+            "blockchain_id":1,
+            "blockchain_name":"ETH",
+            "height":123456,
+            "network":"testnet",
+            "version":"2.0.0",
+            "location":"singapura"
+        }
+    },
+    "Blog": {
+        "Categories":[{
+            "id": "AB234BSA13",
+            "name": "name_content",
+            "tag": "tags",
+            "description": "description",
+            "image_url": "images_link",
+            "visibility": true,
+            "meta_desctiption": "description",
+            "url": "https://url.com"
+        }],
+        "Content": [{
+            "id": "njsoiajisdas-123123",
+            "uuid": "sawdasdawd-ssawdas-awdasad",
+            "snippet": "snippet",
+            "tag": "Tags",
+            "html": "<h2>Title<h2>",
+            "visibility": true,
+            "image_url": "https://url.com",
+            "published_at": "23-05-2023 00:00:00",
+            "url": "https://url.com",
+            "reading_time": 23,
+            "excerpt": "examples",
+            "author": ["author"],
+            "meta": {
+                "meta_title": "meta_title",
+                "meta_description": "meta_description"
+            }
+        }]
+    },
+    "Invoices":{
+        "List": [{
+            "invoice_id": 1234,
+            "package_id": 1234,
+            "payment_method_id": 1234,
+            "payment_due_date": "23-05-2023 00:00:00",
+            "payment_due": "23-05-2023 00:00:00",
+            "total_amount": 1,
+            "status": ["paid", "unpaid", "overdue"]
+        }],
+        "Single":{
+            "invoice_id": 1234,
+            "package_id": 1234,
+            "payment_method_id": 1234,
+            "payment_due_date": "23-05-2023 00:00:00",
+            "payment_due": "23-05-2023 00:00:00",
+            "total_amount": 1,
+            "status": ["paid", "unpaid", "overdue"]
+        }
+    },
+    "NodeBlockchain": {
+        "List": [{
+            "blockchain_id": 1,
+            "network": ["testnet", "mainnet"],
+            "version": ["1.0.0", "2.0.0"],
+            "location": ["singapura", "indonesia"],
+            "api_interface": [{
+                "type": "testnet",
+                "interface": "JSON-RPC",
+                "connection_speed": "height",
+                "documentation_link": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+                "endpoint": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+            }]
+        }],
+        "Single": {
+            "blockchain_id": 1,
+            "network": ["testnet", "mainnet"],
+            "version": ["1.0.0", "2.0.0"],
+            "location": ["singapura", "indonesia"],
+            "api_interface": [{
+                "type": "testnet",
+                "interface": "JSON-RPC",
+                "connection_speed": "height",
+                "documentation_link": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+                "endpoint": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+            }]
+        }
+    },
+    "Package": {
+        "List": [{
+            "package_id": 1,
+            "name": "Gold",
+            "description": "Gold Package",
+            "request_per_second_limit": 1000,
+            "request_per_day_limit": 10000,
+            "request_per_month_limit": 10000000,
+            "price": 150000.00,
+            "is_trial": false
+        }],
+        "Single": {
+            "package_id": 1,
+            "name": "Gold",
+            "description": "Gold Package",
+            "request_per_second_limit": 1000,
+            "request_per_day_limit": 10000,
+            "request_per_month_limit": 10000000,
+            "price": 150000.00,
+            "is_trial": false
+        }
+    },
+    "PaymentMethod": {
+        "List": [{
+            "id": 1,
+            "name": "BCA_VA",
+            "description": "description",
+            "is_crypto": false,
+            "gateway": "https://api.xendit.co"
+        }],
+        "Single": {
+            "id": 1,
+            "name": "BCA_VA",
+            "description": "description",
+            "is_crypto": false,
+            "gateway": "https://api.xendit.co"
+        }
+    },
+    "Subscription": {
+        "CurrentPlan":{
+            "package_id": 1,
+            "name": "Gold",
+            "duration": 1520000,
+            "price": 15000.00,
+            "start_date": "23-05-2023 00:00:00",
+            "end_date": "23-05-2023 00:00:00"
+        },
+        "ListPlan": [{
+            "package_id": 1,
+            "name": "Gold",
+            "price": 15000.00,
+            "start_date": "23-05-2023 00:00:00",
+            "end_date": "23-05-2023 00:00:00"
+        }]
+    }
+}

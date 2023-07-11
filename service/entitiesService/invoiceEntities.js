@@ -28,7 +28,6 @@ class Invoices {
     }
 
     getCreateInoviceResponse(invoice){
-        console.log(invoice);
         return {
             invoice_id: this.data.invoice_id,
             package_id: invoice.data.package_id,

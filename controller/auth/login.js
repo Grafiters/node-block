@@ -9,6 +9,9 @@ const { generateToken } = require("../../service/jwtService");
 const totpService = require('../../service/totpService');
 
 exports.userLogin = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Login Form to user without google credentials"
+
     const { email, password } = req.body;
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){

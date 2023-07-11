@@ -21,7 +21,6 @@ class User {
 
   getUserRegisEntities(){
     return {
-      username: this.username,
       email: this.email,
       google_id: this.google_id,
       role: this.role
