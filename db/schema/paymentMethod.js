@@ -12,7 +12,10 @@ function bodyPaymentMethod(req, res, next){
         gateway: Joi.string().required(),
     })
 
-    validation.validateRequest(req, next, schema, res)
+    const request = validation.validateRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     next()
 }
@@ -22,7 +25,10 @@ async function paramsPaymentMethod(req, res, next){
         package_id: Joi.number().integer().required(),
     })
 
-    validation.validateParamsRequest(req, next, paramsSchema, res)
+    const request = validation.validateParamsRequest(req, next, paramsSchema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
     const blockchain = await model.PaymentMethods.findOne({
         where: {
             id: req.params.id

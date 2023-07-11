@@ -13,7 +13,10 @@ function bodyBlockchain(req, res, next){
         location: Joi.string().required()
     })
 
-    validation.validateRequest(req, next, schema, res)
+    const request = validation.validateRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
     next()
 }
 
@@ -22,7 +25,11 @@ async function paramsBlockchain(req, res, next){
         blockchain_id: Joi.number().integer().required(),
     })
 
-    validation.validateParamsRequest(req, next, paramsSchema, res)
+    const request = validation.validateParamsRequest(req, next, paramsSchema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
+    
     const blockchain = await model.Blockchain.findOne({
         where: {
             id: req.params.blockchain_id

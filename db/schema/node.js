@@ -13,7 +13,11 @@ async function requestCreateSchema(req, res, next){
         documentation_link: Joi.string().required()
     });
 
-    validation.validateRequest(req, next, schema, res);    
+    const request = validation.validateRequest(req, next, schema, res);    
+    if(!request.status){
+        return res.status(422).send(request)
+    }
+
     const blockchain = await model.Blockchain.findOne({where: {id: req.body.blockchain_id}})
     if(!blockchain){
         return res.status(422).send({
@@ -29,14 +33,18 @@ async function requestParams(req, res, next){
     const paramsSchema = Joi.object({
         node_id: Joi.number().integer().required(),
     })
-    validation.validateParamsRequest(req, next, paramsSchema, res)
+    const request = validation.validateParamsRequest(req, next, paramsSchema, res)
+
+    if(!request.status){
+        return res.status(422).send(request)
+    }
     const node = await model.Node.findOne({
         where: {
             id: req.params.node_id
         }
     })
 
-    if(!blockchain){
+    if(!node){
         return res.status(422).json({
             status: false,
             message: 'Node Blockchain ID tidak ditemukan'

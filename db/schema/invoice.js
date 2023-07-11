@@ -10,7 +10,10 @@ async function bodyInvoice(req, res, next){
         payment_method_id: Joi.number().integer().required()
     });
 
-    validation.validateRequest(req, next, schema, res);
+    const request = validation.validateRequest(req, next, schema, res);
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     const packageData = await model.Packages.findOne({where: {id: req.body.package_id}})
     const payment_method = await model.PaymentMethods.findOne({where: {id: req.body.payment_method_id}})
@@ -37,7 +40,10 @@ async function paramsInvoice(req, res, next){
         id: Joi.number().integer().required()
     })
 
-    validation.validateParamsRequest(req, next, schema, res)
+    const request = validation.validateParamsRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     const invoice = await model.Inovices.findOne({
         where: {

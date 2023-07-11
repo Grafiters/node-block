@@ -9,7 +9,10 @@ function bodyApiKeys(req, res, next){
         label: Joi.string().required(),
     })
 
-    validation.validateRequest(req, next, schema, res)
+    const request = validation.validateRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     next()
 }
@@ -22,7 +25,11 @@ function bodyStatitic(req, res, next){
         end_date: Joi.date().required(),
     })
 
-    validation.validateQueryRequest(req, next, schema, res)
+    const request = validation.validateQueryRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
+
     if(req.query.api_key){
         const api_keys = model.ApiKeys.findOne({
             where: {
@@ -38,7 +45,7 @@ function bodyStatitic(req, res, next){
         }
     }
 
-    next(0)
+    next()
 }
 
 async function paramsApiKeys(req, res, next){
@@ -46,7 +53,10 @@ async function paramsApiKeys(req, res, next){
         api_key: Joi.number().integer().required()
     })
 
-    validation.validateParamsRequest(req, next, schema, res)
+    const request = validation.validateParamsRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     const invoice = await model.ApiKeys.findOne({
         where: {

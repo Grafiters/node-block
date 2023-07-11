@@ -9,7 +9,10 @@ async function paramsSubcribe(req, res, next){
         subcribe_id: Joi.number().integer().required()
     })
 
-    validation.validateParamsRequest(req, next, schema, res)
+    const request = validation.validateParamsRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     const invoice = await model.UserSubcriptions.findOne({
         where: {

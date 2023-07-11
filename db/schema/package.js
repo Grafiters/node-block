@@ -15,7 +15,10 @@ function bodyPackage(req, res, next){
         is_trial: Joi.boolean().required()
     })
 
-    validation.validateRequest(req, next, schema, res)
+    const request = validation.validateRequest(req, next, schema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
 
     next()
 }
@@ -25,7 +28,10 @@ async function paramsPackage(req, res, next){
         package_id: Joi.number().integer().required(),
     })
 
-    validation.validateParamsRequest(req, next, paramsSchema, res)
+    const request = validation.validateParamsRequest(req, next, paramsSchema, res)
+    if(!request.status){
+        return res.status(422).send(request)
+    }
     const blockchain = await model.Blockchain.findOne({
         where: {
             id: req.params.id
