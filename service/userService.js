@@ -1,5 +1,11 @@
 const model = require("../db/models");
 
+async function getAllUser(){
+    user = await model.User.findAll()
+
+    return user
+}
+
 async function findUserByID(id){
     user = await model.User.findOne({where: {id: id}})
 
@@ -63,15 +69,21 @@ async function updateUserOtpSecretByID(id, otp_secret, enabled) {
         otp_secret: otp_secret,
         otp_enabled: enabled
     }
-    await model.User.update(params, {
-        id: id
+    const update = await model.User.update(params, {
+        where: {
+            id: id
+        }
     }).then(result => {
+        console.log(result);
         if(result == 1){
             return true
         }
+    }).catch(err => {
+        console.log(err);
+        return false;
     })
 
-    return false
+    return update
 }
 
 async function updateUserStatus(id, status) {
@@ -80,7 +92,9 @@ async function updateUserStatus(id, status) {
         email_verified_at: null
     }
     await model.User.update(params, {
-        id: id
+        where: {
+            id: id
+        }
     }).then(result => {
         if(result == 1){
             return true
@@ -124,5 +138,6 @@ module.exports = {
     updateUserStatus,
     getActivityUser,
     getUserByEmail,
-    findUserByID
+    findUserByID,
+    getAllUser
 }

@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require('fs');
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: false})
+const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: true})
 
 const outputFile = './swagger_output.json'
 const endpointsFiles = ['./route/index.js']
@@ -21,12 +21,17 @@ const doc = {
           description: "production"
         }
     ],
+    securityDefinitions: {
+      Bearer: {
+        type: "apiKey",
+        name: "token",
+        in: "header",
+      }
+    },
     basePath: "/api/",
     consumes: ['application/json'],
     produces: ['application/json'],
-    definitions: require('./config/dto/definitions.json')
+    components: require('./config/dto/definitions.json')
 }
-
-console.log(doc);
 
 swaggerAutogen(outputFile, endpointsFiles, doc)

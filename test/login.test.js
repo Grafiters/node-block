@@ -12,6 +12,7 @@ describe('Test the login Without geetest challenge', () => {
       const response = await request(server).post('/api/auth/login').send(params);
 
       userAccessToken = response.body.token
+      console.log(userAccessToken);
       expect(response.status).toBe(201);
       expect(response.body).toBeTruthy();
     });

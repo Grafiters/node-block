@@ -1,31 +1,187 @@
 {
+    "Code":{
+        "Failed":{
+            "type":"object",
+            "properties": {
+                "status": {
+                    "type":"boolean"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "Success":{
+            "type":"object",
+            "properties": {
+                "status": {
+                    "type":"boolean"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
     "User": {
         "Request": {
             "Login": {
                 "type": "object",
                 "properties": {
                     "email": {
+                        "required":true,
                         "type":"string",
                         "examples": "example@example.com"
+                    },
+                    "password": {
+                        "required":true,
+                        "type":"string",
+                        "examples": "Example123!*"
+                    },
+                    "otp_token":{
+                        "type": "integer",
+                        "required":false
+                    },
+                    "captcha":{
+                        "required":true,
+                        "type":"object",
+                        "properties":{
+                            "geetestChallenge":{
+                                "type":"string"
+                            },
+                            "geetestValidate":{
+                                "type":"string"
+                            },
+                            "geetestSeccode":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            },
+            "LoginGoogle":{
+                "type":"object",
+                "properties":{
+                    "google_id":{
+                        "required":true,
+                        "type":"string"
                     }
                 }
             },
             "Register":{
-                
+                "type":"object",
+                "properties":{
+                    "email": {
+                        "type":"string",
+                        "required":true,
+                        "examples":"example@example.com"
+                    },
+                    "password":{
+                        "type":"string",
+                        "examples":"Example123!*"
+                    },
+                    "captcha":{
+                        "required":true,
+                        "type":"object",
+                        "properties":{
+                            "geetestChallenge":{
+                                "type":"string"
+                            },
+                            "geetestValidate":{
+                                "type":"string"
+                            },
+                            "geetestSeccode":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            },
+            "ActivationToken":{
+                "type":"string",
+                "properties":{
+                    "activation_token": {
+                        "type":"string",
+                        "required": true,
+                        "examples":"https://www.nusawrapper.com/account/activation_token/123456"
+                    }
+                }
+            },
+            "ResendActivationEmail":{
+                "type":"string",
+                "properties":{
+                    "activation_token": {
+                        "type":"string",
+                        "required": true,
+                        "examples":"https://www.nusawrapper.com/account/activation_token/123456"
+                    }
+                }
+            },
+            "RegisterWithGoogle": {
+                "type":"object",
+                "properties":{
+                    "email": {
+                        "required":true,
+                        "type":"string"
+                    },
+                    "google_id":{
+                        "required":true,
+                        "type":"string"
+                    }
+                }
+            },
+            "ForgotPassword": {
+                "type":"string",
+                "properties":{
+                    "email": {
+                        "type": "string",
+                        "examples": "example@example.com"
+                    }
+                }
+            },
+            "ResetPassword": {
+                "type":"string",
+                "properties":{
+                    "email": {
+                        "type": "string",
+                        "examples": "example@example.com"
+                    },
+                    "reset_token": {
+                        "type":"integer",
+                        "examples":123456
+                    },
+                    "new_password": {
+                        "type":"string"
+                    }
+                }
+            },
+            "ChangePassword": {
+                "type":"object",
+                "properties":{
+                    "old_password": {
+                        "type": "string"
+                    },
+                    "new_password": {
+                        "type":"string"
+                    }
+                }
             }
         },
         "Response":{
-            "email":"example@example.com",
-            "role":["User", "Admin"],
-            "otp_enabled":false
-        },
-        "Register":{
-            "email":"example@example.com",
-            "google_id":"123JUG123123",
-            "role":["User", "Admin"]
+            "type":"object",
+            "properties":{
+                "email":{"type":"string"},
+                "role":{"type":"string"},
+                "otp_enabled":{"type":"boolean"}
+            }
         },
         "Login": {
-            "token": "123JUG123123"
+            "type":"object",
+            "properties":{
+                "token": {
+                    "type":"string"
+                }
+            }
         }
     },
     "ApiKey": {

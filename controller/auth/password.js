@@ -7,6 +7,30 @@ const { registerMailer, resendRegisterMailer } = require("../../service/mailerSe
 const model = require("../../db/models");
 
 exports.forgotPassword = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Register Form to user without google credentials"
+
+    /*    #swagger.parameters['password'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/ForgotPassword' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/Code/Success' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     const { email } = req.body
 
     const token = generateTokenEmail(5)
@@ -23,7 +47,7 @@ exports.forgotPassword = async (req, res) => {
 
         const sendMailer = await resendRegisterMailer(email, 'Rest Password')
         
-        return res.status(200).json({
+        return res.status(201).json({
             status: true,
             message: 'Email pemulihan kata sandi berhasil dikirim. Silakan cek email Anda.'
         })
@@ -37,6 +61,29 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.resetPassword = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Register Form to user without google credentials"
+
+    /*    #swagger.parameters['password'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/ResetPassword' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/Code/Success' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
     const { email, reset_token, new_password } = req.body
 
     const data = await validateEmailRegister(email);

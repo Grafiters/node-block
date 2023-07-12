@@ -16,12 +16,100 @@
     }
   ],
   "paths": {
-    "/monitored-addresses/": {
+    "/admin/users/": {
       "get": {
         "tags": [
-          "User"
+          "Admin"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "User Akses",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/users/update/{user_id}": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "User Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp_enabled",
+            "required": true,
+            "schema": {
+              "type": "boolean",
+              "example": true
+            },
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otp_enabled": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monitored-addresses/": {
+      "get": {
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -48,15 +136,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-addresses/add": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -82,16 +176,39 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "example": "any"
+                  },
+                  "notification_method": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/monitored-addresses/history": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -118,15 +235,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-addresses/{address_id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "address_id",
@@ -161,15 +284,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-addresses/delete/{address_id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "address_id",
@@ -204,15 +333,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-event/": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -239,15 +374,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-event/add": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -273,16 +414,42 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contract_address": {
+                    "example": "any"
+                  },
+                  "event_name": {
+                    "example": "any"
+                  },
+                  "notification_method": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/monitored-event/{address_id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "address_id",
@@ -317,15 +484,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-event/history": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -352,15 +525,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/monitored-event/delete/{address_id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "address_id",
@@ -395,7 +574,16 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/payment-method/": {
@@ -405,10 +593,22 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/payment-method/{id}": {
@@ -428,18 +628,27 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/payment-method/add": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "token",
@@ -459,15 +668,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/payment-method/edit/{id}": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -495,15 +710,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/payment-method/delete/{id}": {
       "delete": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -531,7 +752,16 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blockchain/": {
@@ -541,33 +771,33 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blockchain/add": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "token",
             "in": "header",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "form",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Form/Blockchain"
             }
           }
         ],
@@ -581,15 +811,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blockchain/edit/{blockchain_id}": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "blockchain_id",
@@ -605,15 +841,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "form",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Form/Blockchain"
-            }
           }
         ],
         "responses": {
@@ -626,15 +853,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blockchain/delete/{blockchain_id}": {
       "delete": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "blockchain_id",
@@ -662,7 +895,16 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/node/": {
@@ -694,15 +936,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/node/add": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -729,15 +977,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/node/edit/{node_id}": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "node_id",
@@ -771,16 +1025,36 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "blockchain_id": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/node/delete/{node_id}": {
       "delete": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "node_id",
@@ -815,15 +1089,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/subcribe/": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -850,15 +1130,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/subcribe/{subcribe_id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "subcribe_id",
@@ -893,15 +1179,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/api-keys/": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -928,15 +1220,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/api-keys/generate": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -963,15 +1261,35 @@
           "422": {
             "description": "Unprocessable Entity"
           }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/api-keys/delete/{api_key_id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "api_key_id",
@@ -1006,7 +1324,16 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/api-keys/usage-statistic": {
@@ -1045,15 +1372,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/api-keys/usage-statistic/chart": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1108,15 +1441,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/api-keys/usage-statistic/{api_key}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "api_key",
@@ -1158,15 +1497,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/invoice/": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1196,15 +1541,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/invoice/{id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1239,15 +1590,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/invoice/create": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1262,15 +1619,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "form",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Form/Invoice"
-            }
           }
         ],
         "responses": {
@@ -1283,15 +1631,38 @@
           "422": {
             "description": "Unprocessable Entity"
           }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "package_id": {
+                    "example": "any"
+                  },
+                  "payment_method_id": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/invoice/edit/{id}/{status}/{user_id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1322,18 +1693,27 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/invoice/delete/{id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1368,42 +1748,46 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/package/": {
       "get": {
-        "tags": [
-          "Package"
-        ],
-        "description": "Endpoint to sign in a specific user",
-        "parameters": [
-          {
-            "name": "query",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Filter/Package"
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/package/{id}": {
       "get": {
-        "tags": [
-          "Package"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1418,33 +1802,33 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/package/add": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "token",
             "in": "header",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "package",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Form/Package"
             }
           }
         ],
@@ -1458,15 +1842,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/package/edit/{id}": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1482,15 +1872,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "package",
-            "in": "params",
-            "description": "Filter parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Form/Package"
-            }
           }
         ],
         "responses": {
@@ -1503,15 +1884,21 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/package/delete/{id}": {
       "delete": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1539,7 +1926,16 @@
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/geetest/register": {
@@ -1549,10 +1945,22 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/geetest/verify": {
@@ -1562,18 +1970,47 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "geetestChallenge": {
+                    "example": "any"
+                  },
+                  "geetestValidate": {
+                    "example": "any"
+                  },
+                  "geetestSeccode": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/blog/": {
       "get": {
-        "tags": [
-          "Blog"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "limit",
@@ -1594,18 +2031,27 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blog/categories": {
       "get": {
-        "tags": [
-          "Blog"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "limit",
@@ -1626,18 +2072,27 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blog/{id}": {
       "get": {
-        "tags": [
-          "Blog"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -1652,18 +2107,27 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/blog/search": {
       "post": {
-        "tags": [
-          "Blog"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "limit",
@@ -1684,8 +2148,34 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1695,7 +2185,8 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Login Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1716,13 +2207,37 @@
           "200": {
             "description": "OK"
           },
+          "201": {
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/User/Response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/User/Response"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/user/change-password": {
@@ -1730,7 +2245,8 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Login Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1749,16 +2265,81 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/User/Login"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/User/Login"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1768,7 +2349,8 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Login Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1798,7 +2380,16 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/user/enable-2fa": {
@@ -1806,7 +2397,8 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Login Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1835,16 +2427,39 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otp_secret": {
+                    "example": "any"
+                  },
+                  "otp_code": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/user/verify-2fa": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1873,16 +2488,36 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otp_code": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/user/disable-2fa": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1912,15 +2547,35 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otp_code": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/user/disable-account": {
       "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1947,15 +2602,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/user/current-plan": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -1985,15 +2646,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/user/my-activity": {
       "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
+        "description": "",
         "parameters": [
           {
             "name": "x-api-key",
@@ -2020,7 +2687,16 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/auth/login": {
@@ -2028,238 +2704,103 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Login Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "login",
             "in": "body",
-            "description": "Login Form.",
-            "required": true,
+            "description": "Login form user.",
             "schema": {
-              "$ref": "#/components/schemas/Auth/Login"
-            },
-            "examples": {
-              "example": {
-                "$ref": "#/components/examples/Login"
-              }
+              "$ref": "#/components/User/Request/Login"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Login",
+            "description": "Example response Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Login"
+                  "$ref": "#/components/User/Login"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Login"
+                  "$ref": "#/components/User/Login"
                 }
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
-            "description": "Login Error",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "geetest": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid Geetest challenge"
-                        }
-                      }
-                    },
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Email tidak valid",
-                            "password kurang dari 8 karakter",
-                            "Login gagal. Email atau password tidak valid."
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "twoFactor": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "array",
-                          "example": [
-                            "Missing otp token",
-                            "invalid otp token"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "geetest": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid Geetest challenge"
-                        }
-                      }
-                    },
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Email tidak valid",
-                            "password kurang dari 8 karakter",
-                            "Login gagal. Email atau password tidak valid."
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "twoFactor": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "array",
-                          "example": [
-                            "Missing otp token",
-                            "invalid otp token"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               }
             }
           },
           "500": {
-            "description": "Login",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
                   },
-                  "xml": {
-                    "name": "main"
+                  "password": {
+                    "example": "any"
+                  },
+                  "captcha": {
+                    "example": "any"
+                  },
+                  "otp_token": {
+                    "example": "any"
+                  },
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
                   }
                 }
               }
@@ -2273,200 +2814,91 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Register Form to user without google credentials",
+        "description": "",
         "parameters": [
           {
             "name": "register",
             "in": "body",
-            "description": "Register Form.",
-            "required": true,
+            "description": "Login form user.",
             "schema": {
-              "$ref": "#/components/schemas/Auth/Register"
-            },
-            "examples": {
-              "example": {
-                "$ref": "#/components/examples/Login"
-              }
+              "$ref": "#/components/User/Request/Register"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Login",
+            "description": "Example response Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Register"
+                  "$ref": "#/components/User/Response"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Register"
+                  "$ref": "#/components/User/Response"
                 }
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
-            "description": "Login Error",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "geetest": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid Geetest challenge"
-                        }
-                      }
-                    },
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Email tidak valid",
-                            "password kurang dari 8 karakter",
-                            "Login gagal. Email atau password tidak valid."
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "geetest": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid Geetest challenge"
-                        }
-                      }
-                    },
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Email tidak valid",
-                            "password kurang dari 8 karakter",
-                            "Login gagal. Email atau password tidak valid."
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               }
             }
           },
           "500": {
-            "description": "Login",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
                   },
-                  "xml": {
-                    "name": "main"
+                  "password": {
+                    "example": "any"
+                  },
+                  "captcha": {
+                    "example": "any"
                   }
                 }
               }
@@ -2480,218 +2912,85 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
-        "parameters": [
-          {
-            "name": "Login Google",
-            "in": "body",
-            "description": "Login Form.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "google_id": {
-                  "type": "object",
-                  "properties": {
-                    "require": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        ],
+        "summary": "Login Form to user with google credentials",
+        "description": "",
+        "parameters": [],
         "responses": {
           "201": {
-            "description": "Login",
+            "description": "Example response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Login"
+                  "$ref": "#/components/User/Login"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Login"
+                  "$ref": "#/components/User/Login"
                 }
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "422": {
-            "description": "Login Error",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Akun google belum terdaftar pada system"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "twoFactor": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "array",
-                          "example": [
-                            "Missing otp token",
-                            "invalid otp token"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "akun": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Kesalahan validasi"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "example": [
-                            "Akun google belum terdaftar pada system"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "twoFactor": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "array",
-                          "example": [
-                            "Missing otp token",
-                            "invalid otp token"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "otherValidation": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
-                        }
-                      }
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               }
             }
           },
           "500": {
-            "description": "Login",
+            "description": "Example response failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
+                  "$ref": "#/components/Code/Failed"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
-                    }
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otp_token": {
+                    "example": "any"
                   },
-                  "xml": {
-                    "name": "main"
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
                   }
                 }
               }
@@ -2705,16 +3004,80 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Register Form to user with google credentials",
+        "description": "",
+        "parameters": [],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/User/Response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/User/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2724,7 +3087,8 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Activation Email user",
+        "description": "",
         "parameters": [
           {
             "name": "activation_token",
@@ -2733,19 +3097,63 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/ActivationToken"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/auth/{email}/resend": {
@@ -2753,7 +3161,8 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Resend activation code via email",
+        "description": "",
         "parameters": [
           {
             "name": "email",
@@ -2762,19 +3171,63 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/ResendActivationEmail"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     },
     "/auth/forgot-password": {
@@ -2782,16 +3235,98 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Register Form to user without google credentials",
+        "description": "",
+        "parameters": [
+          {
+            "name": "password",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/ForgotPassword"
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2801,247 +3336,173 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to sign in a specific user",
+        "summary": "Register Form to user without google credentials",
+        "description": "",
+        "parameters": [
+          {
+            "name": "password",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/ResetPassword"
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Example response Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Example response failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/Code/Failed"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "new_password": {
+                    "example": "any"
+                  },
+                  "in": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "schema": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   },
   "components": {
-    "schemas": {
-      "Login": {
+    "Code": {
+      "Failed": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
+          "status": {
+            "type": "boolean"
           },
-          "value": {
-            "type": "object",
-            "properties": {
-              "status": {
-                "type": "string",
-                "example": "true"
-              },
-              "message": {
-                "type": "string",
-                "example": "Login successful"
-              },
-              "token": {
-                "type": "string",
-                "example": "<string>"
-              }
-            }
+          "message": {
+            "type": "string"
           }
-        },
-        "xml": {
-          "name": "Login"
         }
       },
-      "Register": {
+      "Success": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
+          "status": {
+            "type": "boolean"
           },
-          "value": {
-            "type": "object",
-            "properties": {
-              "status": {
-                "type": "string",
-                "example": "true"
-              },
-              "message": {
-                "type": "string",
-                "example": "Registrasi berhasil. Silakan periksa email Anda untuk verifikasi."
-              },
-              "user": {
-                "xml": {
-                  "name": "user"
-                },
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
-        "xml": {
-          "name": "Register"
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "value": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "example": "example@example.com"
-              },
-              "role": {
-                "type": "string",
-                "example": "admin/user/developer"
-              },
-              "otp_enabled": {
-                "type": "string",
-                "example": "true/false"
-              }
-            }
-          },
-          "summary": {
-            "type": "string",
-            "example": "sample of user data"
-          }
-        },
-        "xml": {
-          "name": "User"
-        }
-      },
-      "Form": {
-        "type": "object",
-        "Package": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "require": true,
-              "type": "string"
-            },
-            "is_trial": {
-              "require": true,
-              "type": "string"
-            },
-            "description": {
-              "require": true,
-              "type": "string"
-            },
-            "request_per_second_limit": {
-              "require": true,
-              "type": "integer"
-            },
-            "request_per_day_limit": {
-              "require": true,
-              "type": "integer"
-            },
-            "request_per_month_limit": {
-              "require": true,
-              "type": "integer"
-            },
-            "price": {
-              "require": true,
-              "type": "number"
-            },
-            "trial_duration": {
-              "require": true,
-              "type": "integer"
-            },
-            "trial_request_limit": {
-              "require": true,
-              "type": "integer"
-            }
-          }
-        },
-        "Blockchain": {
-          "type": "object",
-          "properties": {
-            "blockchain_name": {
-              "type": "string",
-              "require": true
-            },
-            "height": {
-              "type": "integer",
-              "require": true
-            },
-            "network": {
-              "type": "string",
-              "require": true
-            },
-            "version": {
-              "type": "string",
-              "require": true
-            },
-            "location": {
-              "type": "string",
-              "require": true
-            }
-          }
-        },
-        "Invoice": {
-          "type": "object",
-          "properties": {
-            "package_id": {
-              "type": "integer",
-              "require": true
-            },
-            "payment_method_id": {
-              "type": "integer",
-              "require": true
-            }
+          "message": {
+            "type": "string"
           }
         }
-      },
-      "Filter": {
-        "Package": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "require": false,
-              "type": "string"
-            },
-            "is_trial": {
-              "require": false,
-              "type": "string"
-            }
-          }
-        }
-      },
-      "Auth": {
-        "type": "object",
+      }
+    },
+    "User": {
+      "Request": {
         "Login": {
           "type": "object",
           "properties": {
             "email": {
-              "require": true,
-              "type": "string"
+              "required": true,
+              "type": "string",
+              "examples": "example@example.com"
             },
             "password": {
-              "require": true,
-              "type": "string"
+              "required": true,
+              "type": "string",
+              "examples": "Example123!*"
             },
             "otp_token": {
-              "require": false,
-              "type": "integer"
+              "type": "integer",
+              "required": false
             },
             "captcha": {
-              "require": false,
+              "required": true,
               "type": "object",
               "properties": {
                 "geetestChallenge": {
-                  "require": true,
                   "type": "string"
                 },
                 "geetestValidate": {
-                  "require": true,
                   "type": "string"
                 },
                 "geetestSeccode": {
-                  "require": true,
                   "type": "string"
                 }
               }
+            }
+          }
+        },
+        "LoginGoogle": {
+          "type": "object",
+          "properties": {
+            "google_id": {
+              "required": true,
+              "type": "string"
             }
           }
         },
@@ -3049,41 +3510,344 @@
           "type": "object",
           "properties": {
             "email": {
-              "require": true,
-              "type": "string"
+              "type": "string",
+              "required": true,
+              "examples": "example@example.com"
             },
             "password": {
-              "require": true,
-              "type": "string"
+              "type": "string",
+              "examples": "Example123!*"
             },
             "captcha": {
-              "require": false,
+              "required": true,
               "type": "object",
               "properties": {
                 "geetestChallenge": {
-                  "require": true,
                   "type": "string"
                 },
                 "geetestValidate": {
-                  "require": true,
                   "type": "string"
                 },
                 "geetestSeccode": {
-                  "require": true,
                   "type": "string"
                 }
               }
             }
           }
+        },
+        "ActivationToken": {
+          "type": "string",
+          "properties": {
+            "activation_token": {
+              "type": "string",
+              "required": true,
+              "examples": "https://www.nusawrapper.com/account/activation_token/123456"
+            }
+          }
+        },
+        "ResendActivationEmail": {
+          "type": "string",
+          "properties": {
+            "activation_token": {
+              "type": "string",
+              "required": true,
+              "examples": "https://www.nusawrapper.com/account/activation_token/123456"
+            }
+          }
+        },
+        "RegisterWithGoogle": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "required": true,
+              "type": "string"
+            },
+            "google_id": {
+              "required": true,
+              "type": "string"
+            }
+          }
+        },
+        "ForgotPassword": {
+          "type": "string",
+          "properties": {
+            "email": {
+              "type": "string",
+              "examples": "example@example.com"
+            }
+          }
+        },
+        "ResetPassword": {
+          "type": "string",
+          "properties": {
+            "email": {
+              "type": "string",
+              "examples": "example@example.com"
+            },
+            "reset_token": {
+              "type": "integer",
+              "examples": 123456
+            },
+            "new_password": {
+              "type": "string"
+            }
+          }
+        },
+        "ChangePassword": {
+          "type": "object",
+          "properties": {
+            "old_password": {
+              "type": "string"
+            },
+            "new_password": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "otp_enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
         }
       }
     },
-    "examples": {
-      "Login": {
-        "value": {
-          "email": "example@example.com",
-          "password": "example"
+    "ApiKey": {
+      "List": [
+        {
+          "api_key_id": 1,
+          "label": "label",
+          "api_key": "ABCDEFGHIJKLMNOPQRSTUVWXYZabc",
+          "masked_api_key": "*******************BHCAS"
         }
+      ],
+      "Single": {
+        "api_key_id": 1,
+        "label": "label",
+        "api_key": "ABCDEFGHIJKLMNOPQRSTUVWXYZabc",
+        "masked_api_key": "*******************BHCAS"
+      }
+    },
+    "Blockchain": {
+      "List": [
+        {
+          "blockchain_id": 1,
+          "blockchain_name": "ETH",
+          "height": 123456,
+          "network": "testnet",
+          "version": "2.0.0",
+          "location": "singapura"
+        }
+      ],
+      "Single": {
+        "blockchain_id": 1,
+        "blockchain_name": "ETH",
+        "height": 123456,
+        "network": "testnet",
+        "version": "2.0.0",
+        "location": "singapura"
+      }
+    },
+    "Blog": {
+      "Categories": [
+        {
+          "id": "AB234BSA13",
+          "name": "name_content",
+          "tag": "tags",
+          "description": "description",
+          "image_url": "images_link",
+          "visibility": true,
+          "meta_desctiption": "description",
+          "url": "https://url.com"
+        }
+      ],
+      "Content": [
+        {
+          "id": "njsoiajisdas-123123",
+          "uuid": "sawdasdawd-ssawdas-awdasad",
+          "snippet": "snippet",
+          "tag": "Tags",
+          "html": "<h2>Title<h2>",
+          "visibility": true,
+          "image_url": "https://url.com",
+          "published_at": "23-05-2023 00:00:00",
+          "url": "https://url.com",
+          "reading_time": 23,
+          "excerpt": "examples",
+          "author": [
+            "author"
+          ],
+          "meta": {
+            "meta_title": "meta_title",
+            "meta_description": "meta_description"
+          }
+        }
+      ]
+    },
+    "Invoices": {
+      "List": [
+        {
+          "invoice_id": 1234,
+          "package_id": 1234,
+          "payment_method_id": 1234,
+          "payment_due_date": "23-05-2023 00:00:00",
+          "payment_due": "23-05-2023 00:00:00",
+          "total_amount": 1,
+          "status": [
+            "paid",
+            "unpaid",
+            "overdue"
+          ]
+        }
+      ],
+      "Single": {
+        "invoice_id": 1234,
+        "package_id": 1234,
+        "payment_method_id": 1234,
+        "payment_due_date": "23-05-2023 00:00:00",
+        "payment_due": "23-05-2023 00:00:00",
+        "total_amount": 1,
+        "status": [
+          "paid",
+          "unpaid",
+          "overdue"
+        ]
+      }
+    },
+    "NodeBlockchain": {
+      "List": [
+        {
+          "blockchain_id": 1,
+          "network": [
+            "testnet",
+            "mainnet"
+          ],
+          "version": [
+            "1.0.0",
+            "2.0.0"
+          ],
+          "location": [
+            "singapura",
+            "indonesia"
+          ],
+          "api_interface": [
+            {
+              "type": "testnet",
+              "interface": "JSON-RPC",
+              "connection_speed": "height",
+              "documentation_link": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+              "endpoint": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+            }
+          ]
+        }
+      ],
+      "Single": {
+        "blockchain_id": 1,
+        "network": [
+          "testnet",
+          "mainnet"
+        ],
+        "version": [
+          "1.0.0",
+          "2.0.0"
+        ],
+        "location": [
+          "singapura",
+          "indonesia"
+        ],
+        "api_interface": [
+          {
+            "type": "testnet",
+            "interface": "JSON-RPC",
+            "connection_speed": "height",
+            "documentation_link": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+            "endpoint": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+          }
+        ]
+      }
+    },
+    "Package": {
+      "List": [
+        {
+          "package_id": 1,
+          "name": "Gold",
+          "description": "Gold Package",
+          "request_per_second_limit": 1000,
+          "request_per_day_limit": 10000,
+          "request_per_month_limit": 10000000,
+          "price": 150000,
+          "is_trial": false
+        }
+      ],
+      "Single": {
+        "package_id": 1,
+        "name": "Gold",
+        "description": "Gold Package",
+        "request_per_second_limit": 1000,
+        "request_per_day_limit": 10000,
+        "request_per_month_limit": 10000000,
+        "price": 150000,
+        "is_trial": false
+      }
+    },
+    "PaymentMethod": {
+      "List": [
+        {
+          "id": 1,
+          "name": "BCA_VA",
+          "description": "description",
+          "is_crypto": false,
+          "gateway": "https://api.xendit.co"
+        }
+      ],
+      "Single": {
+        "id": 1,
+        "name": "BCA_VA",
+        "description": "description",
+        "is_crypto": false,
+        "gateway": "https://api.xendit.co"
+      }
+    },
+    "Subscription": {
+      "CurrentPlan": {
+        "package_id": 1,
+        "name": "Gold",
+        "duration": 1520000,
+        "price": 15000,
+        "start_date": "23-05-2023 00:00:00",
+        "end_date": "23-05-2023 00:00:00"
+      },
+      "ListPlan": [
+        {
+          "package_id": 1,
+          "name": "Gold",
+          "price": 15000,
+          "start_date": "23-05-2023 00:00:00",
+          "end_date": "23-05-2023 00:00:00"
+        }
+      ]
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "token",
+        "in": "header"
       }
     }
   }

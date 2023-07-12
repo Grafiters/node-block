@@ -8,6 +8,13 @@ const totpService = require('../service/totpService.js');
 const validationService = require("../service/validationService");
 
 exports.userProfile = async (req, res) => {
+    // #swagger.tags = ['User']
+    // #swagger.summary = "Login Form to user without google credentials"
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/User/Response' }
+    } */
     try {
         const user = await userService.findUserByID(req.auth.user.id)
 
@@ -26,6 +33,29 @@ exports.userProfile = async (req, res) => {
 }
 
 exports.changePassword = async (req, res) => {
+    // #swagger.tags = ['User']
+    // #swagger.summary = "Login Form to user without google credentials"
+
+    /*    #swagger.parameters['password'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/ChangePassword' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/User/Login' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Success' }
+    } */
     const {old_password, new_password} = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
 
@@ -55,10 +85,11 @@ exports.changePassword = async (req, res) => {
 }
 
 exports.toptGenerate = async (req, res) => {
-    const { otp_code} = req.body;
+    // #swagger.tags = ['User']
+    // #swagger.summary = "Login Form to user without google credentials"
+
     const user = await userService.findUserByID(req.auth.user.id)
-    const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);
-    if(validateOtp){
+    if(user.otp_enabled){
         return res.status(422).json({
             status: false,
             message: "two-factor authentication already enabled"
@@ -84,6 +115,9 @@ exports.toptGenerate = async (req, res) => {
 }
 
 exports.enableTwoFactor = async (req, res) => {
+    // #swagger.tags = ['User']
+    // #swagger.summary = "Login Form to user without google credentials"
+
     const { otp_secret, otp_code} = req.body;
     const user = await userService.findUserByID(req.auth.user.id)
     const validateOtp = await totpService.validateOtp(user.otp_secret, otp_code);

@@ -11,6 +11,30 @@ const User = require('../../service/entitiesService/userEntities')
 const model = require("../../db/models");
 
 exports.registerUser = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Register Form to user without google credentials"
+
+    /*    #swagger.parameters['register'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/Register' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/User/Response' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
         const {geetestChallenge, geetestValidate, geetestSeccode} = req.body.captcha;
 
@@ -27,7 +51,6 @@ exports.registerUser = async (req, res) => {
     const token = generateTokenEmail(5)
 
     const params = {
-        username: req.body.username,
         email: req.body.email,
         password_digest: await bcrypt.hash(req.body.password, 10),
         role: 'User',
@@ -65,6 +88,25 @@ exports.registerUser = async (req, res) => {
 }
 
 exports.activationEmail = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Activation Email user"
+
+    /*    #swagger.parameters['register'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/ActivationToken' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/Code/Success' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     const token = req.params.activation_token;
     const user = await getUserByTokenActivation(token)
 
@@ -119,6 +161,24 @@ exports.activationEmail = async (req, res) => {
 }
 
 exports.resendActivationCode = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Resend activation code via email"
+
+    /*    #swagger.parameters['register'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/ResendActivationEmail' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/Code/Success' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
     const { email } = req.params;
     
     const data = await validateEmailRegister(email);
@@ -172,6 +232,25 @@ exports.resendActivationCode = async (req, res) => {
 }
 
 exports.registerWithGoogle = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Register Form to user with google credentials"
+
+    /*    #swagger.parameters['register'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/RegisterWithGoogle' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/User/Response' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     const { google_id, email } = req.body
 
     const token = generateTokenEmail(5)

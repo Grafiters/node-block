@@ -12,6 +12,27 @@ exports.userLogin = async (req, res) => {
     // #swagger.tags = ['Auth']
     // #swagger.summary = "Login Form to user without google credentials"
 
+    /*    #swagger.parameters['login'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/Login' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response Success',
+            schema: { $ref: '#/components/User/Login' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     const { email, password } = req.body;
 
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'development' ){
@@ -108,6 +129,30 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.userLoginGoogle = async (req, res) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.summary = "Login Form to user with google credentials"
+
+    /*    #swagger.parameters['login'] = {
+            in: 'body',
+            description: 'Login form user.',
+            schema: { $ref: '#/components/User/Request/LoginGoogle' }
+    } */
+
+    /* #swagger.responses[201] = {
+            description: 'Example response',
+            schema: { $ref: '#/components/User/Login' }
+    } */
+
+    /* #swagger.responses[422] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
+    /* #swagger.responses[500] = {
+            description: 'Example response failed',
+            schema: { $ref: '#/components/Code/Failed' }
+    } */
+
     const { google_id } = req.body;
     try {
         const result = await getUserByEmailAndGoogleId(google_id)
@@ -147,7 +192,6 @@ exports.userLoginGoogle = async (req, res) => {
         return res.status(201).json({
             status: true,
             message: "Login menggunakan akun Google berhasil.",
-            user: result,
             token: token
         })
     } catch (error) {

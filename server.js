@@ -60,7 +60,7 @@ app
     .use(limiter)
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json());
-
+    
 app.use(`/${process.env.SERVICE}/swagger`, swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(`/${process.env.SERVICE}`, MainRouter)
 

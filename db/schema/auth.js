@@ -55,7 +55,7 @@ function registerSchema(req, res ,next){
     if(!request.status || !params.status){
         const response = request || params
 
-        return response.status(422).send(response)
+        return res.status(422).send(response)
     }
     
     if(process.env.GEETEST_ENABLED && process.env.NODE_ENV == 'production' ){
