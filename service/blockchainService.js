@@ -6,6 +6,16 @@ async function getAllBlcokchainData(){
     return blockchain
 }
 
+async function getAllBlcokchainDataByID(id){
+    const blockchain = await model.Blockchain.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    return blockchain
+}
+
 async function getAllBlcokchainGroupData(){
     const blockchain = await model.Blockchain.findAll({
         attributes: ['blockchain_name'],
@@ -114,6 +124,7 @@ async function getDetailBlockchainByID(id){
 }
 
 module.exports = {
+    getAllBlcokchainDataByID,
     getAllBlcokchainGroupData,
     getBlockchainByName,
     addBlockchainData,

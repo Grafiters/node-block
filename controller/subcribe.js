@@ -12,20 +12,20 @@ exports.getAllSubcribeUser = async (req, res) => {
         const subcribe = await subcribeService.getAllSubcribeUser(params)
         
         if (subcribe.length > 0){
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Berhasil mengambil data subcribe langganan user',
                 data: new userSubcriptionEntities(subcribe).getListPlanUser()
             });
         }else{
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Daftar subcribe langganan tidak ditemukan',
             });
         }
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Terjadi kesalahan pada mengambil data subcribe user, coba beberapa saat lagi',
         });
@@ -41,20 +41,20 @@ exports.getDetailSubcribeUser = async (req, res) => {
         const subcribe = await subcribeService.getUserSubcriptionByParams(params)
         
         if (subcribe.length > 0){
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Berhasil mengambil data subcribe langganan user',
                 data: new userSubcriptionEntities(subcribe).getCurrentPlan()
             });
         }else{
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Daftar subcribe langganan tidak ditemukan',
             });
         }
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Terjadi kesalahan pada mengambil data subcribe user, coba beberapa saat lagi',
         });

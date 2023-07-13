@@ -3,6 +3,34 @@ const model = require('../db/models')
 const xenditService = require('../service/paymentService/xenditService')
 const btcPayService = require('../service/paymentService/btcpayService')
 
+async function getAllInvoice(){
+    try {
+        const invoice = await model.UserSubscriptions.findAll({
+            include: [
+                {
+                    model: model.Packages
+                },
+                {
+                    model: model.Invoices,
+                    as: 'Invoice',
+                    include: [{
+                        model: model.PaymentMethods,
+                        attributes: ["id","name","is_crypto","gateway","description"]
+                    }]
+                },
+                {
+                    model: model.User,
+                    attributes: ['id','email']
+                }
+            ]
+        });
+
+        return invoice
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function getPrevInvoiceUser(user_id){
     try {
         const invoice = await model.UserSubscriptions.findOne({
@@ -38,7 +66,19 @@ async function getAllInvoiceUser(user_id){
         where: {
             user_id: user_id
         },
-        include: [model.Invoices]
+        include: [
+            {
+                model: model.Packages
+            },
+            {
+                model: model.Invoices,
+                as: 'Invoices',
+                include: [{
+                    model: model.PaymentMethods,
+                    attributes: ["id","name","is_crypto","gateway","description"]
+                }]
+            }
+        ]
     })
 
     return invoice
@@ -148,5 +188,6 @@ module.exports = {
     getInvoiceUserByID,
     getAllInvoiceUser,
     deleteInoivceUser,
-    addInvoiceUser
+    addInvoiceUser,
+    getAllInvoice
 }

@@ -1,5 +1,5 @@
-const paymentService = require('../service/paymentMethodService')
-const paymentMethodEntities = require('../service/entitiesService/paymentMethodEntities')
+const paymentService = require('../../service/paymentMethodService')
+const paymentMethodEntities = require('../../service/entitiesService/paymentMethodEntities')
 
 exports.getAllPaymentMethod = async (req, res) => {
     try {
@@ -9,7 +9,7 @@ exports.getAllPaymentMethod = async (req, res) => {
             return res.status(200).send({
                 status: true,
                 message: 'Berhasil mengambil data payment method',
-                data: new paymentMethodEntities(payment).getListPaymentMethod()
+                data: payment
             });
         }else{
             return res.status(200).send({
@@ -33,7 +33,7 @@ exports.getPaymentMethodByID = async (req, res) => {
         return res.status(200).send({
             status: true,
             message: 'Berhasil mengambil data payment method',
-            data: new paymentMethodEntities(payment).getDetailPaymentMethod()
+            data: payment
         });
     } catch (error) {
         console.log(error);
@@ -45,13 +45,28 @@ exports.getPaymentMethodByID = async (req, res) => {
 }
 
 exports.addPaymentMethod = async (req, res) => {
+    /*  #swagger.parameters['payment_method'] = {
+        in: 'formData',
+        schema: {
+            "name": "BCA_VA",
+            "description": "description",
+            "is_crypto": false,
+            "gateway": "https://api.xendit.co"
+        }
+    } */
+    const { name, description, is_crypto, gateway } = req.body
+    const params = {
+        name: name,
+        description: description,
+        is_crypto: is_crypto,
+        gateway: gateway
+    }
     try {
-        const payment = await paymentService.addPaymentMethods(req.body)
+        const payment = await paymentService.addPaymentMethods(params)
 
         return res.status(201).send({
             status: true,
             message: 'Metode pembayaran baru berhasil ditambahkan.',
-            data: new paymentMethodEntities(payment).getDetailPaymentMethod
         });
     } catch (error) {
         console.log(error);
@@ -64,6 +79,15 @@ exports.addPaymentMethod = async (req, res) => {
 }
 
 exports.updatePaymentMethod = async (req, res) => {
+    /*  #swagger.parameters['payment_method'] = {
+        in: 'formData',
+        schema: {
+            "name": "BCA_VA",
+            "description": "description",
+            "is_crypto": false,
+            "gateway": "https://api.xendit.co"
+        }
+    } */
     try {
         const payment = await paymentService.updatePaymentMethods(req.params.id, req.body)
 

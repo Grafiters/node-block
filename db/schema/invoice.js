@@ -51,7 +51,7 @@ async function paramsInvoice(req, res, next){
         }
     })
     if(!invoice){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Invoice not found on system'
         })

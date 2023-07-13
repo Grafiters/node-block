@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require('fs');
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: true})
+const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0', autoBody: false})
 
 const outputFile = './swagger_output.json'
 const endpointsFiles = ['./route/index.js']

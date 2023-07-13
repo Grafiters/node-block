@@ -97,6 +97,7 @@ async function deletePaymentMethods(payment_id){
 
 module.exports = {
     getAllPaymentMethodsByID,
+    getPaymentMethodByID,
     deletePaymentMethods,
     updatePaymentMethods,
     getAllPaymentMethods,

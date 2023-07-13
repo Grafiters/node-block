@@ -45,7 +45,7 @@ async function requestParams(req, res, next){
     })
 
     if(!node){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Node Blockchain ID tidak ditemukan'
         })

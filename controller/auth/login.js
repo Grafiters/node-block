@@ -49,7 +49,7 @@ exports.userLogin = async (req, res) => {
     }
 
     if(!validatorEmail.isEmail(req.body.email)){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: "Kesalahan validasi",
             errors: [
@@ -62,14 +62,14 @@ exports.userLogin = async (req, res) => {
         const result = await getUserByEmail(email)
     
         if(!result){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: "Email tidak ditemukan"
             });
         }
 
         if (!validateUserStatus){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
             });
@@ -77,7 +77,7 @@ exports.userLogin = async (req, res) => {
         
         if(result.otp_enabled){
             if(req.body.otp_token === null){
-                return res.status(422).json({
+                return res.status(422).send({
                     status: false,
                     message: "Missing otp token"
                 });
@@ -85,7 +85,7 @@ exports.userLogin = async (req, res) => {
 
             const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
-                return res.status(422).json({
+                return res.status(422).send({
                     status: false,
                     message: "Invalid token otp"
                 });
@@ -93,14 +93,14 @@ exports.userLogin = async (req, res) => {
         }
 
         if(result.password_digest === null){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
         }
 
         if(!password){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
@@ -109,19 +109,19 @@ exports.userLogin = async (req, res) => {
         if(bcrypt.compareSync(password, result.password_digest)){
             token = generateToken(result)
     
-            return res.status(201).json({
+            return res.status(201).send({
                 status: true,
                 message: "Login berhasil.",
                 token: token
             })
         }else{
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: "Login gagal. Email atau password tidak valid."
             });
         }
     } catch (error) {
-        return res.status(500).json({
+        return res.status(500).send({
             status: false,
             message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
         });
@@ -158,14 +158,14 @@ exports.userLoginGoogle = async (req, res) => {
         const result = await getUserByEmailAndGoogleId(google_id)
     
         if(!result){
-            res.status(422).json({
+            res.status(422).send({
                 status: false,
                 message: "Login menggunakan akun Google gagal. ID Google tidak valid."
             });
         }
 
         if (!validateUserStatus){
-            res.status(422).json({
+            res.status(422).send({
                 status: false,
                 message: "Akun belum teraktivasi, silahkan aktivasi akun anda terlebih dahulu melalui email yang sudah dikirimkan"
             });
@@ -173,7 +173,7 @@ exports.userLoginGoogle = async (req, res) => {
  
         if(result.otp_enabled){
             if(req.body.otp_token === null){
-                res.status(422).json({
+                res.status(422).send({
                     status: false,
                     message: "Missing otp token"
                 });
@@ -181,7 +181,7 @@ exports.userLoginGoogle = async (req, res) => {
 
             const valid_otp = await totpService.validateTokenOtp(result, req.body.otp_token)
             if(!valid_otp){
-                res.status(422).json({
+                res.status(422).send({
                     status: false,
                     message: "Invalid otp token"
                 });
@@ -189,14 +189,14 @@ exports.userLoginGoogle = async (req, res) => {
         }
 
         token = generateToken(result)
-        return res.status(201).json({
+        return res.status(201).send({
             status: true,
             message: "Login menggunakan akun Google berhasil.",
             token: token
         })
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(500).send({
             status: false,
             message: "Terjadi kesalahan saat melakukan login. Silakan coba lagi nanti."
         });

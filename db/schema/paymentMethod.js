@@ -35,7 +35,7 @@ async function paramsPaymentMethod(req, res, next){
         }
     })
     if(!blockchain){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Payment method ID tidak ditemukan'
         })

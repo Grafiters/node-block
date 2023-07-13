@@ -13,7 +13,7 @@ exports.generateGeetest = async (req, res) => {
         return res.status(200).json(challenge);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(500).send({
             status: "error",
             message: "Terjadi kesalahan saat memproses generate geetest challenge. Silakan coba lagi nanti"
         });
@@ -35,7 +35,7 @@ exports.validateGeetest = async (req, res) => {
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: "error",
             message: "Terjadi kesalahan saat memproses verify captcha. Silakan coba lagi nanti"
         });
@@ -50,7 +50,7 @@ exports.toptGenerate = async (req, res) => {
         return res.status(200).json(createTotp);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(500).send({
             status: "error",
             message: "Terjadi kesalahan saat memproses tow-factor authtenticator. Silakan coba lagi nanti"
         });

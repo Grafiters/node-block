@@ -39,7 +39,7 @@ exports.forgotPassword = async (req, res) => {
         const data = await validateEmailRegister(email);
 
         if(!data){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: 'Pengiriman email pemulihan kata sandi gagal. Email tidak ditemukan.'
             });
@@ -47,13 +47,13 @@ exports.forgotPassword = async (req, res) => {
 
         const sendMailer = await resendRegisterMailer(email, 'Rest Password')
         
-        return res.status(201).json({
+        return res.status(201).send({
             status: true,
             message: 'Email pemulihan kata sandi berhasil dikirim. Silakan cek email Anda.'
         })
     } catch ( err ){
         console.log(err);
-        res.status(500).json({
+        res.status(500).send({
             status: false,
             message: err
         });
@@ -89,7 +89,7 @@ exports.resetPassword = async (req, res) => {
     const data = await validateEmailRegister(email);
 
     if(!data){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Pengiriman email pemulihan kata sandi gagal. Email tidak ditemukan.'
         });
@@ -104,7 +104,7 @@ exports.resetPassword = async (req, res) => {
             where: { email: email }
         }).then(num => {
             if (num == 1){
-                res.status(201).json({
+                res.status(201).send({
                     status: true,
                     message: "Reset kata sandi berhasil. Kata sandi Anda telah diperbarui."
                 })
@@ -123,7 +123,7 @@ exports.resetPassword = async (req, res) => {
         })
     } catch ( err ){
         console.log(err);
-        res.status(500).json({
+        res.status(500).send({
             status: false,
             message: err
         });

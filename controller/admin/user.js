@@ -4,14 +4,14 @@ exports.userProfile = async (req, res) => {
     try {
         const user = await userService.getAllUser()
 
-        return res.status(200).json({
+        return res.status(200).send({
             status: true,
             message: 'Berhasil mengambil data user',
             data: user
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(500).send({
             status: false,
             message: "Terjadi kesalahan saat memproses Profile User. Silakan coba lagi nanti"
         });
@@ -19,12 +19,17 @@ exports.userProfile = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
+    /*    #swagger.parameters['otp_enabled'] = {
+        in: 'formData',
+        required: true,
+        name: 'otp_enabled',
+        schema: true
+    } */
     const { user_id } = req.params;
     const { otp_enabled } = req.body;
 
-    console.log(req.body);
-
     const target_user = await userService.findUserByID(user_id);
+
     try {
         const update = await userService.updateUserOtpSecretByID(target_user.id, null, otp_enabled)
         if(update){

@@ -20,6 +20,15 @@ async function validateApiKeyUser(req){
 }
 
 const authJWT = async (req, res, next) => {
+    /*
+        #swagger.security = [{
+        "Bearer": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header",
+        }
+    }]
+    */
     const xApiKey = req.headers['x-api-key']
 
     if(xApiKey){
@@ -87,6 +96,15 @@ const authAdminJWT = (req, res, next) => {
 }
 
 const authExecptionJWT = async (req, res, next) => {
+    /*
+        #swagger.security = [{
+        "Bearer": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header",
+        }
+    }]
+    */
     const xApiKey = req.headers['x-api-key']
 
     if(xApiKey){

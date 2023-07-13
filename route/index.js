@@ -17,19 +17,20 @@ const PaymentMethodRouter = require('./paymentMethod.js');
 const MonitoredAddressRouter = require('./monitoredAddress.js');
 const SmartContractEventRouter = require('./smartContractEvent.js');
 
-MainRouter.use('/admin', /* #swagger.tags = ['Admin'] #swagger.summary = "User Akses"*/ authJWT.authAdminJWT, AdminRouter);
-MainRouter.use('/monitored-addresses', MonitoredAddressRouter);
-MainRouter.use('/monitored-event', SmartContractEventRouter);
-MainRouter.use('/payment-method', PaymentMethodRouter);
-MainRouter.use('/blockchain', BlockchainRouter);
-MainRouter.use('/node', NodeBlockchainRouter);
-MainRouter.use('/subcribe', SubcribeRouter);
-MainRouter.use('/api-keys', ApiKeysRouter);
-MainRouter.use('/invoice', InvocieRouter);
-MainRouter.use('/package', PackageRouter);
-MainRouter.use('/geetest', GeetestRouter);
-MainRouter.use('/blog', BlogRouter);
-MainRouter.use('/user', UserRouter);
-MainRouter.use('/', AuthRouter);
+MainRouter.use('/monitored-addresses', /* #swagger.tags = ['Monitoring Address'] #swagger.summary = "Monitoring Address Service"*/ MonitoredAddressRouter);
+MainRouter.use('/monitored-event', /* #swagger.tags = ['Monitoring Event'] #swagger.summary = "Monitoring Event Service"*/ SmartContractEventRouter);
+MainRouter.use('/payment-method', /* #swagger.tags = ['Public'] #swagger.summary = "Payment Method Service"*/ PaymentMethodRouter);
+MainRouter.use('/blockchain', /* #swagger.tags = ['Public'] #swagger.summary = "Blockchain Service"*/ BlockchainRouter);
+MainRouter.use('/node', /* #swagger.tags = ['Public'] #swagger.summary = "Node Blockchain Service"*/ NodeBlockchainRouter);
+MainRouter.use('/subcribe', /* #swagger.tags = ['Subcribe'] #swagger.summary = "Subcribe Service"*/ SubcribeRouter);
+MainRouter.use('/api-keys', /* #swagger.tags = ['Api-Keys'] #swagger.summary = "Api-Keys Service"*/ ApiKeysRouter);
+MainRouter.use('/invoice', /* #swagger.tags = ['Invoice'] #swagger.summary = "Invoice Service"*/ InvocieRouter);
+MainRouter.use('/package', /* #swagger.tags = ['Public'] #swagger.summary = "Package Service"*/ PackageRouter);
+MainRouter.use('/geetest', /* #swagger.tags = ['Public'] #swagger.summary = "Geetest Service"*/ GeetestRouter);
+MainRouter.use('/blog', /* #swagger.tags = ['Public'] #swagger.summary = "Blog Service"*/ BlogRouter);
+MainRouter.use('/user',/* #swagger.tags = ['User'] #swagger.summary = "User Service"*/ UserRouter);
+MainRouter.use('/', /* #swagger.tags = ['Auth'] #swagger.summary = "User Service"*/ AuthRouter);
+
+MainRouter.use('/admin', /* #swagger.tags = ['Admin'] #swagger.summary = "Admin Akses"*/ authJWT.authAdminJWT, AdminRouter);
 
 module.exports = MainRouter;

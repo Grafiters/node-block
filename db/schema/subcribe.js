@@ -20,7 +20,7 @@ async function paramsSubcribe(req, res, next){
         }
     })
     if(!invoice){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Subcribe ID not found on system'
         })

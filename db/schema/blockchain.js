@@ -36,7 +36,7 @@ async function paramsBlockchain(req, res, next){
         }
     })
     if(!blockchain){
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Blockchain ID tidak ditemukan'
         })

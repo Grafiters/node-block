@@ -5,20 +5,20 @@ exports.getAllSmartContractEvent = async (req, res) => {
         const address = await smartContractService.getAllSmartContractEvent(req.auth.user.id)
 
         if(!address[0]){
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Tidak dapat menemukan data event smart contract',
             });
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             status: true,
             message: 'Berhasil mendapatkan data event smart contract',
             data: address
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Tidak dapat mengambil data event smart contract, silahkan coba beberapa saat lagi',
         });
@@ -30,20 +30,20 @@ exports.findSmartContractEventByID = async (req, res) => {
         const address = await smartContractService.findSmartContractByID(req.params.event_id)
 
         if(!address){
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Tidak dapat menemukan data event smart contract',
             });
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             status: true,
             message: 'Berhasil mendapatkan data event smart contract',
             data: address
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Tidak dapat mengambil data event smart contract, silahkan coba beberapa saat lagi',
         });
@@ -62,18 +62,18 @@ exports.createSmartContractEvent = async (req, res) => {
         const address = await smartContractService.createSmartContractEvent(params)
 
         if(!address.status){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: true,
                 message: address.message
             });
         }
 
-        return res.status(201).json({
+        return res.status(201).send({
             status: true,
             message: 'Berhasil mendapatkan data event smart contract',
         })
     } catch (error) {
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Tidak dapat mengambil data event smart contract, silahkan coba beberapa saat lagi',
         });
@@ -86,20 +86,20 @@ exports.deleteSmartCotnractEvent = async (req, res) => {
 
         if(!address.status){
             console.log(address.message);
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Tidak dapat menemukan data event smart contract',
             });
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             status: true,
             message: 'Berhasil mendapatkan data event smart contract',
             data: address
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Tidak dapat mengambil data event smart contract, silahkan coba beberapa saat lagi',
         });
@@ -111,20 +111,20 @@ exports.getSmartContractEventHistory = async (req, res) => {
         const address = await smartContractService.getSmartContractEventHistory(req.params.event_id)
 
         if(!address[0]){
-            return res.status(200).json({
+            return res.status(200).send({
                 status: true,
                 message: 'Tidak dapat menemukan data event smart contract',
             });
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             status: true,
             message: 'Berhasil mendapatkan data event smart contract',
             data: address
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             status: false,
             message: 'Tidak dapat mengambil data event smart contract, silahkan coba beberapa saat lagi',
         });

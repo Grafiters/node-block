@@ -60,7 +60,19 @@ app
     .use(limiter)
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json());
-    
+
+const requestLogger = (req, res, next) => {
+    const originalSend = res.send;
+    res.send = function (body) {
+        console.log(req.method);
+        console.log(`response [${new Date().toISOString()}] ${req.method} ${req.originalUrl} ${res.statusCode}`);
+        originalSend.call(this, body);
+    };
+    next();
+};
+
+app.use(requestLogger)
+
 app.use(`/${process.env.SERVICE}/swagger`, swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(`/${process.env.SERVICE}`, MainRouter)
 

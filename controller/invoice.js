@@ -12,20 +12,20 @@ exports.getAllinvoiceUser = async (req, res) => {
     try {
         const invoice = await invoiceService.getAllInvoiceUser(req.auth.user.id)
         if(!invoice[0]){
-            return res.status(201).json({
+            return res.status(201).send({
                 success: true,
                 message: "Tidak dapat menemukan data invoice",
             })
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             success: true,
             message: "Berhasil mendapatkan data invoice",
             data: new invoiceEntities(invoice).getListPlan()
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })
@@ -36,20 +36,20 @@ exports.getInvoiceUserByID = async (req, res) => {
     try {
         const invoice = await invoiceService.getInvoiceUserByID(req.params.id)
         if(!invoice){
-            return res.status(200).json({
+            return res.status(200).send({
                 success: true,
                 message: "Tidak dapat menemukan data invoice",
             })
         }
 
-        return res.status(200).json({
+        return res.status(200).send({
             success: true,
             message: "Berhasil mendapatkan data invoice",
             data: invoice
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })
@@ -81,7 +81,7 @@ exports.addInvoiceUser = async (req, res) => {
     try {
         const createInvoice = await invoiceService.addInvoiceUser(params, user)
         if(!createInvoice.status) {
-            return res.status(422).json({
+            return res.status(422).send({
                 success: false,
                 message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
             })
@@ -96,20 +96,20 @@ exports.addInvoiceUser = async (req, res) => {
         const userSub = await UserSubscipService.createUserSubcription(userSubParams)
 
         if(!userSub.status){
-            return res.status(422).json({
+            return res.status(422).send({
                 status: false,
                 message: 'Invoice gagal dibuat'
             })
         }
 
-        return res.status(201).json({
+        return res.status(201).send({
             success: true,
             message: "Invoice berhasil dibuat.",
             data: new invoiceEntities(userSub.data).getCreateInoviceResponse(createInvoice)
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })
@@ -124,13 +124,13 @@ exports.updatePaymentInvoice = async (req, res) => {
         await invoiceService.updatePaymentInvoice(req.params.id, params)
         await UserSubscipService.updateUserSubcription(req.params.id, req.params.user_id)      
 
-        return res.status(201).json({
+        return res.status(201).send({
             success: true,
             message: "Berhasil merubah data invoice",
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat mengupdate invoice, cobalah beberapa saat lagi"
         })
@@ -141,19 +141,19 @@ exports.deleteInvoiceUser = async (req, res) => {
     try {
         const invoice = await invoiceService.deleteInoivceUser(req.params.invoice_id)
         if(!invoice){
-            return res.status(201).json({
+            return res.status(201).send({
                 success: true,
                 message: "Tidak dapat menghapus data invoice",
             })
         }
 
-        return res.status(201).json({
+        return res.status(201).send({
             success: true,
             message: "Berhasil menghapus data invoice",
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })
@@ -163,13 +163,13 @@ exports.deleteInvoiceUser = async (req, res) => {
 exports.xenditListInvoice = async (req, res) => {
     try {
         const invoice = await xenditService.getAllInvoice()
-        return res.status(201).json({
+        return res.status(201).send({
             success: true,
             message: invoice
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })
@@ -179,13 +179,13 @@ exports.xenditListInvoice = async (req, res) => {
 exports.xenditCreateInvoice = async (req, res) => {
     try {
         const invoice = await xenditService.createInvoice()
-        return res.status(201).json({
+        return res.status(201).send({
             success: true,
             message: invoice
         })
     } catch (error) {
         console.log(error);
-        return res.status(422).json({
+        return res.status(422).send({
             success: false,
             message: "Terjadi kesalahan pada saat pembuatan invoice, cobalah beberapa saat lagi"
         })

@@ -16,99 +16,12 @@
     }
   ],
   "paths": {
-    "/admin/users/": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "summary": "User Akses",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/admin/users/update/{user_id}": {
-      "post": {
-        "tags": [
-          "Admin"
-        ],
-        "summary": "User Akses",
-        "description": "",
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "otp_enabled",
-            "required": true,
-            "schema": {
-              "type": "boolean",
-              "example": true
-            },
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_enabled": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/monitored-addresses/": {
       "get": {
+        "tags": [
+          "Monitoring Address"
+        ],
+        "summary": "Monitoring Address Service",
         "description": "",
         "parameters": [
           {
@@ -150,6 +63,10 @@
     },
     "/monitored-addresses/add": {
       "post": {
+        "tags": [
+          "Monitoring Address"
+        ],
+        "summary": "Monitoring Address Service",
         "description": "",
         "parameters": [
           {
@@ -186,28 +103,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "example": "any"
-                  },
-                  "notification_method": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/monitored-addresses/history": {
       "get": {
+        "tags": [
+          "Monitoring Address"
+        ],
+        "summary": "Monitoring Address Service",
         "description": "",
         "parameters": [
           {
@@ -249,6 +153,10 @@
     },
     "/monitored-addresses/{address_id}": {
       "get": {
+        "tags": [
+          "Monitoring Address"
+        ],
+        "summary": "Monitoring Address Service",
         "description": "",
         "parameters": [
           {
@@ -298,6 +206,10 @@
     },
     "/monitored-addresses/delete/{address_id}": {
       "delete": {
+        "tags": [
+          "Monitoring Address"
+        ],
+        "summary": "Monitoring Address Service",
         "description": "",
         "parameters": [
           {
@@ -347,6 +259,10 @@
     },
     "/monitored-event/": {
       "get": {
+        "tags": [
+          "Monitoring Event"
+        ],
+        "summary": "Monitoring Event Service",
         "description": "",
         "parameters": [
           {
@@ -388,6 +304,10 @@
     },
     "/monitored-event/add": {
       "post": {
+        "tags": [
+          "Monitoring Event"
+        ],
+        "summary": "Monitoring Event Service",
         "description": "",
         "parameters": [
           {
@@ -424,31 +344,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "contract_address": {
-                    "example": "any"
-                  },
-                  "event_name": {
-                    "example": "any"
-                  },
-                  "notification_method": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/monitored-event/{address_id}": {
       "get": {
+        "tags": [
+          "Monitoring Event"
+        ],
+        "summary": "Monitoring Event Service",
         "description": "",
         "parameters": [
           {
@@ -498,6 +402,10 @@
     },
     "/monitored-event/history": {
       "get": {
+        "tags": [
+          "Monitoring Event"
+        ],
+        "summary": "Monitoring Event Service",
         "description": "",
         "parameters": [
           {
@@ -539,6 +447,10 @@
     },
     "/monitored-event/delete/{address_id}": {
       "delete": {
+        "tags": [
+          "Monitoring Event"
+        ],
+        "summary": "Monitoring Event Service",
         "description": "",
         "parameters": [
           {
@@ -588,521 +500,142 @@
     },
     "/payment-method/": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Payment Method Service",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/payment-method/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/payment-method/add": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/payment-method/edit/{id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/payment-method/delete/{id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/blockchain/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/blockchain/add": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/blockchain/edit/{blockchain_id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "blockchain_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/blockchain/delete/{blockchain_id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "blockchain_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/node/": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/node/add": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/node/edit/{node_id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "node_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "blockchain_id": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
     },
-    "/node/delete/{node_id}": {
-      "delete": {
+    "/payment-method/{id}": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Payment Method Service",
         "description": "",
         "parameters": [
           {
-            "name": "node_id",
+            "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
             "schema": {
               "type": "string"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
+          "200": {
+            "description": "OK"
           },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/blockchain/": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blockchain Service",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/blockchain/{id}": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blockchain Service",
+        "description": "",
+        "parameters": [
           {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/node/": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Node Blockchain Service",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/node/{id}": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Node Blockchain Service",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
       }
     },
     "/subcribe/": {
       "get": {
+        "tags": [
+          "Subcribe"
+        ],
+        "summary": "Subcribe Service",
         "description": "",
         "parameters": [
           {
@@ -1144,6 +677,10 @@
     },
     "/subcribe/{subcribe_id}": {
       "get": {
+        "tags": [
+          "Subcribe"
+        ],
+        "summary": "Subcribe Service",
         "description": "",
         "parameters": [
           {
@@ -1193,6 +730,10 @@
     },
     "/api-keys/": {
       "get": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1234,6 +775,10 @@
     },
     "/api-keys/generate": {
       "post": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1270,25 +815,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api-keys/delete/{api_key_id}": {
       "delete": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1338,6 +873,10 @@
     },
     "/api-keys/usage-statistic": {
       "get": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1386,6 +925,10 @@
     },
     "/api-keys/usage-statistic/chart": {
       "get": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1455,6 +998,10 @@
     },
     "/api-keys/usage-statistic/{api_key}": {
       "get": {
+        "tags": [
+          "Api-Keys"
+        ],
+        "summary": "Api-Keys Service",
         "description": "",
         "parameters": [
           {
@@ -1511,6 +1058,10 @@
     },
     "/invoice/": {
       "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Invoice Service",
         "description": "",
         "parameters": [
           {
@@ -1555,6 +1106,10 @@
     },
     "/invoice/{id}": {
       "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Invoice Service",
         "description": "",
         "parameters": [
           {
@@ -1604,6 +1159,10 @@
     },
     "/invoice/create": {
       "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Invoice Service",
         "description": "",
         "parameters": [
           {
@@ -1640,28 +1199,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "package_id": {
-                    "example": "any"
-                  },
-                  "payment_method_id": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/invoice/edit/{id}/{status}/{user_id}": {
       "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Invoice Service",
         "description": "",
         "parameters": [
           {
@@ -1693,26 +1239,18 @@
           "201": {
             "description": "Created"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/invoice/delete/{id}": {
       "delete": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Invoice Service",
         "description": "",
         "parameters": [
           {
@@ -1762,31 +1300,27 @@
     },
     "/package/": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Package Service",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/package/{id}": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Package Service",
         "description": "",
         "parameters": [
           {
@@ -1802,214 +1336,52 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/package/add": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/package/edit/{id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
-      }
-    },
-    "/package/delete/{id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/geetest/register": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Geetest Service",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/geetest/verify": {
       "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Geetest Service",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "geetestChallenge": {
-                    "example": "any"
-                  },
-                  "geetestValidate": {
-                    "example": "any"
-                  },
-                  "geetestSeccode": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
     },
     "/blog/": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blog Service",
         "description": "",
         "parameters": [
           {
@@ -2031,26 +1403,18 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/blog/categories": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blog Service",
         "description": "",
         "parameters": [
           {
@@ -2072,26 +1436,18 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/blog/{id}": {
       "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blog Service",
         "description": "",
         "parameters": [
           {
@@ -2107,26 +1463,18 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/blog/search": {
       "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Blog Service",
         "description": "",
         "parameters": [
           {
@@ -2148,34 +1496,8 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "keyword": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -2261,6 +1583,14 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/ChangePassword"
+            }
           }
         ],
         "responses": {
@@ -2321,27 +1651,7 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/user/generate-2fa": {
@@ -2437,28 +1747,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_secret": {
-                    "example": "any"
-                  },
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/user/verify-2fa": {
       "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User Service",
         "description": "",
         "parameters": [
           {
@@ -2498,25 +1795,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/user/disable-2fa": {
       "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User Service",
         "description": "",
         "parameters": [
           {
@@ -2556,25 +1843,15 @@
               "in": "header"
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_code": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/user/disable-account": {
       "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User Service",
         "description": "",
         "parameters": [
           {
@@ -2616,6 +1893,10 @@
     },
     "/user/current-plan": {
       "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User Service",
         "description": "",
         "parameters": [
           {
@@ -2660,6 +1941,10 @@
     },
     "/user/my-activity": {
       "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User Service",
         "description": "",
         "parameters": [
           {
@@ -2732,9 +2017,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -2761,47 +2043,6 @@
               "application/xml": {
                 "schema": {
                   "$ref": "#/components/Code/Failed"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "password": {
-                    "example": "any"
-                  },
-                  "captcha": {
-                    "example": "any"
-                  },
-                  "otp_token": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
                 }
               }
             }
@@ -2842,9 +2083,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -2875,35 +2113,6 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "password": {
-                    "example": "any"
-                  },
-                  "captcha": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -2914,7 +2123,16 @@
         ],
         "summary": "Login Form to user with google credentials",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/LoginGoogle"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Example response",
@@ -2931,9 +2149,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -2964,38 +2179,6 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "otp_token": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -3006,7 +2189,16 @@
         ],
         "summary": "Register Form to user with google credentials",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Login form user.",
+            "schema": {
+              "$ref": "#/components/User/Request/RegisterWithGoogle"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Example response Success",
@@ -3022,9 +2214,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "422": {
             "description": "Example response failed",
@@ -3043,41 +2232,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "example": "any"
-                  },
-                  "email": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -3123,9 +2277,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -3144,16 +2295,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/auth/{email}/resend": {
@@ -3197,9 +2339,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -3218,16 +2357,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ]
+        }
       }
     },
     "/auth/forgot-password": {
@@ -3263,9 +2393,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -3292,38 +2419,6 @@
               "application/xml": {
                 "schema": {
                   "$ref": "#/components/Code/Failed"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": {
-              "type": "apiKey",
-              "name": "token",
-              "in": "header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
                 }
               }
             }
@@ -3364,9 +2459,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "422": {
             "description": "Example response failed",
             "content": {
@@ -3397,6 +2489,26 @@
               }
             }
           }
+        }
+      }
+    },
+    "/admin/users/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         },
         "security": [
           {
@@ -3406,33 +2518,1243 @@
               "in": "header"
             }
           }
+        ]
+      }
+    },
+    "/admin/users/update/{user_id}": {
+      "post": {
+        "tags": [
+          "Admin"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "new_password": {
-                    "example": "any"
-                  },
-                  "in": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "schema": {
-                    "example": "any"
-                  }
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp_enabled",
+            "in": "formData",
+            "required": true,
+            "schema": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/package/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/package/add": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "package",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Gold"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Gold Package"
+                },
+                "request_per_second_limit": {
+                  "type": "number",
+                  "example": 1000
+                },
+                "request_per_day_limit": {
+                  "type": "number",
+                  "example": 10000
+                },
+                "request_per_month_limit": {
+                  "type": "number",
+                  "example": 10000000
+                },
+                "price": {
+                  "type": "number",
+                  "example": 150000
+                },
+                "is_trial": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "trial_duration": {
+                  "type": "number",
+                  "example": 100000
+                },
+                "trial_request_limit": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "description",
+                "request_per_second_limit",
+                "request_per_day_limit",
+                "request_per_month_limit",
+                "price",
+                "is_trial",
+                "trial_duration",
+                "trial_request_limit"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/package/edit/{id}": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "package",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Gold"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Gold Package"
+                },
+                "request_per_second_limit": {
+                  "type": "number",
+                  "example": 1000
+                },
+                "request_per_day_limit": {
+                  "type": "number",
+                  "example": 10000
+                },
+                "request_per_month_limit": {
+                  "type": "number",
+                  "example": 10000000
+                },
+                "price": {
+                  "type": "number",
+                  "example": 150000
+                },
+                "is_trial": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "trial_duration": {
+                  "type": "number",
+                  "example": 100000
+                },
+                "trial_request_limit": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "description",
+                "request_per_second_limit",
+                "request_per_day_limit",
+                "request_per_month_limit",
+                "price",
+                "is_trial",
+                "trial_duration",
+                "trial_request_limit"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/package/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/invoice/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/invoice/{id}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/invoice/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/blockchain/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/blockchain/{id}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/blockchain/add": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp_enabled",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "blockchain_name": {
+                  "type": "string",
+                  "example": "ETH"
+                },
+                "height": {
+                  "type": "number",
+                  "example": 123456
+                },
+                "network": {
+                  "type": "string",
+                  "example": "testnet"
+                },
+                "version": {
+                  "type": "string",
+                  "example": "2.0.0"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "singapura"
+                }
+              },
+              "required": [
+                "blockchain_name",
+                "height",
+                "network",
+                "version",
+                "location"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/blockchain/edit/{blockchain_id}": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "blockchain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp_enabled",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "blockchain_name": {
+                  "type": "string",
+                  "example": "ETH"
+                },
+                "height": {
+                  "type": "number",
+                  "example": 123456
+                },
+                "network": {
+                  "type": "string",
+                  "example": "testnet"
+                },
+                "version": {
+                  "type": "string",
+                  "example": "2.0.0"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "singapura"
+                }
+              },
+              "required": [
+                "blockchain_name",
+                "height",
+                "network",
+                "version",
+                "location"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/blockchain/delete/{blockchain_id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "blockchain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/node/{blockchain_id}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "blockchain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/node/add": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "node",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "blockchain_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "connection_speed": {
+                  "type": "string",
+                  "example": "height"
+                },
+                "api_interface": {
+                  "type": "string",
+                  "example": "JSON-RPC"
+                },
+                "endpoint": {
+                  "type": "string",
+                  "example": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+                },
+                "documentation_link": {
+                  "type": "string",
+                  "example": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+                }
+              },
+              "required": [
+                "blockchain_id",
+                "connection_speed",
+                "api_interface",
+                "endpoint",
+                "documentation_link"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/node/edit/{node_id}": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "node",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "blockchain_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "connection_speed": {
+                  "type": "string",
+                  "example": "height"
+                },
+                "api_interface": {
+                  "type": "string",
+                  "example": "JSON-RPC"
+                },
+                "endpoint": {
+                  "type": "string",
+                  "example": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+                },
+                "documentation_link": {
+                  "type": "string",
+                  "example": "https://ethereum.org/en/developers/docs/apis/json-rpc/"
+                }
+              },
+              "required": [
+                "blockchain_id",
+                "connection_speed",
+                "api_interface",
+                "endpoint",
+                "documentation_link"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/node/delete/{node_id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/payment-method/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/payment-method/{id}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/payment-method/add": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payment_method",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "BCA_VA"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "description"
+                },
+                "is_crypto": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "gateway": {
+                  "type": "string",
+                  "example": "https://api.xendit.co"
                 }
               }
             }
           }
-        }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/payment-method/edit/{id}": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "payment_method",
+            "in": "formData",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "BCA_VA"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "description"
+                },
+                "is_crypto": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "gateway": {
+                  "type": "string",
+                  "example": "https://api.xendit.co"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
+      }
+    },
+    "/admin/payment-method/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Akses",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "Bearer": {
+              "type": "apiKey",
+              "name": "token",
+              "in": "header"
+            }
+          }
+        ]
       }
     }
   },
