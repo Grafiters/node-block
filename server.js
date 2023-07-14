@@ -50,7 +50,6 @@ sequelize
 
 const corsConfig = {
     origin: '*',
-    optionsSuccessStatus: 200,
     AccessControlAllowMethods: ['POST','GET','OPTIONS','PUT','DELETE']
 }
 
@@ -64,8 +63,6 @@ app
 const requestLogger = (req, res, next) => {
     const originalSend = res.send;
     res.send = function (body) {
-        console.log(req.method);
-        console.log(`response [${new Date().toISOString()}] ${req.method} ${req.originalUrl} ${res.statusCode}`);
         originalSend.call(this, body);
     };
     next();
