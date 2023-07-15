@@ -11,6 +11,7 @@ const logger = require('morgan');
 const swaggerUi = require('swagger-ui-express')
 const RateLimit = require("express-rate-limit");
 const swaggerFile = require('./swagger_output.json')
+const ActivityService = require('./service/activityService')
 
 const cors = require('cors');
 
@@ -63,6 +64,7 @@ app
 const requestLogger = (req, res, next) => {
     const originalSend = res.send;
     res.send = function (body) {
+        console.log(req);
         originalSend.call(this, body);
     };
     next();
